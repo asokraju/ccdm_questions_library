@@ -1,0 +1,1841 @@
+chapters:
+- end_page: 4
+  name: Good Clinical Data Management Practices
+  output_filename: 01_Good_Clinical_Data_Management_Practices.pdf
+  start_page: 3
+- end_page: 4
+  name: This page is intentionally blank.
+  output_filename: 02_This_page_is_intentionally_blank.pdf
+  start_page: 4
+- end_page: 9
+  name: GCDMP Revision History
+  output_filename: 03_GCDMP_Revision_History.pdf
+  start_page: 4
+- end_page: 11
+  name: Executive Summary
+  output_filename: 04_Executive_Summary.pdf
+  start_page: 9
+- end_page: 13
+  name: Acknowledgements
+  output_filename: 05_Acknowledgements.pdf
+  start_page: 11
+- end_page: 15
+  name: Introduction
+  output_filename: 06_Introduction.pdf
+  start_page: 13
+- end_page: 15
+  name: Data Privacy
+  output_filename: 07_Data_Privacy.pdf
+  start_page: 15
+- end_page: 16
+  name: Introduction
+  output_filename: 08_Introduction.pdf
+  start_page: 15
+- end_page: 16
+  name: Scope
+  output_filename: 09_Scope.pdf
+  start_page: 16
+- end_page: 17
+  name: Minimum Standards
+  output_filename: 10_Minimum_Standards.pdf
+  start_page: 16
+- end_page: 18
+  name: Best Practices
+  output_filename: 11_Best_Practices.pdf
+  start_page: 17
+- end_page: 21
+  name: Importance of Data Privacy
+  output_filename: 12_Importance_of_Data_Privacy.pdf
+  start_page: 18
+- end_page: 23
+  name: Data Privacy Focus Areas
+  output_filename: 13_Data_Privacy_Focus_Areas.pdf
+  start_page: 21
+- end_page: 24
+  name: Data Collection
+  output_filename: 14_Data_Collection.pdf
+  start_page: 23
+- end_page: 24
+  name: International Studies and Data Privacy
+  output_filename: 15_International_Studies_and_Data_Privacy.pdf
+  start_page: 24
+- end_page: 24
+  name: Policy Definition and Training
+  output_filename: 16_Policy_Definition_and_Training.pdf
+  start_page: 24
+- end_page: 24
+  name: Potential Future Concerns for Data Privacy
+  output_filename: 17_Potential_Future_Concerns_for_Data_Privacy.pdf
+  start_page: 24
+- end_page: 25
+  name: Recommended Standard Operating Procedures
+  output_filename: 18_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 24
+- end_page: 25
+  name: References
+  output_filename: 19_References.pdf
+  start_page: 25
+- end_page: 28
+  name: Further Reading
+  output_filename: 20_Further_Reading.pdf
+  start_page: 25
+- end_page: 29
+  name: Chapter Revision History
+  output_filename: 21_Chapter_Revision_History.pdf
+  start_page: 28
+- end_page: 29
+  name: Data Management Plan
+  output_filename: 22_Data_Management_Plan.pdf
+  start_page: 29
+- end_page: 30
+  name: Introduction
+  output_filename: 23_Introduction.pdf
+  start_page: 29
+- end_page: 30
+  name: Scope
+  output_filename: 24_Scope.pdf
+  start_page: 30
+- end_page: 30
+  name: Minimum Standards
+  output_filename: 25_Minimum_Standards.pdf
+  start_page: 30
+- end_page: 31
+  name: Best Practices
+  output_filename: 26_Best_Practices.pdf
+  start_page: 30
+- end_page: 31
+  name: Purpose of the DMP
+  output_filename: 27_Purpose_of_the_DMP.pdf
+  start_page: 31
+- end_page: 32
+  name: Creation and Maintenance
+  output_filename: 28_Creation_and_Maintenance.pdf
+  start_page: 31
+- end_page: 43
+  name: Organization of a DMP
+  output_filename: 29_Organization_of_a_DMP.pdf
+  start_page: 32
+- end_page: 44
+  name: Recommended Standard Operating Procedures
+  output_filename: 30_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 43
+- end_page: 44
+  name: References
+  output_filename: 31_References.pdf
+  start_page: 44
+- end_page: 44
+  name: Further Reading
+  output_filename: 32_Further_Reading.pdf
+  start_page: 44
+- end_page: 45
+  name: Chapter Revision History
+  output_filename: 33_Chapter_Revision_History.pdf
+  start_page: 44
+- end_page: 45
+  name: Project Management for the Clinical Data Manager
+  output_filename: 34_Project_Management_for_the_Clinical_Data_Manager.pdf
+  start_page: 45
+- end_page: 46
+  name: Introduction
+  output_filename: 35_Introduction.pdf
+  start_page: 45
+- end_page: 46
+  name: Scope
+  output_filename: 36_Scope.pdf
+  start_page: 46
+- end_page: 48
+  name: Minimum Standards
+  output_filename: 37_Minimum_Standards.pdf
+  start_page: 46
+- end_page: 48
+  name: Best Practices
+  output_filename: 38_Best_Practices.pdf
+  start_page: 48
+- end_page: 51
+  name: Overview of Project Management
+  output_filename: 39_Overview_of_Project_Management.pdf
+  start_page: 48
+- end_page: 57
+  name: Project Management Activities Within CDM
+  output_filename: 40_Project_Management_Activities_Within_CDM.pdf
+  start_page: 51
+- end_page: 59
+  name: Competencies of Project Management
+  output_filename: 41_Competencies_of_Project_Management.pdf
+  start_page: 57
+- end_page: 60
+  name: Recommended Standard Operating Procedures
+  output_filename: 42_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 59
+- end_page: 60
+  name: References
+  output_filename: 43_References.pdf
+  start_page: 60
+- end_page: 60
+  name: Further Reading
+  output_filename: 44_Further_Reading.pdf
+  start_page: 60
+- end_page: 69
+  name: Chapter Revision History
+  output_filename: 45_Chapter_Revision_History.pdf
+  start_page: 60
+- end_page: 69
+  name: Vendor Selection and Management
+  output_filename: 46_Vendor_Selection_and_Management.pdf
+  start_page: 69
+- end_page: 70
+  name: Introduction
+  output_filename: 47_Introduction.pdf
+  start_page: 69
+- end_page: 70
+  name: Scope
+  output_filename: 48_Scope.pdf
+  start_page: 70
+- end_page: 71
+  name: Minimum Standards
+  output_filename: 49_Minimum_Standards.pdf
+  start_page: 70
+- end_page: 72
+  name: Best Practices
+  output_filename: 50_Best_Practices.pdf
+  start_page: 71
+- end_page: 73
+  name: Types of Vendor Services
+  output_filename: 51_Types_of_Vendor_Services.pdf
+  start_page: 72
+- end_page: 74
+  name: Business Model Impact on CDM
+  output_filename: 52_Business_Model_Impact_on_CDM.pdf
+  start_page: 73
+- end_page: 78
+  name: Vendor Qualification, Evaluation and Selection
+  output_filename: 53_Vendor_Qualification,_Evaluation_and_Selection.pdf
+  start_page: 74
+- end_page: 82
+  name: Development of Contract and Scope of Work (SOW)
+  output_filename: 54_Development_of_Contract_and_Scope_of_Work_(SOW).pdf
+  start_page: 78
+- end_page: 87
+  name: Vendor Oversight
+  output_filename: 55_Vendor_Oversight.pdf
+  start_page: 82
+- end_page: 87
+  name: Recommended Standard Operating Procedures
+  output_filename: 56_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 87
+- end_page: 88
+  name: References
+  output_filename: 57_References.pdf
+  start_page: 87
+- end_page: 88
+  name: Further Reading
+  output_filename: 58_Further_Reading.pdf
+  start_page: 88
+- end_page: 93
+  name: Chapter Revision History
+  output_filename: 59_Chapter_Revision_History.pdf
+  start_page: 88
+- end_page: 93
+  name: Data Management Standards in Clinical Research
+  output_filename: 60_Data_Management_Standards_in_Clinical_Research.pdf
+  start_page: 93
+- end_page: 94
+  name: Introduction
+  output_filename: 61_Introduction.pdf
+  start_page: 93
+- end_page: 94
+  name: Scope
+  output_filename: 62_Scope.pdf
+  start_page: 94
+- end_page: 94
+  name: Minimum Standards
+  output_filename: 63_Minimum_Standards.pdf
+  start_page: 94
+- end_page: 94
+  name: Best Practices
+  output_filename: 64_Best_Practices.pdf
+  start_page: 94
+- end_page: 95
+  name: Purpose and Benefits of Standardization
+  output_filename: 65_Purpose_and_Benefits_of_Standardization.pdf
+  start_page: 94
+- end_page: 97
+  name: History of the Development of Standards Organizations
+  output_filename: 66_History_of_the_Development_of_Standards_Organizati.pdf
+  start_page: 95
+- end_page: 98
+  name: Standards for Clinical Research
+  output_filename: 67_Standards_for_Clinical_Research.pdf
+  start_page: 97
+- end_page: 99
+  name: Clinical Data Acquisition Standards Harmonization (CDASH)
+  output_filename: 68_Clinical_Data_Acquisition_Standards_Harmonization_.pdf
+  start_page: 98
+- end_page: 101
+  name: Laboratory Model (LAB)
+  output_filename: 69_Laboratory_Model_(LAB).pdf
+  start_page: 99
+- end_page: 102
+  name: Operational Data Model (ODM)
+  output_filename: 70_Operational_Data_Model_(ODM).pdf
+  start_page: 101
+- end_page: 105
+  name: Study Data Tabulation Model (SDTM)
+  output_filename: 71_Study_Data_Tabulation_Model_(SDTM).pdf
+  start_page: 102
+- end_page: 106
+  name: Analysis Dataset Model (ADaM)
+  output_filename: 72_Analysis_Dataset_Model_(ADaM).pdf
+  start_page: 105
+- end_page: 107
+  name: Electronic Common Technical Document (eCTD)
+  output_filename: 73_Electronic_Common_Technical_Document_(eCTD).pdf
+  start_page: 106
+- end_page: 108
+  name: HL7 Standards
+  output_filename: 74_HL7_Standards.pdf
+  start_page: 107
+- end_page: 109
+  name: Future Directions
+  output_filename: 75_Future_Directions.pdf
+  start_page: 108
+- end_page: 110
+  name: Recommended Standard Operating Procedures
+  output_filename: 76_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 109
+- end_page: 110
+  name: References
+  output_filename: 77_References.pdf
+  start_page: 110
+- end_page: 111
+  name: Further Reading
+  output_filename: 78_Further_Reading.pdf
+  start_page: 110
+- end_page: 113
+  name: Chapter Revision History
+  output_filename: 79_Chapter_Revision_History.pdf
+  start_page: 111
+- end_page: 113
+  name: Design and Development of Data Collection Instruments
+  output_filename: 80_Design_and_Development_of_Data_Collection_Instrume.pdf
+  start_page: 113
+- end_page: 114
+  name: Introduction
+  output_filename: 81_Introduction.pdf
+  start_page: 113
+- end_page: 115
+  name: Minimum Standards
+  output_filename: 82_Minimum_Standards.pdf
+  start_page: 114
+- end_page: 115
+  name: Best Practices
+  output_filename: 83_Best_Practices.pdf
+  start_page: 115
+- end_page: 117
+  name: Design and Development Processes
+  output_filename: 84_Design_and_Development_Processes.pdf
+  start_page: 115
+- end_page: 123
+  name: Clarity and Ease of Use
+  output_filename: 85_Clarity_and_Ease_of_Use.pdf
+  start_page: 117
+- end_page: 124
+  name: Edit Checks
+  output_filename: 86_Edit_Checks.pdf
+  start_page: 123
+- end_page: 125
+  name: Review and Quality Control Processes
+  output_filename: 87_Review_and_Quality_Control_Processes.pdf
+  start_page: 124
+- end_page: 125
+  name: Standards in CRF Design
+  output_filename: 88_Standards_in_CRF_Design.pdf
+  start_page: 125
+- end_page: 126
+  name: CRF Completion Guidelines
+  output_filename: 89_CRF_Completion_Guidelines.pdf
+  start_page: 125
+- end_page: 126
+  name: CRF Change Control and Versioning
+  output_filename: 90_CRF_Change_Control_and_Versioning.pdf
+  start_page: 126
+- end_page: 127
+  name: Data Privacy
+  output_filename: 91_Data_Privacy.pdf
+  start_page: 126
+- end_page: 127
+  name: Future Directions
+  output_filename: 92_Future_Directions.pdf
+  start_page: 127
+- end_page: 127
+  name: Recommended Standard Operating Procedures
+  output_filename: 93_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 127
+- end_page: 128
+  name: References
+  output_filename: 94_References.pdf
+  start_page: 127
+- end_page: 129
+  name: Further Reading
+  output_filename: 95_Further_Reading.pdf
+  start_page: 128
+- end_page: 131
+  name: Chapter Revision History
+  output_filename: 96_Chapter_Revision_History.pdf
+  start_page: 129
+- end_page: 131
+  name: Edit Check Design Principles
+  output_filename: 97_Edit_Check_Design_Principles.pdf
+  start_page: 131
+- end_page: 132
+  name: Introduction
+  output_filename: 98_Introduction.pdf
+  start_page: 131
+- end_page: 132
+  name: Scope
+  output_filename: 99_Scope.pdf
+  start_page: 132
+- end_page: 133
+  name: Minimum Standards
+  output_filename: 100_Minimum_Standards.pdf
+  start_page: 132
+- end_page: 133
+  name: Best Practices
+  output_filename: 101_Best_Practices.pdf
+  start_page: 133
+- end_page: 137
+  name: Purpose and Process of Edit Checks
+  output_filename: 102_Purpose_and_Process_of_Edit_Checks.pdf
+  start_page: 133
+- end_page: 141
+  name: Creating Edit Check Specifications
+  output_filename: 103_Creating_Edit_Check_Specifications.pdf
+  start_page: 137
+- end_page: 143
+  name: Types of Checks
+  output_filename: 104_Types_of_Checks.pdf
+  start_page: 141
+- end_page: 144
+  name: Front-End vs. Back-End Edit Checks
+  output_filename: 105_Front-End_vs._Back-End_Edit_Checks.pdf
+  start_page: 143
+- end_page: 144
+  name: Electronic Data Capture (EDC) vs. Paper-based Edit Checks
+  output_filename: 106_Electronic_Data_Capture_(EDC)_vs._Paper-based_Edit.pdf
+  start_page: 144
+- end_page: 146
+  name: Validating Edit Checks
+  output_filename: 107_Validating_Edit_Checks.pdf
+  start_page: 144
+- end_page: 147
+  name: Maintenance of Edit Checks
+  output_filename: 108_Maintenance_of_Edit_Checks.pdf
+  start_page: 146
+- end_page: 148
+  name: Edit Check Training
+  output_filename: 109_Edit_Check_Training.pdf
+  start_page: 147
+- end_page: 148
+  name: Recommended Standard Operating Procedures
+  output_filename: 110_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 148
+- end_page: 148
+  name: References
+  output_filename: 111_References.pdf
+  start_page: 148
+- end_page: 148
+  name: Further Reading
+  output_filename: 112_Further_Reading.pdf
+  start_page: 148
+- end_page: 149
+  name: Chapter Revision History
+  output_filename: 113_Chapter_Revision_History.pdf
+  start_page: 148
+- end_page: 149
+  name: "Electronic Data Capture\u2014Concepts and Study Start-up"
+  output_filename: "114_Electronic_Data_Capture\u2014Concepts_and_Study_Start-u.pdf"
+  start_page: 149
+- end_page: 150
+  name: Introduction
+  output_filename: 115_Introduction.pdf
+  start_page: 149
+- end_page: 151
+  name: Scope
+  output_filename: 116_Scope.pdf
+  start_page: 150
+- end_page: 152
+  name: Minimum Standards
+  output_filename: 117_Minimum_Standards.pdf
+  start_page: 151
+- end_page: 154
+  name: Best Practices
+  output_filename: 118_Best_Practices.pdf
+  start_page: 152
+- end_page: 160
+  name: Differences Between EDC and Paper-based Studies
+  output_filename: 119_Differences_Between_EDC_and_Paper-based_Studies.pdf
+  start_page: 154
+- end_page: 169
+  name: EDC Deployment Considerations
+  output_filename: 120_EDC_Deployment_Considerations.pdf
+  start_page: 160
+- end_page: 171
+  name: Integration
+  output_filename: 121_Integration.pdf
+  start_page: 169
+- end_page: 172
+  name: International Study Considerations
+  output_filename: 122_International_Study_Considerations.pdf
+  start_page: 171
+- end_page: 176
+  name: System and Vendor Assessments
+  output_filename: 123_System_and_Vendor_Assessments.pdf
+  start_page: 172
+- end_page: 177
+  name: Vendor SLAs and Performance Reports
+  output_filename: 124_Vendor_SLAs_and_Performance_Reports.pdf
+  start_page: 176
+- end_page: 180
+  name: Detailed Help Desk Planning
+  output_filename: 125_Detailed_Help_Desk_Planning.pdf
+  start_page: 177
+- end_page: 183
+  name: Gap Analysis between Existing SOPs and EDC Requirements
+  output_filename: 126_Gap_Analysis_between_Existing_SOPs_and_EDC_Require.pdf
+  start_page: 180
+- end_page: 184
+  name: Metrics and Performance Targets
+  output_filename: 127_Metrics_and_Performance_Targets.pdf
+  start_page: 183
+- end_page: 185
+  name: Reports to Support Study and Process Management
+  output_filename: 128_Reports_to_Support_Study_and_Process_Management.pdf
+  start_page: 184
+- end_page: 193
+  name: CDM Deliverables During Study Start-up
+  output_filename: 129_CDM_Deliverables_During_Study_Start-up.pdf
+  start_page: 185
+- end_page: 195
+  name: Site Evaluation and Qualification
+  output_filename: 130_Site_Evaluation_and_Qualification.pdf
+  start_page: 193
+- end_page: 198
+  name: End User Preparation
+  output_filename: 131_End_User_Preparation.pdf
+  start_page: 195
+- end_page: 198
+  name: Recommended Standard Operating Procedures
+  output_filename: 132_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 198
+- end_page: 199
+  name: References
+  output_filename: 133_References.pdf
+  start_page: 198
+- end_page: 201
+  name: Further Reading
+  output_filename: 134_Further_Reading.pdf
+  start_page: 199
+- end_page: 203
+  name: Chapter Revision History
+  output_filename: 135_Chapter_Revision_History.pdf
+  start_page: 201
+- end_page: 203
+  name: "Electronic Data Capture\u2014Study Conduct"
+  output_filename: "136_Electronic_Data_Capture\u2014Study_Conduct.pdf"
+  start_page: 203
+- end_page: 203
+  name: Introduction
+  output_filename: 137_Introduction.pdf
+  start_page: 203
+- end_page: 204
+  name: Scope
+  output_filename: 138_Scope.pdf
+  start_page: 203
+- end_page: 205
+  name: Minimum Standards
+  output_filename: 139_Minimum_Standards.pdf
+  start_page: 204
+- end_page: 206
+  name: Best Practices
+  output_filename: 140_Best_Practices.pdf
+  start_page: 205
+- end_page: 208
+  name: Data Reviews, Trend Analyses, and Remediation
+  output_filename: 141_Data_Reviews,_Trend_Analyses,_and_Remediation.pdf
+  start_page: 206
+- end_page: 209
+  name: Communication Plan
+  output_filename: 142_Communication_Plan.pdf
+  start_page: 208
+- end_page: 210
+  name: Metrics Reports
+  output_filename: 143_Metrics_Reports.pdf
+  start_page: 209
+- end_page: 211
+  name: Security
+  output_filename: 144_Security.pdf
+  start_page: 210
+- end_page: 212
+  name: Managing User Access
+  output_filename: 145_Managing_User_Access.pdf
+  start_page: 211
+- end_page: 213
+  name: Ensuring Effective Software Support
+  output_filename: 146_Ensuring_Effective_Software_Support.pdf
+  start_page: 212
+- end_page: 214
+  name: Training
+  output_filename: 147_Training.pdf
+  start_page: 213
+- end_page: 220
+  name: Change Control
+  output_filename: 148_Change_Control.pdf
+  start_page: 214
+- end_page: 222
+  name: Midstudy Requests for Patient Data
+  output_filename: 149_Midstudy_Requests_for_Patient_Data.pdf
+  start_page: 220
+- end_page: 223
+  name: 'Recommended Standard Operating Procedures:'
+  output_filename: 150_Recommended_Standard_Operating_Procedures_.pdf
+  start_page: 222
+- end_page: 223
+  name: References
+  output_filename: 151_References.pdf
+  start_page: 223
+- end_page: 225
+  name: Further Reading
+  output_filename: 152_Further_Reading.pdf
+  start_page: 223
+- end_page: 227
+  name: Chapter Revision History
+  output_filename: 153_Chapter_Revision_History.pdf
+  start_page: 225
+- end_page: 227
+  name: "Electronic Data Capture\u2014Study Closeout"
+  output_filename: "154_Electronic_Data_Capture\u2014Study_Closeout.pdf"
+  start_page: 227
+- end_page: 228
+  name: Introduction
+  output_filename: 155_Introduction.pdf
+  start_page: 227
+- end_page: 228
+  name: Scope
+  output_filename: 156_Scope.pdf
+  start_page: 228
+- end_page: 229
+  name: Minimum Standards
+  output_filename: 157_Minimum_Standards.pdf
+  start_page: 228
+- end_page: 230
+  name: Best Practices
+  output_filename: 158_Best_Practices.pdf
+  start_page: 229
+- end_page: 232
+  name: Final Review
+  output_filename: 159_Final_Review.pdf
+  start_page: 230
+- end_page: 234
+  name: Final Locking of Data and Database
+  output_filename: 160_Final_Locking_of_Data_and_Database.pdf
+  start_page: 232
+- end_page: 234
+  name: Audits
+  output_filename: 161_Audits.pdf
+  start_page: 234
+- end_page: 235
+  name: Generating Archive Media for Sites
+  output_filename: 162_Generating_Archive_Media_for_Sites.pdf
+  start_page: 234
+- end_page: 236
+  name: Provisioned Hardware Disposition
+  output_filename: 163_Provisioned_Hardware_Disposition.pdf
+  start_page: 235
+- end_page: 236
+  name: Recommended Standard Operating Procedures
+  output_filename: 164_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 236
+- end_page: 236
+  name: References
+  output_filename: 165_References.pdf
+  start_page: 236
+- end_page: 239
+  name: Further Reading
+  output_filename: 166_Further_Reading.pdf
+  start_page: 236
+- end_page: 241
+  name: Chapter Revision History
+  output_filename: 167_Chapter_Revision_History.pdf
+  start_page: 239
+- end_page: 241
+  name: CRF Completion Guidelines
+  output_filename: 168_CRF_Completion_Guidelines.pdf
+  start_page: 241
+- end_page: 242
+  name: Introduction
+  output_filename: 169_Introduction.pdf
+  start_page: 241
+- end_page: 242
+  name: Scope
+  output_filename: 170_Scope.pdf
+  start_page: 242
+- end_page: 243
+  name: Minimum Standards
+  output_filename: 171_Minimum_Standards.pdf
+  start_page: 242
+- end_page: 244
+  name: Best Practices
+  output_filename: 172_Best_Practices.pdf
+  start_page: 243
+- end_page: 244
+  name: Format and Content of CRF Completion Guidelines
+  output_filename: 173_Format_and_Content_of_CRF_Completion_Guidelines.pdf
+  start_page: 244
+- end_page: 246
+  name: General Instructions Section
+  output_filename: 174_General_Instructions_Section.pdf
+  start_page: 244
+- end_page: 246
+  name: Page/Screen-specific Instructions
+  output_filename: 175_Page_Screen-specific_Instructions.pdf
+  start_page: 246
+- end_page: 247
+  name: Recommended Standard Operating Procedures
+  output_filename: 176_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 246
+- end_page: 247
+  name: References
+  output_filename: 177_References.pdf
+  start_page: 247
+- end_page: 247
+  name: Further Reading
+  output_filename: 178_Further_Reading.pdf
+  start_page: 247
+- end_page: 249
+  name: Chapter Revision History
+  output_filename: 179_Chapter_Revision_History.pdf
+  start_page: 247
+- end_page: 249
+  name: CRF Printing and Vendor Selection
+  output_filename: 180_CRF_Printing_and_Vendor_Selection.pdf
+  start_page: 249
+- end_page: 249
+  name: Introduction
+  output_filename: 181_Introduction.pdf
+  start_page: 249
+- end_page: 250
+  name: Scope
+  output_filename: 182_Scope.pdf
+  start_page: 249
+- end_page: 250
+  name: Minimum Standards
+  output_filename: 183_Minimum_Standards.pdf
+  start_page: 250
+- end_page: 251
+  name: Best Practices
+  output_filename: 184_Best_Practices.pdf
+  start_page: 250
+- end_page: 251
+  name: CRF Binder
+  output_filename: 185_CRF_Binder.pdf
+  start_page: 251
+- end_page: 252
+  name: Paper
+  output_filename: 186_Paper.pdf
+  start_page: 251
+- end_page: 252
+  name: Tab Banks
+  output_filename: 187_Tab_Banks.pdf
+  start_page: 252
+- end_page: 253
+  name: Binding, Packaging, and Shipments
+  output_filename: 188_Binding,_Packaging,_and_Shipments.pdf
+  start_page: 252
+- end_page: 254
+  name: Information Commonly Provided With Printing Specifications
+  output_filename: 189_Information_Commonly_Provided_With_Printing_Specif.pdf
+  start_page: 253
+- end_page: 254
+  name: Selection & Evaluation of CRF Printing Vendors
+  output_filename: 190_Selection_&_Evaluation_of_CRF_Printing_Vendors.pdf
+  start_page: 254
+- end_page: 254
+  name: Recommended Standard Operating Procedures
+  output_filename: 191_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 254
+- end_page: 255
+  name: References
+  output_filename: 192_References.pdf
+  start_page: 254
+- end_page: 255
+  name: Further Reading
+  output_filename: 193_Further_Reading.pdf
+  start_page: 255
+- end_page: 257
+  name: Chapter Revision History
+  output_filename: 194_Chapter_Revision_History.pdf
+  start_page: 255
+- end_page: 257
+  name: Database Validation, Programming and Standards
+  output_filename: 195_Database_Validation,_Programming_and_Standards.pdf
+  start_page: 257
+- end_page: 258
+  name: Introduction
+  output_filename: 196_Introduction.pdf
+  start_page: 257
+- end_page: 258
+  name: Scope
+  output_filename: 197_Scope.pdf
+  start_page: 258
+- end_page: 259
+  name: Minimum Standards
+  output_filename: 198_Minimum_Standards.pdf
+  start_page: 258
+- end_page: 260
+  name: Best Practices
+  output_filename: 199_Best_Practices.pdf
+  start_page: 259
+- end_page: 262
+  name: Validation
+  output_filename: 200_Validation.pdf
+  start_page: 260
+- end_page: 263
+  name: Importance of Validation to CDM
+  output_filename: 201_Importance_of_Validation_to_CDM.pdf
+  start_page: 262
+- end_page: 264
+  name: SDLC and Validation
+  output_filename: 202_SDLC_and_Validation.pdf
+  start_page: 263
+- end_page: 265
+  name: Validation Standards
+  output_filename: 203_Validation_Standards.pdf
+  start_page: 264
+- end_page: 267
+  name: Validation Plan
+  output_filename: 204_Validation_Plan.pdf
+  start_page: 265
+- end_page: 270
+  name: Study-Specific Validation
+  output_filename: 205_Study-Specific_Validation.pdf
+  start_page: 267
+- end_page: 272
+  name: Validation Risks
+  output_filename: 206_Validation_Risks.pdf
+  start_page: 270
+- end_page: 272
+  name: Regulatory Impact on Validation
+  output_filename: 207_Regulatory_Impact_on_Validation.pdf
+  start_page: 272
+- end_page: 273
+  name: Recommended Standard Operating Procedures
+  output_filename: 208_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 272
+- end_page: 274
+  name: References
+  output_filename: 209_References.pdf
+  start_page: 273
+- end_page: 275
+  name: Further Reading
+  output_filename: 210_Further_Reading.pdf
+  start_page: 274
+- end_page: 277
+  name: Chapter Revision History
+  output_filename: 211_Chapter_Revision_History.pdf
+  start_page: 275
+- end_page: 277
+  name: Laboratory Data Handling
+  output_filename: 212_Laboratory_Data_Handling.pdf
+  start_page: 277
+- end_page: 278
+  name: Introduction
+  output_filename: 213_Introduction.pdf
+  start_page: 277
+- end_page: 278
+  name: Scope
+  output_filename: 214_Scope.pdf
+  start_page: 278
+- end_page: 279
+  name: Minimum Standards
+  output_filename: 215_Minimum_Standards.pdf
+  start_page: 278
+- end_page: 280
+  name: Best Practices
+  output_filename: 216_Best_Practices.pdf
+  start_page: 279
+- end_page: 283
+  name: Distinctions Between Types of Labs
+  output_filename: 217_Distinctions_Between_Types_of_Labs.pdf
+  start_page: 280
+- end_page: 285
+  name: Lab Data in Clinical Studies
+  output_filename: 218_Lab_Data_in_Clinical_Studies.pdf
+  start_page: 283
+- end_page: 286
+  name: Standards
+  output_filename: 219_Standards.pdf
+  start_page: 285
+- end_page: 287
+  name: Unexpected/Unscheduled Lab Data
+  output_filename: 220_Unexpected_Unscheduled_Lab_Data.pdf
+  start_page: 286
+- end_page: 290
+  name: Lab Reference Ranges
+  output_filename: 221_Lab_Reference_Ranges.pdf
+  start_page: 287
+- end_page: 291
+  name: Lab Processes in Studies
+  output_filename: 222_Lab_Processes_in_Studies.pdf
+  start_page: 290
+- end_page: 294
+  name: Cleaning Lab Data
+  output_filename: 223_Cleaning_Lab_Data.pdf
+  start_page: 291
+- end_page: 295
+  name: Lab Accreditation/Certification
+  output_filename: 224_Lab_Accreditation_Certification.pdf
+  start_page: 294
+- end_page: 296
+  name: Regulatory Agencies
+  output_filename: 225_Regulatory_Agencies.pdf
+  start_page: 295
+- end_page: 296
+  name: Recommended Standard Operating Procedures
+  output_filename: 226_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 296
+- end_page: 297
+  name: References
+  output_filename: 227_References.pdf
+  start_page: 296
+- end_page: 297
+  name: Further Reading
+  output_filename: 228_Further_Reading.pdf
+  start_page: 297
+- end_page: 299
+  name: Chapter Revision History
+  output_filename: 229_Chapter_Revision_History.pdf
+  start_page: 297
+- end_page: 299
+  name: External Data Transfers
+  output_filename: 230_External_Data_Transfers.pdf
+  start_page: 299
+- end_page: 299
+  name: Introduction
+  output_filename: 231_Introduction.pdf
+  start_page: 299
+- end_page: 300
+  name: Scope
+  output_filename: 232_Scope.pdf
+  start_page: 299
+- end_page: 300
+  name: Minimum Standards
+  output_filename: 233_Minimum_Standards.pdf
+  start_page: 300
+- end_page: 301
+  name: Best Practices
+  output_filename: 234_Best_Practices.pdf
+  start_page: 300
+- end_page: 303
+  name: Types of External Data
+  output_filename: 235_Types_of_External_Data.pdf
+  start_page: 301
+- end_page: 303
+  name: External Data Processing Steps Affecting the Data Quality
+  output_filename: 236_External_Data_Processing_Steps_Affecting_the_Data_.pdf
+  start_page: 303
+- end_page: 305
+  name: Key Variables
+  output_filename: 237_Key_Variables.pdf
+  start_page: 303
+- end_page: 306
+  name: Data Editing and Verification Procedures
+  output_filename: 238_Data_Editing_and_Verification_Procedures.pdf
+  start_page: 305
+- end_page: 308
+  name: Record Formatting and File Formats
+  output_filename: 239_Record_Formatting_and_File_Formats.pdf
+  start_page: 306
+- end_page: 308
+  name: Data Transmission
+  output_filename: 240_Data_Transmission.pdf
+  start_page: 308
+- end_page: 309
+  name: Procedures for Database Updates
+  output_filename: 241_Procedures_for_Database_Updates.pdf
+  start_page: 308
+- end_page: 310
+  name: File Storage and Archiving
+  output_filename: 242_File_Storage_and_Archiving.pdf
+  start_page: 309
+- end_page: 310
+  name: Recommended Standard Operating Procedures
+  output_filename: 243_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 310
+- end_page: 311
+  name: References
+  output_filename: 244_References.pdf
+  start_page: 310
+- end_page: 312
+  name: Further Reading
+  output_filename: 245_Further_Reading.pdf
+  start_page: 311
+- end_page: 313
+  name: Chapter Revision History
+  output_filename: 246_Chapter_Revision_History.pdf
+  start_page: 312
+- end_page: 313
+  name: Patient-Reported Outcomes
+  output_filename: 247_Patient-Reported_Outcomes.pdf
+  start_page: 313
+- end_page: 314
+  name: Introduction
+  output_filename: 248_Introduction.pdf
+  start_page: 313
+- end_page: 314
+  name: Scope
+  output_filename: 249_Scope.pdf
+  start_page: 314
+- end_page: 315
+  name: Minimum Standards
+  output_filename: 250_Minimum_Standards.pdf
+  start_page: 314
+- end_page: 316
+  name: Best Practices
+  output_filename: 251_Best_Practices.pdf
+  start_page: 315
+- end_page: 317
+  name: Data Suitable for PRO Collection Methods
+  output_filename: 252_Data_Suitable_for_PRO_Collection_Methods.pdf
+  start_page: 316
+- end_page: 318
+  name: Traditional PRO Collection Methods
+  output_filename: 253_Traditional_PRO_Collection_Methods.pdf
+  start_page: 317
+- end_page: 320
+  name: ePRO Collection Methods
+  output_filename: 254_ePRO_Collection_Methods.pdf
+  start_page: 318
+- end_page: 322
+  name: Choosing a Pro Method
+  output_filename: 255_Choosing_a_Pro_Method.pdf
+  start_page: 320
+- end_page: 323
+  name: Costs Considerations
+  output_filename: 256_Costs_Considerations.pdf
+  start_page: 322
+- end_page: 324
+  name: Regulatory Considerations
+  output_filename: 257_Regulatory_Considerations.pdf
+  start_page: 323
+- end_page: 324
+  name: Recommended Standard Operating Procedures
+  output_filename: 258_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 324
+- end_page: 325
+  name: References
+  output_filename: 259_References.pdf
+  start_page: 324
+- end_page: 326
+  name: Further Reading
+  output_filename: 260_Further_Reading.pdf
+  start_page: 325
+- end_page: 327
+  name: Chapter Revision History
+  output_filename: 261_Chapter_Revision_History.pdf
+  start_page: 326
+- end_page: 327
+  name: CDM Presentation at Investigator Meetings
+  output_filename: 262_CDM_Presentation_at_Investigator_Meetings.pdf
+  start_page: 327
+- end_page: 327
+  name: Introduction
+  output_filename: 263_Introduction.pdf
+  start_page: 327
+- end_page: 327
+  name: Scope
+  output_filename: 264_Scope.pdf
+  start_page: 327
+- end_page: 328
+  name: Minimum Standards
+  output_filename: 265_Minimum_Standards.pdf
+  start_page: 327
+- end_page: 329
+  name: Best Practices
+  output_filename: 266_Best_Practices.pdf
+  start_page: 328
+- end_page: 332
+  name: Procedures
+  output_filename: 267_Procedures.pdf
+  start_page: 329
+- end_page: 332
+  name: Recommended Standard Operating Procedures
+  output_filename: 268_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 332
+- end_page: 332
+  name: References
+  output_filename: 269_References.pdf
+  start_page: 332
+- end_page: 332
+  name: Further Reading
+  output_filename: 270_Further_Reading.pdf
+  start_page: 332
+- end_page: 333
+  name: Chapter Revision History
+  output_filename: 271_Chapter_Revision_History.pdf
+  start_page: 332
+- end_page: 333
+  name: Training
+  output_filename: 272_Training.pdf
+  start_page: 333
+- end_page: 334
+  name: Introduction
+  output_filename: 273_Introduction.pdf
+  start_page: 333
+- end_page: 334
+  name: Scope
+  output_filename: 274_Scope.pdf
+  start_page: 334
+- end_page: 334
+  name: Minimum Standards
+  output_filename: 275_Minimum_Standards.pdf
+  start_page: 334
+- end_page: 335
+  name: Best Practices
+  output_filename: 276_Best_Practices.pdf
+  start_page: 334
+- end_page: 336
+  name: Master Training Plan
+  output_filename: 277_Master_Training_Plan.pdf
+  start_page: 335
+- end_page: 338
+  name: Data Management Training Topics
+  output_filename: 278_Data_Management_Training_Topics.pdf
+  start_page: 336
+- end_page: 338
+  name: Training Techniques and Environment
+  output_filename: 279_Training_Techniques_and_Environment.pdf
+  start_page: 338
+- end_page: 339
+  name: Principles of Learning
+  output_filename: 280_Principles_of_Learning.pdf
+  start_page: 338
+- end_page: 339
+  name: Strategies in Learning
+  output_filename: 281_Strategies_in_Learning.pdf
+  start_page: 339
+- end_page: 341
+  name: Presentation Delivery/Tools and Techniques
+  output_filename: 282_Presentation_Delivery_Tools_and_Techniques.pdf
+  start_page: 339
+- end_page: 342
+  name: Online Training
+  output_filename: 283_Online_Training.pdf
+  start_page: 341
+- end_page: 343
+  name: Trainer Qualifications
+  output_filename: 284_Trainer_Qualifications.pdf
+  start_page: 342
+- end_page: 343
+  name: Training Environment
+  output_filename: 285_Training_Environment.pdf
+  start_page: 343
+- end_page: 343
+  name: Evaluation and Feedback Techniques
+  output_filename: 286_Evaluation_and_Feedback_Techniques.pdf
+  start_page: 343
+- end_page: 343
+  name: Recommended Standard Operating Procedures
+  output_filename: 287_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 343
+- end_page: 344
+  name: References
+  output_filename: 288_References.pdf
+  start_page: 343
+- end_page: 345
+  name: Further Reading
+  output_filename: 289_Further_Reading.pdf
+  start_page: 344
+- end_page: 347
+  name: Chapter Revision History
+  output_filename: 290_Chapter_Revision_History.pdf
+  start_page: 345
+- end_page: 347
+  name: Metrics in Clinical Data Management
+  output_filename: 291_Metrics_in_Clinical_Data_Management.pdf
+  start_page: 347
+- end_page: 348
+  name: Introduction
+  output_filename: 292_Introduction.pdf
+  start_page: 347
+- end_page: 348
+  name: Scope
+  output_filename: 293_Scope.pdf
+  start_page: 348
+- end_page: 349
+  name: Minimum Standards
+  output_filename: 294_Minimum_Standards.pdf
+  start_page: 348
+- end_page: 350
+  name: Best Practices
+  output_filename: 295_Best_Practices.pdf
+  start_page: 349
+- end_page: 354
+  name: Identifying Metrics
+  output_filename: 296_Identifying_Metrics.pdf
+  start_page: 350
+- end_page: 356
+  name: Metrics in Different Types of Studies
+  output_filename: 297_Metrics_in_Different_Types_of_Studies.pdf
+  start_page: 354
+- end_page: 359
+  name: Importance of Metrics Standardization
+  output_filename: 298_Importance_of_Metrics_Standardization.pdf
+  start_page: 356
+- end_page: 360
+  name: Context and Attributes of Metrics
+  output_filename: 299_Context_and_Attributes_of_Metrics.pdf
+  start_page: 359
+- end_page: 362
+  name: Defining Time Points for Standardized Metrics Collection
+  output_filename: 300_Defining_Time_Points_for_Standardized_Metrics_Coll.pdf
+  start_page: 360
+- end_page: 363
+  name: 'Action Plans: The Feedback Loop'
+  output_filename: 301_Action_Plans__The_Feedback_Loop.pdf
+  start_page: 362
+- end_page: 364
+  name: Metrics Documentation
+  output_filename: 302_Metrics_Documentation.pdf
+  start_page: 363
+- end_page: 364
+  name: Recommended Standard Operating Procedures
+  output_filename: 303_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 364
+- end_page: 364
+  name: References
+  output_filename: 304_References.pdf
+  start_page: 364
+- end_page: 365
+  name: Further Reading
+  output_filename: 305_Further_Reading.pdf
+  start_page: 364
+- end_page: 367
+  name: Chapter Revision History
+  output_filename: 306_Chapter_Revision_History.pdf
+  start_page: 365
+- end_page: 367
+  name: Assuring Data Quality
+  output_filename: 307_Assuring_Data_Quality.pdf
+  start_page: 367
+- end_page: 369
+  name: Introduction
+  output_filename: 308_Introduction.pdf
+  start_page: 367
+- end_page: 369
+  name: Scope
+  output_filename: 309_Scope.pdf
+  start_page: 369
+- end_page: 370
+  name: Minimum Standards
+  output_filename: 310_Minimum_Standards.pdf
+  start_page: 369
+- end_page: 370
+  name: Best Practices
+  output_filename: 311_Best_Practices.pdf
+  start_page: 370
+- end_page: 374
+  name: Quality Systems
+  output_filename: 312_Quality_Systems.pdf
+  start_page: 370
+- end_page: 376
+  name: Quality System Documentation
+  output_filename: 313_Quality_System_Documentation.pdf
+  start_page: 374
+- end_page: 379
+  name: Creating a Quality System
+  output_filename: 314_Creating_a_Quality_System.pdf
+  start_page: 376
+- end_page: 381
+  name: Maintaining a Quality System
+  output_filename: 315_Maintaining_a_Quality_System.pdf
+  start_page: 379
+- end_page: 383
+  name: Auditing a Quality System
+  output_filename: 316_Auditing_a_Quality_System.pdf
+  start_page: 381
+- end_page: 384
+  name: Other Considerations for Quality Systems
+  output_filename: 317_Other_Considerations_for_Quality_Systems.pdf
+  start_page: 383
+- end_page: 384
+  name: Recommended Standard Operating Procedures
+  output_filename: 318_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 384
+- end_page: 385
+  name: References
+  output_filename: 319_References.pdf
+  start_page: 384
+- end_page: 386
+  name: Further Reading
+  output_filename: 320_Further_Reading.pdf
+  start_page: 385
+- end_page: 387
+  name: Chapter Revision History
+  output_filename: 321_Chapter_Revision_History.pdf
+  start_page: 386
+- end_page: 387
+  name: Measuring Data Quality
+  output_filename: 322_Measuring_Data_Quality.pdf
+  start_page: 387
+- end_page: 388
+  name: Introduction
+  output_filename: 323_Introduction.pdf
+  start_page: 387
+- end_page: 388
+  name: Scope
+  output_filename: 324_Scope.pdf
+  start_page: 388
+- end_page: 388
+  name: Minimum Standards
+  output_filename: 325_Minimum_Standards.pdf
+  start_page: 388
+- end_page: 389
+  name: Best Practices
+  output_filename: 326_Best_Practices.pdf
+  start_page: 388
+- end_page: 390
+  name: Other Best Practice Considerations
+  output_filename: 327_Other_Best_Practice_Considerations.pdf
+  start_page: 389
+- end_page: 392
+  name: Data Errors
+  output_filename: 328_Data_Errors.pdf
+  start_page: 390
+- end_page: 395
+  name: Inspection or Comparison of Data
+  output_filename: 329_Inspection_or_Comparison_of_Data.pdf
+  start_page: 392
+- end_page: 396
+  name: Acceptable Quality
+  output_filename: 330_Acceptable_Quality.pdf
+  start_page: 395
+- end_page: 396
+  name: Documentation
+  output_filename: 331_Documentation.pdf
+  start_page: 396
+- end_page: 396
+  name: Recommended Standard Operating Procedures
+  output_filename: 332_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 396
+- end_page: 397
+  name: References
+  output_filename: 333_References.pdf
+  start_page: 396
+- end_page: 398
+  name: Further Reading
+  output_filename: 334_Further_Reading.pdf
+  start_page: 397
+- end_page: 399
+  name: Chapter Revision History
+  output_filename: 335_Chapter_Revision_History.pdf
+  start_page: 398
+- end_page: 399
+  name: Data Storage
+  output_filename: 336_Data_Storage.pdf
+  start_page: 399
+- end_page: 399
+  name: Introduction
+  output_filename: 337_Introduction.pdf
+  start_page: 399
+- end_page: 400
+  name: Scope
+  output_filename: 338_Scope.pdf
+  start_page: 399
+- end_page: 400
+  name: Minimum Standards
+  output_filename: 339_Minimum_Standards.pdf
+  start_page: 400
+- end_page: 400
+  name: Best Practices
+  output_filename: 340_Best_Practices.pdf
+  start_page: 400
+- end_page: 401
+  name: Physical Storage
+  output_filename: 341_Physical_Storage.pdf
+  start_page: 400
+- end_page: 402
+  name: Electronic Storage and Warehousing
+  output_filename: 342_Electronic_Storage_and_Warehousing.pdf
+  start_page: 401
+- end_page: 403
+  name: Data Archival
+  output_filename: 343_Data_Archival.pdf
+  start_page: 402
+- end_page: 404
+  name: Recommended Standard Operating Procedures
+  output_filename: 344_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 403
+- end_page: 404
+  name: References
+  output_filename: 345_References.pdf
+  start_page: 404
+- end_page: 404
+  name: Further Reading
+  output_filename: 346_Further_Reading.pdf
+  start_page: 404
+- end_page: 405
+  name: Chapter Revision History
+  output_filename: 347_Chapter_Revision_History.pdf
+  start_page: 404
+- end_page: 405
+  name: Data Entry Processes
+  output_filename: 348_Data_Entry_Processes.pdf
+  start_page: 405
+- end_page: 406
+  name: Introduction
+  output_filename: 349_Introduction.pdf
+  start_page: 405
+- end_page: 406
+  name: Scope
+  output_filename: 350_Scope.pdf
+  start_page: 406
+- end_page: 407
+  name: Minimum Standards
+  output_filename: 351_Minimum_Standards.pdf
+  start_page: 406
+- end_page: 407
+  name: Best Practices
+  output_filename: 352_Best_Practices.pdf
+  start_page: 407
+- end_page: 409
+  name: Workflow
+  output_filename: 353_Workflow.pdf
+  start_page: 407
+- end_page: 410
+  name: Data Receipt
+  output_filename: 354_Data_Receipt.pdf
+  start_page: 409
+- end_page: 415
+  name: Data Entry
+  output_filename: 355_Data_Entry.pdf
+  start_page: 410
+- end_page: 420
+  name: Data Review
+  output_filename: 356_Data_Review.pdf
+  start_page: 415
+- end_page: 422
+  name: Change Control
+  output_filename: 357_Change_Control.pdf
+  start_page: 420
+- end_page: 422
+  name: Recommended Standard Operating Procedures
+  output_filename: 358_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 422
+- end_page: 423
+  name: References
+  output_filename: 359_References.pdf
+  start_page: 422
+- end_page: 423
+  name: Further Reading
+  output_filename: 360_Further_Reading.pdf
+  start_page: 423
+- end_page: 425
+  name: Chapter Revision History
+  output_filename: 361_Chapter_Revision_History.pdf
+  start_page: 423
+- end_page: 425
+  name: Medical Coding Dictionary Management & Maintenance
+  output_filename: 362_Medical_Coding_Dictionary_Management_&_Maintenance.pdf
+  start_page: 425
+- end_page: 426
+  name: Introduction
+  output_filename: 363_Introduction.pdf
+  start_page: 425
+- end_page: 426
+  name: Scope
+  output_filename: 364_Scope.pdf
+  start_page: 426
+- end_page: 427
+  name: Minimum Standards
+  output_filename: 365_Minimum_Standards.pdf
+  start_page: 426
+- end_page: 428
+  name: Best Practices
+  output_filename: 366_Best_Practices.pdf
+  start_page: 427
+- end_page: 431
+  name: Established Standardized Dictionaries in Common Use
+  output_filename: 367_Established_Standardized_Dictionaries_in_Common_Us.pdf
+  start_page: 428
+- end_page: 432
+  name: Other Dictionaries
+  output_filename: 368_Other_Dictionaries.pdf
+  start_page: 431
+- end_page: 434
+  name: Dictionary Application Software Selection
+  output_filename: 369_Dictionary_Application_Software_Selection.pdf
+  start_page: 432
+- end_page: 437
+  name: Medical Coding Tools and Methods
+  output_filename: 370_Medical_Coding_Tools_and_Methods.pdf
+  start_page: 434
+- end_page: 437
+  name: Dictionary System Validation
+  output_filename: 371_Dictionary_System_Validation.pdf
+  start_page: 437
+- end_page: 439
+  name: Change Control
+  output_filename: 372_Change_Control.pdf
+  start_page: 437
+- end_page: 439
+  name: Recommended Standard Operating Procedures
+  output_filename: 373_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 439
+- end_page: 439
+  name: References
+  output_filename: 374_References.pdf
+  start_page: 439
+- end_page: 440
+  name: Further Reading
+  output_filename: 375_Further_Reading.pdf
+  start_page: 439
+- end_page: 441
+  name: Chapter Revision History
+  output_filename: 376_Chapter_Revision_History.pdf
+  start_page: 440
+- end_page: 441
+  name: Safety Data Management and Reporting
+  output_filename: 377_Safety_Data_Management_and_Reporting.pdf
+  start_page: 441
+- end_page: 442
+  name: Introduction
+  output_filename: 378_Introduction.pdf
+  start_page: 441
+- end_page: 443
+  name: Scope
+  output_filename: 379_Scope.pdf
+  start_page: 442
+- end_page: 443
+  name: Minimum Standards
+  output_filename: 380_Minimum_Standards.pdf
+  start_page: 443
+- end_page: 444
+  name: Best Practices
+  output_filename: 381_Best_Practices.pdf
+  start_page: 443
+- end_page: 446
+  name: Available Guidelines
+  output_filename: 382_Available_Guidelines.pdf
+  start_page: 444
+- end_page: 448
+  name: Safety Reporting
+  output_filename: 383_Safety_Reporting.pdf
+  start_page: 446
+- end_page: 450
+  name: Capture, Management, And Reporting Of Adverse Events
+  output_filename: 384_Capture,_Management,_And_Reporting_Of_Adverse_Even.pdf
+  start_page: 448
+- end_page: 452
+  name: Dictionaries
+  output_filename: 385_Dictionaries.pdf
+  start_page: 450
+- end_page: 454
+  name: Encoding
+  output_filename: 386_Encoding.pdf
+  start_page: 452
+- end_page: 456
+  name: Capture, Management, and Reporting of Laboratory Data
+  output_filename: 387_Capture,_Management,_and_Reporting_of_Laboratory_D.pdf
+  start_page: 454
+- end_page: 457
+  name: Other Data
+  output_filename: 388_Other_Data.pdf
+  start_page: 456
+- end_page: 458
+  name: Serious Adverse Event Data
+  output_filename: 389_Serious_Adverse_Event_Data.pdf
+  start_page: 457
+- end_page: 459
+  name: General Safety Data
+  output_filename: 390_General_Safety_Data.pdf
+  start_page: 458
+- end_page: 460
+  name: Recommended Standard Operating Procedures
+  output_filename: 391_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 459
+- end_page: 461
+  name: References
+  output_filename: 392_References.pdf
+  start_page: 460
+- end_page: 462
+  name: Further Reading
+  output_filename: 393_Further_Reading.pdf
+  start_page: 461
+- end_page: 463
+  name: Chapter Revision History
+  output_filename: 394_Chapter_Revision_History.pdf
+  start_page: 462
+- end_page: 463
+  name: Serious Adverse Event Data Reconciliation
+  output_filename: 395_Serious_Adverse_Event_Data_Reconciliation.pdf
+  start_page: 463
+- end_page: 463
+  name: Introduction
+  output_filename: 396_Introduction.pdf
+  start_page: 463
+- end_page: 463
+  name: Scope
+  output_filename: 397_Scope.pdf
+  start_page: 463
+- end_page: 464
+  name: Minimum Standards
+  output_filename: 398_Minimum_Standards.pdf
+  start_page: 463
+- end_page: 467
+  name: Best Practices
+  output_filename: 399_Best_Practices.pdf
+  start_page: 464
+- end_page: 468
+  name: Procedures
+  output_filename: 400_Procedures.pdf
+  start_page: 467
+- end_page: 469
+  name: Recommended Standard Operating Procedures
+  output_filename: 401_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 468
+- end_page: 469
+  name: References
+  output_filename: 402_References.pdf
+  start_page: 469
+- end_page: 469
+  name: Further Reading
+  output_filename: 403_Further_Reading.pdf
+  start_page: 469
+- end_page: 470
+  name: Chapter Revision History
+  output_filename: 404_Chapter_Revision_History.pdf
+  start_page: 469
+- end_page: 471
+  name: 'Appendix A: Sample SAE Data Reconciliation Form'
+  output_filename: 405_Appendix_A__Sample_SAE_Data_Reconciliation_Form.pdf
+  start_page: 470
+- end_page: 471
+  name: Database Closure
+  output_filename: 406_Database_Closure.pdf
+  start_page: 471
+- end_page: 472
+  name: Introduction
+  output_filename: 407_Introduction.pdf
+  start_page: 471
+- end_page: 472
+  name: Scope
+  output_filename: 408_Scope.pdf
+  start_page: 472
+- end_page: 473
+  name: Minimum Standards
+  output_filename: 409_Minimum_Standards.pdf
+  start_page: 472
+- end_page: 473
+  name: Best Practices
+  output_filename: 410_Best_Practices.pdf
+  start_page: 473
+- end_page: 475
+  name: Interim and Final Lock Distinctions
+  output_filename: 411_Interim_and_Final_Lock_Distinctions.pdf
+  start_page: 473
+- end_page: 477
+  name: Database Closure Processes
+  output_filename: 412_Database_Closure_Processes.pdf
+  start_page: 475
+- end_page: 478
+  name: Database Closure Checklist
+  output_filename: 413_Database_Closure_Checklist.pdf
+  start_page: 477
+- end_page: 478
+  name: Database Lock and Closure Documentation
+  output_filename: 414_Database_Lock_and_Closure_Documentation.pdf
+  start_page: 478
+- end_page: 479
+  name: Final Database Release
+  output_filename: 415_Final_Database_Release.pdf
+  start_page: 478
+- end_page: 479
+  name: EDC and Paper-Based Distinctions
+  output_filename: 416_EDC_and_Paper-Based_Distinctions.pdf
+  start_page: 479
+- end_page: 480
+  name: Database Unlocking/Relocking
+  output_filename: 417_Database_Unlocking_Relocking.pdf
+  start_page: 479
+- end_page: 481
+  name: Recommended Standard Operating Procedures
+  output_filename: 418_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 480
+- end_page: 481
+  name: References
+  output_filename: 419_References.pdf
+  start_page: 481
+- end_page: 481
+  name: Further Reading
+  output_filename: 420_Further_Reading.pdf
+  start_page: 481
+- end_page: 483
+  name: Chapter Revision History
+  output_filename: 421_Chapter_Revision_History.pdf
+  start_page: 481
+- end_page: 483
+  name: Clinical Data Archiving
+  output_filename: 422_Clinical_Data_Archiving.pdf
+  start_page: 483
+- end_page: 483
+  name: Introduction
+  output_filename: 423_Introduction.pdf
+  start_page: 483
+- end_page: 484
+  name: Scope
+  output_filename: 424_Scope.pdf
+  start_page: 483
+- end_page: 484
+  name: Minimum Standards
+  output_filename: 425_Minimum_Standards.pdf
+  start_page: 484
+- end_page: 485
+  name: Best Practices
+  output_filename: 426_Best_Practices.pdf
+  start_page: 484
+- end_page: 486
+  name: Background
+  output_filename: 427_Background.pdf
+  start_page: 485
+- end_page: 486
+  name: Regulations and Guidance
+  output_filename: 428_Regulations_and_Guidance.pdf
+  start_page: 486
+- end_page: 488
+  name: Archive Contents
+  output_filename: 429_Archive_Contents.pdf
+  start_page: 486
+- end_page: 490
+  name: Technical Requirements
+  output_filename: 430_Technical_Requirements.pdf
+  start_page: 488
+- end_page: 490
+  name: Archives for Clinical Sites
+  output_filename: 431_Archives_for_Clinical_Sites.pdf
+  start_page: 490
+- end_page: 490
+  name: Recommended Standard Operating Procedures
+  output_filename: 432_Recommended_Standard_Operating_Procedures.pdf
+  start_page: 490
+- end_page: 491
+  name: References
+  output_filename: 433_References.pdf
+  start_page: 490
+- end_page: 491
+  name: Further Reading
+  output_filename: 434_Further_Reading.pdf
+  start_page: 491
+- end_page: 493
+  name: Chapter Revision History
+  output_filename: 435_Chapter_Revision_History.pdf
+  start_page: 491
+- end_page: 493
+  name: Glossary
+  output_filename: 436_Glossary.pdf
+  start_page: 493
+- end_page: 496
+  name: A
+  output_filename: 437_A.pdf
+  start_page: 493
+- end_page: 496
+  name: B
+  output_filename: 438_B.pdf
+  start_page: 496
+- end_page: 500
+  name: C
+  output_filename: 439_C.pdf
+  start_page: 496
+- end_page: 502
+  name: D
+  output_filename: 440_D.pdf
+  start_page: 500
+- end_page: 504
+  name: E
+  output_filename: 441_E.pdf
+  start_page: 502
+- end_page: 506
+  name: F
+  output_filename: 442_F.pdf
+  start_page: 504
+- end_page: 507
+  name: G
+  output_filename: 443_G.pdf
+  start_page: 506
+- end_page: 507
+  name: H
+  output_filename: 444_H.pdf
+  start_page: 507
+- end_page: 512
+  name: I
+  output_filename: 445_I.pdf
+  start_page: 507
+- end_page: 512
+  name: L
+  output_filename: 446_L.pdf
+  start_page: 512
+- end_page: 513
+  name: M
+  output_filename: 447_M.pdf
+  start_page: 512
+- end_page: 514
+  name: N
+  output_filename: 448_N.pdf
+  start_page: 513
+- end_page: 515
+  name: O
+  output_filename: 449_O.pdf
+  start_page: 514
+- end_page: 516
+  name: P
+  output_filename: 450_P.pdf
+  start_page: 515
+- end_page: 517
+  name: Q
+  output_filename: 451_Q.pdf
+  start_page: 516
+- end_page: 518
+  name: R
+  output_filename: 452_R.pdf
+  start_page: 517
+- end_page: 521
+  name: S
+  output_filename: 453_S.pdf
+  start_page: 518
+- end_page: 522
+  name: T
+  output_filename: 454_T.pdf
+  start_page: 521
+- end_page: 522
+  name: U
+  output_filename: 455_U.pdf
+  start_page: 522
+- end_page: 523
+  name: V
+  output_filename: 456_V.pdf
+  start_page: 522
+- end_page: 523
+  name: W
+  output_filename: 457_W.pdf
+  start_page: 523
+- end_page: 524
+  name: X
+  output_filename: 458_X.pdf
+  start_page: 523
+- end_page: 524
+  name: References
+  output_filename: 459_References.pdf
+  start_page: 524
+- end_page: 524
+  name: Chapter Revision History
+  output_filename: 460_Chapter_Revision_History.pdf
+  start_page: 524

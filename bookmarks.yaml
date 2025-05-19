@@ -1,0 +1,137 @@
+chapters:
+- end_page: 8
+  name: Good Clinical Data Management Practices
+  output_filename: 01_Good_Clinical_Data_Management_Practices.pdf
+  start_page: 3
+- end_page: 10
+  name: Executive Summary
+  output_filename: 02_Executive_Summary.pdf
+  start_page: 9
+- end_page: 12
+  name: Acknowledgements
+  output_filename: 03_Acknowledgements.pdf
+  start_page: 11
+- end_page: 14
+  name: Introduction
+  output_filename: 04_Introduction.pdf
+  start_page: 13
+- end_page: 28
+  name: Data Privacy
+  output_filename: 05_Data_Privacy.pdf
+  start_page: 15
+- end_page: 44
+  name: Data Management Plan
+  output_filename: 06_Data_Management_Plan.pdf
+  start_page: 29
+- end_page: 68
+  name: Project Management for the Clinical Data Manager
+  output_filename: 07_Project_Management_for_the_Clinical_Data_Manager.pdf
+  start_page: 45
+- end_page: 92
+  name: Vendor Selection and Management
+  output_filename: 08_Vendor_Selection_and_Management.pdf
+  start_page: 69
+- end_page: 112
+  name: Data Management Standards in Clinical Research
+  output_filename: 09_Data_Management_Standards_in_Clinical_Research.pdf
+  start_page: 93
+- end_page: 130
+  name: Design and Development of Data Collection Instruments
+  output_filename: 10_Design_and_Development_of_Data_Collection_Instrume.pdf
+  start_page: 113
+- end_page: 148
+  name: Edit Check Design Principles
+  output_filename: 11_Edit_Check_Design_Principles.pdf
+  start_page: 131
+- end_page: 202
+  name: "Electronic Data Capture\u2014Concepts and Study Start-up"
+  output_filename: "12_Electronic_Data_Capture\u2014Concepts_and_Study_Start-u.pdf"
+  start_page: 149
+- end_page: 226
+  name: "Electronic Data Capture\u2014Study Conduct"
+  output_filename: "13_Electronic_Data_Capture\u2014Study_Conduct.pdf"
+  start_page: 203
+- end_page: 240
+  name: "Electronic Data Capture\u2014Study Closeout"
+  output_filename: "14_Electronic_Data_Capture\u2014Study_Closeout.pdf"
+  start_page: 227
+- end_page: 248
+  name: CRF Completion Guidelines
+  output_filename: 15_CRF_Completion_Guidelines.pdf
+  start_page: 241
+- end_page: 256
+  name: CRF Printing and Vendor Selection
+  output_filename: 16_CRF_Printing_and_Vendor_Selection.pdf
+  start_page: 249
+- end_page: 276
+  name: Database Validation, Programming and Standards
+  output_filename: 17_Database_Validation,_Programming_and_Standards.pdf
+  start_page: 257
+- end_page: 298
+  name: Laboratory Data Handling
+  output_filename: 18_Laboratory_Data_Handling.pdf
+  start_page: 277
+- end_page: 312
+  name: External Data Transfers
+  output_filename: 19_External_Data_Transfers.pdf
+  start_page: 299
+- end_page: 326
+  name: Patient-Reported Outcomes
+  output_filename: 20_Patient-Reported_Outcomes.pdf
+  start_page: 313
+- end_page: 332
+  name: CDM Presentation at Investigator Meetings
+  output_filename: 21_CDM_Presentation_at_Investigator_Meetings.pdf
+  start_page: 327
+- end_page: 346
+  name: Training
+  output_filename: 22_Training.pdf
+  start_page: 333
+- end_page: 366
+  name: Metrics in Clinical Data Management
+  output_filename: 23_Metrics_in_Clinical_Data_Management.pdf
+  start_page: 347
+- end_page: 386
+  name: Assuring Data Quality
+  output_filename: 24_Assuring_Data_Quality.pdf
+  start_page: 367
+- end_page: 398
+  name: Measuring Data Quality
+  output_filename: 25_Measuring_Data_Quality.pdf
+  start_page: 387
+- end_page: 404
+  name: Data Storage
+  output_filename: 26_Data_Storage.pdf
+  start_page: 399
+- end_page: 424
+  name: Data Entry Processes
+  output_filename: 27_Data_Entry_Processes.pdf
+  start_page: 405
+- end_page: 440
+  name: Medical Coding Dictionary Management & Maintenance
+  output_filename: 28_Medical_Coding_Dictionary_Management_&_Maintenance.pdf
+  start_page: 425
+- end_page: 462
+  name: Safety Data Management and Reporting
+  output_filename: 29_Safety_Data_Management_and_Reporting.pdf
+  start_page: 441
+- end_page: 469
+  name: Serious Adverse Event Data Reconciliation
+  output_filename: 30_Serious_Adverse_Event_Data_Reconciliation.pdf
+  start_page: 463
+- end_page: 470
+  name: 'Appendix A: Sample SAE Data Reconciliation Form'
+  output_filename: 31_Appendix_A__Sample_SAE_Data_Reconciliation_Form.pdf
+  start_page: 470
+- end_page: 482
+  name: Database Closure
+  output_filename: 32_Database_Closure.pdf
+  start_page: 471
+- end_page: 492
+  name: Clinical Data Archiving
+  output_filename: 33_Clinical_Data_Archiving.pdf
+  start_page: 483
+- end_page: 524
+  name: Glossary
+  output_filename: 34_Glossary.pdf
+  start_page: 493
