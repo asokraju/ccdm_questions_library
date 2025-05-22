@@ -11,9 +11,11 @@ function Statistics({ progress, onBack }) {
     // Cleanup previous charts
     if (topicChartInstance.current) {
       topicChartInstance.current.destroy();
+      topicChartInstance.current = null;
     }
     if (subtopicChartInstance.current) {
       subtopicChartInstance.current.destroy();
+      subtopicChartInstance.current = null;
     }
 
     // Create topic chart
@@ -83,7 +85,7 @@ function Statistics({ progress, onBack }) {
       };
 
       subtopicChartInstance.current = new Chart(ctx, {
-        type: 'horizontalBar',
+        type: 'bar',
         data: chartData,
         options: {
           indexAxis: 'y',
@@ -116,9 +118,11 @@ function Statistics({ progress, onBack }) {
     return () => {
       if (topicChartInstance.current) {
         topicChartInstance.current.destroy();
+        topicChartInstance.current = null;
       }
       if (subtopicChartInstance.current) {
         subtopicChartInstance.current.destroy();
+        subtopicChartInstance.current = null;
       }
     };
   }, [progress]);
