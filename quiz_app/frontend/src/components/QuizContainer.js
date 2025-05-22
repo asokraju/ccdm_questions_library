@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { apiService } from '../services/apiService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
@@ -11,11 +11,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    loadQuestions();
-  }, [quizConfig]);
-
-  const loadQuestions = async () => {
+  const loadQuestions = useCallback(async () => {
     if (!quizConfig) {
       setIsLoading(false);
       return;
@@ -39,7 +35,11 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
       console.error('Error loading questions:', error);
       setIsLoading(false);
     }
-  };
+  }, [quizConfig]);
+
+  useEffect(() => {
+    loadQuestions();
+  }, [loadQuestions]);
 
   const handleAnswerSelect = (answer) => {
     if (showExplanation) return;
