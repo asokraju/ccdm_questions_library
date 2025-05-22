@@ -5,6 +5,7 @@ import Statistics from './components/Statistics';
 import ReviewList from './components/ReviewList';
 import TopicSelector from './components/TopicSelector';
 import QuizConfig from './components/QuizConfig';
+import StudyNotes from './components/StudyNotes';
 import './App.css';
 
 function App() {
@@ -64,6 +65,12 @@ function App() {
                 onClick={() => setCurrentView('config')}
               >
                 Start Quiz
+              </button>
+              <button 
+                className="secondary study-button"
+                onClick={() => setCurrentView('notes')}
+              >
+                📖 Study Material
               </button>
               <button 
                 className="secondary"
@@ -139,6 +146,12 @@ function App() {
 
       {currentView === 'review' && (
         <ReviewList
+          onBack={() => setCurrentView('menu')}
+        />
+      )}
+
+      {currentView === 'notes' && (
+        <StudyNotes
           onBack={() => setCurrentView('menu')}
         />
       )}
