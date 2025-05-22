@@ -39,26 +39,7 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
       questionCount,
       difficulty: difficulty === 'balanced' ? null : difficulty // null means all difficulties
     };
-    console.log('Starting quiz with config:', config);
-    
-    // Add small delay for mobile devices to prevent race conditions
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    const startQuiz = () => {
-      try {
-        onStartQuiz(config);
-      } catch (error) {
-        console.error('Error starting quiz:', error);
-        alert('Error starting quiz. Please try again.');
-      }
-    };
-    
-    if (isMobile) {
-      // Small delay for mobile to ensure state is stable
-      setTimeout(startQuiz, 100);
-    } else {
-      startQuiz();
-    }
+    onStartQuiz(config);
   };
 
   return (
@@ -119,14 +100,6 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
                 key={option.value} 
                 className={`difficulty-option ${difficulty === option.value ? 'selected' : ''}`}
                 onClick={() => setDifficulty(option.value)}
-                onTouchStart={(e) => {
-                  // Prevent potential mobile touch issues
-                  e.preventDefault();
-                  setDifficulty(option.value);
-                }}
-                role="button"
-                tabIndex={0}
-                aria-pressed={difficulty === option.value}
               >
                 <div className="difficulty-label">
                   <strong>{option.label}</strong>

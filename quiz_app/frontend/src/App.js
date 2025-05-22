@@ -5,7 +5,6 @@ import Statistics from './components/Statistics';
 import ReviewList from './components/ReviewList';
 import TopicSelector from './components/TopicSelector';
 import QuizConfig from './components/QuizConfig';
-import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 function App() {
@@ -43,16 +42,11 @@ function App() {
   };
 
   return (
-    <ErrorBoundary onReset={() => {
-      setCurrentView('menu');
-      setQuizConfig(null);
-      setSelectedTopic('all');
-    }}>
-      <div className="container">
-        <div className="header">
-          <h1>CCDM Quiz Application</h1>
-          <p>Test your Clinical Data Management knowledge</p>
-        </div>
+    <div className="container">
+      <div className="header">
+        <h1>CCDM Quiz Application</h1>
+        <p>Test your Clinical Data Management knowledge</p>
+      </div>
 
       {currentView === 'menu' && (
         <div>
@@ -148,8 +142,7 @@ function App() {
           onBack={() => setCurrentView('menu')}
         />
       )}
-      </div>
-    </ErrorBoundary>
+    </div>
   );
 }
 

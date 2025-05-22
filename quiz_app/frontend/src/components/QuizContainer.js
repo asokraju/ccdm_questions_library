@@ -17,7 +17,6 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
   const loadQuestions = async () => {
     if (!quizConfig) {
-      console.error('QuizConfig is null or undefined');
       setIsLoading(false);
       return;
     }
@@ -33,9 +32,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
         params.difficulty = quizConfig.difficulty;
       }
       
-      console.log('Loading questions with params:', params);
       const response = await axios.get('/api/questions', { params });
-      console.log('Questions loaded:', response.data.length);
       setQuestions(response.data);
       setIsLoading(false);
     } catch (error) {
