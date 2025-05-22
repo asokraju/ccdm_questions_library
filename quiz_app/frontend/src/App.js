@@ -1,44 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { AppProvider, useApp } from './contexts/AppContext';
+import { apiService } from './services/apiService';
 import QuizContainer from './components/QuizContainer';
 import Statistics from './components/Statistics';
 import ReviewList from './components/ReviewList';
 import TopicSelector from './components/TopicSelector';
 import QuizConfig from './components/QuizConfig';
 import StudyNotes from './components/StudyNotes';
+import { VIEWS } from './utils/constants';
 import './App.css';
 
-function App() {
-  const [currentView, setCurrentView] = useState('menu');
-  const [selectedTopic, setSelectedTopic] = useState('all');
-  const [topics, setTopics] = useState([]);
-  const [progress, setProgress] = useState(null);
-  const [quizConfig, setQuizConfig] = useState(null);
+function AppContent() {
+  const { state, actions } = useApp();
+  const { currentView, selectedTopic, topics, progress, quizConfig } = state;
 
-  useEffect(() => {
-    // Load topics
-    axios.get('/api/topics')
-      .then(response => setTopics(response.data))
-      .catch(error => console.error('Error loading topics:', error));
-    
-    // Load progress
-    loadProgress();
-  }, []);
-
-  const loadProgress = () => {
-    axios.get('/api/progress')
-      .then(response => setProgress(response.data))
-      .catch(error => console.error('Error loading progress:', error));
-  };
-
-  const handleReset = () => {
+  const handleReset = async () => {
     if (window.confirm('Are you sure you want to reset all progress?')) {
-      axios.post('/api/reset')
-        .then(() => {
-          loadProgress();
-          setCurrentView('menu');
-        })
-        .catch(error => console.error('Error resetting progress:', error));
+      try {
+        await apiService.resetProgress();
+        actions.setCurrentView(VIEWS.MENU);
+        // Progress will be reloaded automatically by the context
+      } catch (error) {
+        console.error('Error resetting progress:', error);
+      }
     }
   };
 
@@ -49,12 +33,12 @@ function App() {
         <p>Test your Clinical Data Management knowledge</p>
       </div>
 
-      {currentView === 'menu' && (
+      {currentView === VIEWS.MENU && (
         <div>
           <TopicSelector
             topics={topics}
             selectedTopic={selectedTopic}
-            onTopicChange={setSelectedTopic}
+            onTopicChange={actions.setSelectedTopic}
           />
           
           <div className="menu card">
@@ -62,25 +46,25 @@ function App() {
             <div className="menu-buttons">
               <button 
                 className="primary"
-                onClick={() => setCurrentView('config')}
+                onClick={() => actions.setCurrentView(VIEWS.CONFIG)}
               >
                 Start Quiz
               </button>
               <button 
                 className="secondary study-button"
-                onClick={() => setCurrentView('notes')}
+                onClick={() => actions.setCurrentView(VIEWS.NOTES)}
               >
                 📖 Study Material
               </button>
               <button 
                 className="secondary"
-                onClick={() => setCurrentView('statistics')}
+                onClick={() => actions.setCurrentView(VIEWS.STATISTICS)}
               >
                 View Statistics
               </button>
               <button 
                 className="secondary"
-                onClick={() => setCurrentView('review')}
+                onClick={() => actions.setCurrentView(VIEWS.REVIEW)}
               >
                 Review Incorrect Answers
               </button>
@@ -95,30 +79,30 @@ function App() {
         </div>
       )}
 
-      {currentView === 'config' && (
+      {currentView === VIEWS.CONFIG && (
         <QuizConfig
           selectedTopic={selectedTopic}
           onStartQuiz={(config) => {
-            setQuizConfig(config);
-            setCurrentView('quiz');
+            actions.setQuizConfig(config);
+            actions.setCurrentView(VIEWS.QUIZ);
           }}
           onBack={() => {
-            setCurrentView('menu');
-            setQuizConfig(null);
+            actions.setCurrentView(VIEWS.MENU);
+            actions.setQuizConfig(null);
           }}
         />
       )}
 
-      {currentView === 'quiz' && (
+      {currentView === VIEWS.QUIZ && (
         <>
           {quizConfig ? (
             <QuizContainer
               quizConfig={quizConfig}
               onBack={() => {
-                setCurrentView('menu');
-                setQuizConfig(null);
+                actions.setCurrentView(VIEWS.MENU);
+                actions.setQuizConfig(null);
               }}
-              onUpdateProgress={loadProgress}
+              onUpdateProgress={actions.loadProgress}
             />
           ) : (
             <div className="card">
@@ -126,8 +110,8 @@ function App() {
               <button 
                 className="secondary" 
                 onClick={() => {
-                  setCurrentView('menu');
-                  setQuizConfig(null);
+                  actions.setCurrentView(VIEWS.MENU);
+                  actions.setQuizConfig(null);
                 }}
               >
                 Back to Menu
@@ -137,25 +121,33 @@ function App() {
         </>
       )}
 
-      {currentView === 'statistics' && progress && (
+      {currentView === VIEWS.STATISTICS && progress && (
         <Statistics
           progress={progress}
-          onBack={() => setCurrentView('menu')}
+          onBack={() => actions.setCurrentView(VIEWS.MENU)}
         />
       )}
 
-      {currentView === 'review' && (
+      {currentView === VIEWS.REVIEW && (
         <ReviewList
-          onBack={() => setCurrentView('menu')}
+          onBack={() => actions.setCurrentView(VIEWS.MENU)}
         />
       )}
 
-      {currentView === 'notes' && (
+      {currentView === VIEWS.NOTES && (
         <StudyNotes
-          onBack={() => setCurrentView('menu')}
+          onBack={() => actions.setCurrentView(VIEWS.MENU)}
         />
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }
 

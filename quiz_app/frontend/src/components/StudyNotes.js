@@ -1,54 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useStudyNotes } from '../hooks/useStudyNotes';
 import MarkdownRenderer from './MarkdownRenderer';
 
 function StudyNotes({ onBack }) {
-  const [topics, setTopics] = useState([]);
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [noteContent, setNoteContent] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    loadTopics();
-  }, []);
-
-  const loadTopics = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get('/api/notes/topics');
-      setTopics(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error loading topics:', error);
-      setError('Failed to load study topics');
-      setIsLoading(false);
-    }
-  };
-
-  const loadNoteContent = async (topic) => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`/api/notes/${encodeURIComponent(topic)}`);
-      setNoteContent(response.data.content);
-      setSelectedTopic(topic);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error loading note content:', error);
-      setError('Failed to load study material');
-      setIsLoading(false);
-    }
-  };
-
-  const handleTopicSelect = (topic) => {
-    loadNoteContent(topic);
-  };
-
-  const handleBackToTopics = () => {
-    setSelectedTopic(null);
-    setNoteContent('');
-    setError(null);
-  };
+  const {
+    topics,
+    selectedTopic,
+    noteContent,
+    isLoading,
+    error,
+    loadNoteContent,
+    clearSelectedTopic
+  } = useStudyNotes();
 
   if (isLoading) {
     return (
@@ -74,7 +37,7 @@ function StudyNotes({ onBack }) {
           <h2>📖 Study Material</h2>
           <div className="error-message">
             <p>{error}</p>
-            <button className="secondary" onClick={loadTopics}>
+            <button className="secondary" onClick={() => window.location.reload()}>
               Retry
             </button>
           </div>
@@ -88,7 +51,7 @@ function StudyNotes({ onBack }) {
     return (
       <div className="study-notes">
         <div className="notes-header">
-          <button className="secondary back-button" onClick={handleBackToTopics}>
+          <button className="secondary back-button" onClick={clearSelectedTopic}>
             ← Back to Topics
           </button>
           <button className="secondary menu-button" onClick={onBack}>
@@ -131,7 +94,7 @@ function StudyNotes({ onBack }) {
             <div 
               key={topic.name}
               className="topic-card"
-              onClick={() => handleTopicSelect(topic.name)}
+              onClick={() => loadNoteContent(topic.name)}
             >
               <div className="topic-title">
                 <h3>{topic.name}</h3>

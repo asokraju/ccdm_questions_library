@@ -1,39 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { useDropdown } from '../hooks/useDropdown';
 
 function TopicSelector({ topics, selectedTopic, onTopicChange }) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    if (isDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('touchstart', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, [isDropdownOpen]);
-
   const allOptions = [
     { value: 'all', label: 'All Topics' },
     ...topics.map(topic => ({ value: topic, label: topic }))
   ];
 
-  const selectedOption = allOptions.find(option => option.value === selectedTopic);
-  const displayLabel = selectedOption ? selectedOption.label : 'All Topics';
+  const {
+    isOpen,
+    dropdownRef,
+    toggleDropdown,
+    selectOption,
+    getDisplayLabel
+  } = useDropdown(selectedTopic, allOptions);
 
   const handleTopicSelect = (topicValue) => {
+    selectOption(topicValue);
     onTopicChange(topicValue);
-    setIsDropdownOpen(false);
   };
 
   return (
@@ -43,16 +27,16 @@ function TopicSelector({ topics, selectedTopic, onTopicChange }) {
         <button
           type="button"
           id="topic-select"
-          className={`dropdown-button ${isDropdownOpen ? 'open' : ''}`}
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className={`dropdown-button ${isOpen ? 'open' : ''}`}
+          onClick={toggleDropdown}
           aria-haspopup="listbox"
-          aria-expanded={isDropdownOpen}
+          aria-expanded={isOpen}
         >
-          <span>{displayLabel}</span>
+          <span>{getDisplayLabel()}</span>
           <span className="dropdown-arrow">▼</span>
         </button>
         
-        {isDropdownOpen && (
+        {isOpen && (
           <div className="dropdown-menu" role="listbox">
             {allOptions.map(option => (
               <button
