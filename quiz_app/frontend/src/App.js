@@ -4,6 +4,7 @@ import QuizContainer from './components/QuizContainer';
 import Statistics from './components/Statistics';
 import ReviewList from './components/ReviewList';
 import TopicSelector from './components/TopicSelector';
+import QuizConfig from './components/QuizConfig';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [selectedTopic, setSelectedTopic] = useState('all');
   const [topics, setTopics] = useState([]);
   const [progress, setProgress] = useState(null);
+  const [quizConfig, setQuizConfig] = useState(null);
 
   useEffect(() => {
     // Load topics
@@ -59,7 +61,7 @@ function App() {
             <div className="menu-buttons">
               <button 
                 className="primary"
-                onClick={() => setCurrentView('quiz')}
+                onClick={() => setCurrentView('config')}
               >
                 Start Quiz
               </button>
@@ -86,9 +88,20 @@ function App() {
         </div>
       )}
 
-      {currentView === 'quiz' && (
-        <QuizContainer
+      {currentView === 'config' && (
+        <QuizConfig
           selectedTopic={selectedTopic}
+          onStartQuiz={(config) => {
+            setQuizConfig(config);
+            setCurrentView('quiz');
+          }}
+          onBack={() => setCurrentView('menu')}
+        />
+      )}
+
+      {currentView === 'quiz' && quizConfig && (
+        <QuizContainer
+          quizConfig={quizConfig}
           onBack={() => setCurrentView('menu')}
           onUpdateProgress={loadProgress}
         />

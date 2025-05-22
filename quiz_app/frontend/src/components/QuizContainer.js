@@ -3,7 +3,7 @@ import axios from 'axios';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
 
-function QuizContainer({ selectedTopic, onBack, onUpdateProgress }) {
+function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -13,17 +13,21 @@ function QuizContainer({ selectedTopic, onBack, onUpdateProgress }) {
 
   useEffect(() => {
     loadQuestions();
-  }, [selectedTopic]);
+  }, [quizConfig]);
 
   const loadQuestions = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/api/questions', {
-        params: {
-          topic: selectedTopic,
-          limit: 10
-        }
-      });
+      const params = {
+        topic: quizConfig.topic,
+        limit: quizConfig.questionCount
+      };
+      
+      if (quizConfig.difficulty) {
+        params.difficulty = quizConfig.difficulty;
+      }
+      
+      const response = await axios.get('/api/questions', { params });
       setQuestions(response.data);
       setIsLoading(false);
     } catch (error) {
