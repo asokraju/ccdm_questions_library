@@ -13,74 +13,33 @@ A comprehensive quiz application for Clinical Data Management (CCDM) training an
 
 ## Setup Instructions
 
-### For Windows (Fresh Install)
+### For Windows (Recommended: WSL Approach)
 
-#### Step 1: Install Node.js
-1. Go to https://nodejs.org/
-2. Download the latest LTS version (Long Term Support)
-3. Run the installer (.msi file)
-4. During installation, make sure to check "Automatically install the necessary tools" option
-5. Restart your computer after installation
+Due to potential Node.js installation issues on Windows, we recommend using Windows Subsystem for Linux (WSL) for the best development experience.
 
-#### Step 2: Verify Installation
-1. Open Command Prompt (Win + R, type `cmd`, press Enter)
-2. Check Node.js version:
-   ```cmd
-   node --version
+#### Step 1: Install WSL2
+1. Open PowerShell as Administrator (Right-click Start → Windows PowerShell (Admin))
+2. Install WSL:
+   ```powershell
+   wsl --install
    ```
-3. Check npm version:
-   ```cmd
-   npm --version
-   ```
-   Both commands should return version numbers.
+3. Restart your computer when prompted
+4. After restart, Ubuntu will automatically open and ask you to create a username and password
 
-#### Step 3: Install Git (if not already installed)
-1. Go to https://git-scm.com/download/win
-2. Download and install Git for Windows
-3. During installation, select "Git from the command line and also from 3rd-party software"
-
-#### Step 4: Clone the Repository
-1. Open Command Prompt
-2. Navigate to your desired directory (e.g., `cd C:\Users\YourUsername\Documents`)
-3. Clone the repository:
-   ```cmd
-   git clone https://github.com/asokraju/ccdm_questions_library.git
-   ```
-4. Navigate to the project:
-   ```cmd
-   cd ccdm_questions_library\quiz_app
+#### Step 2: Setup Development Environment in WSL
+1. Open Ubuntu from Start Menu (or type `wsl` in Command Prompt)
+2. Run the automated setup script:
+   ```bash
+   # Download and run the setup script
+   curl -fsSL https://raw.githubusercontent.com/asokraju/ccdm_questions_library/main/quiz_app/setup.sh | bash
    ```
 
-#### Step 5: Setup Backend
-1. Navigate to backend directory:
-   ```cmd
-   cd backend
-   ```
-2. Install dependencies:
-   ```cmd
-   npm install
-   ```
-3. Start the backend server:
-   ```cmd
-   npm start
-   ```
-   The server will run on http://localhost:3001
+#### Alternative Manual Setup in WSL:
+If you prefer manual setup, follow the Ubuntu instructions below within your WSL environment.
 
-#### Step 6: Setup Frontend (New Command Prompt Window)
-1. Open a new Command Prompt window
-2. Navigate to the frontend directory:
-   ```cmd
-   cd C:\Users\YourUsername\Documents\ccdm_questions_library\quiz_app\frontend
-   ```
-3. Install dependencies:
-   ```cmd
-   npm install
-   ```
-4. Start the React development server:
-   ```cmd
-   npm start
-   ```
-   The application will automatically open in your browser at http://localhost:3000
+### For Native Windows (Not Recommended)
+
+If you must use native Windows, use the provided `start.bat` script, but be aware of potential Node.js compatibility issues.
 
 ### For Ubuntu (Fresh Install)
 
@@ -145,21 +104,36 @@ npm start
 ```
 The application will automatically open in your browser at http://localhost:3000
 
-### Quick Start Script
+### Quick Start Scripts
 
-For convenience, you can use the provided start script:
-
-**Windows:**
-```cmd
-cd quiz_app
-start.bat
+#### Automated Setup (Recommended)
+**One-command setup for WSL/Ubuntu:**
+```bash
+# Download and run the complete setup script
+curl -fsSL https://raw.githubusercontent.com/asokraju/ccdm_questions_library/main/quiz_app/setup.sh | bash
 ```
 
-**Ubuntu:**
+This script will:
+- Install all prerequisites (Node.js, Git, etc.)
+- Clone the repository
+- Install all dependencies
+- Create a startup script
+- Optionally start the application
+
+#### Manual Start Scripts
+If you already have the repository cloned:
+
+**WSL/Ubuntu:**
 ```bash
 cd quiz_app
 chmod +x start.sh
 ./start.sh
+```
+
+**Windows (Native - Not Recommended):**
+```cmd
+cd quiz_app
+start.bat
 ```
 
 ### Troubleshooting
@@ -186,9 +160,16 @@ chmod +x start.sh
    - Check if ports 3000 and 3001 are blocked
    - Temporarily disable firewall for testing
 
+6. **WSL-specific issues:**
+   - If WSL command not found: Update Windows to latest version
+   - If Ubuntu doesn't start: `wsl --set-default-version 2`
+   - If browser doesn't open: Manually go to http://localhost:3000
+   - File permissions: `chmod +x setup.sh` before running
+
 ### Prerequisites Summary
 
-- **Windows:** Node.js LTS, Git, Command Prompt or PowerShell
+- **Windows (WSL Recommended):** WSL2 with Ubuntu, Modern web browser
+- **Windows (Native):** Node.js LTS, Git, Command Prompt or PowerShell
 - **Ubuntu:** Node.js 14+, npm, Git, Terminal access
 - **Both:** Modern web browser (Chrome, Firefox, Edge, Safari)
 
