@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   const [questionCount, setQuestionCount] = useState(10);
   const [difficulty, setDifficulty] = useState('balanced');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const questionCountOptions = [5, 10, 15, 20, 25, 30];
   const difficultyOptions = [
@@ -12,13 +14,51 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
     { value: 'challenging', label: 'Challenging', description: 'Advanced knowledge questions' }
   ];
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   const handleStartQuiz = () => {
     const config = {
       topic: selectedTopic,
       questionCount,
       difficulty: difficulty === 'balanced' ? null : difficulty // null means all difficulties
     };
-    onStartQuiz(config);
+    console.log('Starting quiz with config:', config);
+    
+    // Add small delay for mobile devices to prevent race conditions
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    const startQuiz = () => {
+      try {
+        onStartQuiz(config);
+      } catch (error) {
+        console.error('Error starting quiz:', error);
+        alert('Error starting quiz. Please try again.');
+      }
+    };
+    
+    if (isMobile) {
+      // Small delay for mobile to ensure state is stable
+      setTimeout(startQuiz, 100);
+    } else {
+      startQuiz();
+    }
   };
 
   return (
@@ -36,17 +76,38 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
         <div className="config-section">
           <h3>Number of Questions</h3>
           <div className="question-count-selector">
-            <select 
-              value={questionCount} 
-              onChange={(e) => setQuestionCount(parseInt(e.target.value))}
-              className="config-select"
-            >
-              {questionCountOptions.map(count => (
-                <option key={count} value={count}>
-                  {count} Questions
-                </option>
-              ))}
-            </select>
+            <div className="custom-dropdown" ref={dropdownRef}>
+              <button
+                type="button"
+                className={`dropdown-button ${isDropdownOpen ? 'open' : ''}`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                aria-haspopup="listbox"
+                aria-expanded={isDropdownOpen}
+              >
+                <span>{questionCount} Questions</span>
+                <span className="dropdown-arrow">▼</span>
+              </button>
+              
+              {isDropdownOpen && (
+                <div className="dropdown-menu" role="listbox">
+                  {questionCountOptions.map(count => (
+                    <button
+                      key={count}
+                      type="button"
+                      className={`dropdown-option ${count === questionCount ? 'selected' : ''}`}
+                      onClick={() => {
+                        setQuestionCount(count);
+                        setIsDropdownOpen(false);
+                      }}
+                      role="option"
+                      aria-selected={count === questionCount}
+                    >
+                      {count} Questions
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -58,6 +119,14 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
                 key={option.value} 
                 className={`difficulty-option ${difficulty === option.value ? 'selected' : ''}`}
                 onClick={() => setDifficulty(option.value)}
+                onTouchStart={(e) => {
+                  // Prevent potential mobile touch issues
+                  e.preventDefault();
+                  setDifficulty(option.value);
+                }}
+                role="button"
+                tabIndex={0}
+                aria-pressed={difficulty === option.value}
               >
                 <div className="difficulty-label">
                   <strong>{option.label}</strong>

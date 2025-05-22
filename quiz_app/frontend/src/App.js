@@ -5,6 +5,7 @@ import Statistics from './components/Statistics';
 import ReviewList from './components/ReviewList';
 import TopicSelector from './components/TopicSelector';
 import QuizConfig from './components/QuizConfig';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 function App() {
@@ -42,11 +43,16 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <h1>CCDM Quiz Application</h1>
-        <p>Test your Clinical Data Management knowledge</p>
-      </div>
+    <ErrorBoundary onReset={() => {
+      setCurrentView('menu');
+      setQuizConfig(null);
+      setSelectedTopic('all');
+    }}>
+      <div className="container">
+        <div className="header">
+          <h1>CCDM Quiz Application</h1>
+          <p>Test your Clinical Data Management knowledge</p>
+        </div>
 
       {currentView === 'menu' && (
         <div>
@@ -95,16 +101,39 @@ function App() {
             setQuizConfig(config);
             setCurrentView('quiz');
           }}
-          onBack={() => setCurrentView('menu')}
+          onBack={() => {
+            setCurrentView('menu');
+            setQuizConfig(null);
+          }}
         />
       )}
 
-      {currentView === 'quiz' && quizConfig && (
-        <QuizContainer
-          quizConfig={quizConfig}
-          onBack={() => setCurrentView('menu')}
-          onUpdateProgress={loadProgress}
-        />
+      {currentView === 'quiz' && (
+        <>
+          {quizConfig ? (
+            <QuizContainer
+              quizConfig={quizConfig}
+              onBack={() => {
+                setCurrentView('menu');
+                setQuizConfig(null);
+              }}
+              onUpdateProgress={loadProgress}
+            />
+          ) : (
+            <div className="card">
+              <p>Quiz configuration error. Please try again.</p>
+              <button 
+                className="secondary" 
+                onClick={() => {
+                  setCurrentView('menu');
+                  setQuizConfig(null);
+                }}
+              >
+                Back to Menu
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       {currentView === 'statistics' && progress && (
@@ -119,7 +148,8 @@ function App() {
           onBack={() => setCurrentView('menu')}
         />
       )}
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }
 

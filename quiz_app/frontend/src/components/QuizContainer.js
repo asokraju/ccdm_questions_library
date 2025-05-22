@@ -16,6 +16,12 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   }, [quizConfig]);
 
   const loadQuestions = async () => {
+    if (!quizConfig) {
+      console.error('QuizConfig is null or undefined');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       setIsLoading(true);
       const params = {
@@ -27,7 +33,9 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
         params.difficulty = quizConfig.difficulty;
       }
       
+      console.log('Loading questions with params:', params);
       const response = await axios.get('/api/questions', { params });
+      console.log('Questions loaded:', response.data.length);
       setQuestions(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -91,6 +99,15 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     onBack();
   };
 
+  if (!quizConfig) {
+    return (
+      <div className="card">
+        <p>Quiz configuration not found. Please try again.</p>
+        <button className="secondary" onClick={onBack}>Back to Menu</button>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return <div className="card">Loading questions...</div>;
   }
@@ -105,6 +122,15 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
+  if (!currentQuestion) {
+    return (
+      <div className="card">
+        <p>Error loading question. Please try again.</p>
+        <button className="secondary" onClick={onBack}>Back to Menu</button>
+      </div>
+    );
+  }
+
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
