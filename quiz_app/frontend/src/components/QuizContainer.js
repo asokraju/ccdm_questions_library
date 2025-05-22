@@ -1,45 +1,98 @@
-import React from 'react';
-import { useQuiz } from '../hooks/useQuiz';
+import React, { useState, useEffect } from 'react';
+import { apiService } from '../services/apiService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
 
 function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
-  const {
-    questions,
-    currentQuestionIndex,
-    selectedAnswer,
-    showExplanation,
-    answers,
-    isLoading,
-    error,
-    selectAnswer,
-    submitAnswer,
-    nextQuestion,
-    results,
-    isComplete
-  } = useQuiz(quizConfig);
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [answers, setAnswers] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadQuestions();
+  }, [quizConfig]);
+
+  const loadQuestions = async () => {
+    if (!quizConfig) {
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const params = {
+        topic: quizConfig.topic,
+        limit: quizConfig.questionCount
+      };
+      
+      if (quizConfig.difficulty) {
+        params.difficulty = quizConfig.difficulty;
+      }
+      
+      const response = await apiService.getQuestions(params);
+      setQuestions(response);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error loading questions:', error);
+      setIsLoading(false);
+    }
+  };
 
   const handleAnswerSelect = (answer) => {
     if (showExplanation) return;
-    selectAnswer(answer);
+    setSelectedAnswer(answer);
   };
 
   const handleSubmit = async () => {
     if (!selectedAnswer) return;
-    await submitAnswer();
-    onUpdateProgress();
+
+    const currentQuestion = questions[currentQuestionIndex];
+    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    
+    // Store answer
+    const newAnswers = {
+      ...answers,
+      [currentQuestion.id]: {
+        answer: selectedAnswer,
+        isCorrect
+      }
+    };
+    setAnswers(newAnswers);
+
+    // Submit to backend
+    try {
+      await apiService.submitAnswer({
+        questionId: currentQuestion.id,
+        answer: selectedAnswer,
+        topic: currentQuestion.topic,
+        subtopic: currentQuestion.subtopic,
+        isCorrect
+      });
+      onUpdateProgress();
+    } catch (error) {
+      console.error('Error submitting answer:', error);
+    }
+
+    setShowExplanation(true);
   };
 
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      nextQuestion();
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
     } else {
+      // Quiz completed
       handleQuizComplete();
     }
   };
 
   const handleQuizComplete = () => {
-    alert(`Quiz completed! You got ${results.correct} out of ${results.total} correct.`);
+    const correctCount = Object.values(answers).filter(a => a.isCorrect).length;
+    alert(`Quiz completed! You got ${correctCount} out of ${questions.length} correct.`);
     onBack();
   };
 
@@ -47,15 +100,6 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     return (
       <div className="card">
         <p>Quiz configuration not found. Please try again.</p>
-        <button className="secondary" onClick={onBack}>Back to Menu</button>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="card">
-        <p>Error loading quiz: {error}</p>
         <button className="secondary" onClick={onBack}>Back to Menu</button>
       </div>
     );

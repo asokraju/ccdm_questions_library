@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useCallback, useMemo } from 'react';
 import { apiService } from '../services/apiService';
 
 // Initial state
@@ -178,14 +178,8 @@ const AppDispatchContext = createContext();
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
   
-  // Load initial data
-  useEffect(() => {
-    loadTopics();
-    loadProgress();
-  }, []);
-  
   // Action creators
-  const loadTopics = async () => {
+  const loadTopics = useCallback(async () => {
     dispatch({ type: ACTION_TYPES.SET_TOPICS_LOADING, payload: true });
     try {
       const topics = await apiService.getTopics();
@@ -193,9 +187,9 @@ export const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_TOPICS_ERROR, payload: error.message });
     }
-  };
+  }, []);
   
-  const loadProgress = async () => {
+  const loadProgress = useCallback(async () => {
     dispatch({ type: ACTION_TYPES.SET_PROGRESS_LOADING, payload: true });
     try {
       const progress = await apiService.getProgress();
@@ -203,9 +197,15 @@ export const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_PROGRESS_ERROR, payload: error.message });
     }
-  };
+  }, []);
   
-  const actions = {
+  // Load initial data
+  useEffect(() => {
+    loadTopics();
+    loadProgress();
+  }, [loadTopics, loadProgress]);
+  
+  const actions = useMemo(() => ({
     loadTopics,
     loadProgress,
     
@@ -227,7 +227,7 @@ export const AppProvider = ({ children }) => {
     
     resetState: () => 
       dispatch({ type: ACTION_TYPES.RESET_STATE }),
-  };
+  }), [loadTopics, loadProgress]);
   
   return (
     <AppStateContext.Provider value={state}>
