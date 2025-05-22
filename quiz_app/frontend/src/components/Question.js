@@ -21,7 +21,7 @@ function Question({ question, selectedAnswer, showExplanation, onAnswerSelect })
   };
 
   return (
-    <div>
+    <div className="question-container fade-in">
       <h3>{question.question}</h3>
       <div className="topic-info">
         <small>Topic: {question.topic} | Subtopic: {question.subtopic}</small>
@@ -33,6 +33,13 @@ function Question({ question, selectedAnswer, showExplanation, onAnswerSelect })
             key={key}
             className={getOptionClass(key)}
             onClick={() => onAnswerSelect(key)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                onAnswerSelect(key);
+              }
+            }}
           >
             <strong>{key.toUpperCase()}.</strong> {value}
           </div>
@@ -40,7 +47,7 @@ function Question({ question, selectedAnswer, showExplanation, onAnswerSelect })
       </div>
       
       {showExplanation && (
-        <div className="explanation">
+        <div className="explanation fade-in">
           <h4>Explanation:</h4>
           <p>{question.explanation}</p>
         </div>

@@ -181,6 +181,27 @@ app.post('/api/reset', (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Get local network IP address
+function getNetworkIP() {
+  const os = require('os');
+  const interfaces = os.networkInterfaces();
+  
+  for (const interfaceName in interfaces) {
+    const networkInterface = interfaces[interfaceName];
+    for (const connection of networkInterface) {
+      if (connection.family === 'IPv4' && !connection.internal) {
+        return connection.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+
+app.listen(PORT, '0.0.0.0', () => {
+  const networkIP = getNetworkIP();
+  console.log(`🚀 CCDM Quiz Backend Server Started`);
+  console.log(`📊 Backend API: http://localhost:${PORT}`);
+  console.log(`🌐 Network Access: http://${networkIP}:${PORT}`);
+  console.log(`📱 Mobile Access: Use network IP on same WiFi`);
+  console.log(`Loaded ${allQuestions.length} questions`);
 });
