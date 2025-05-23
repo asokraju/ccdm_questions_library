@@ -40,7 +40,6 @@ class ApiUserService {
 
   async fetchWithFallback(url, options = {}) {
     try {
-      console.log('Making API request to:', url);
       const response = await fetch(url, {
         ...options,
         headers: {
@@ -49,17 +48,14 @@ class ApiUserService {
         }
       });
 
-      console.log('API Response status:', response.status);
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log('API Response data:', data);
       return data;
     } catch (error) {
-      console.warn('API request failed, falling back to localStorage:', error);
+      console.warn('API request failed:', error.message, 'URL:', url);
       this.isOnline = false;
       throw error;
     }
@@ -129,16 +125,36 @@ class ApiUserService {
   }
 
   async switchUser(username) {
-    // Update localStorage immediately
-    userService.switchUser(username);
-    
-    // Try to update server
     try {
-      await this.fetchWithFallback(`${API_BASE_URL}/users/${username}`, {
+      // First verify user exists in API
+      const user = await this.fetchWithFallback(`${API_BASE_URL}/users/${username}`, {
         method: 'GET'
       });
+      
+      // If user exists in API but not in localStorage, sync them
+      const localUsers = JSON.parse(localStorage.getItem('quizUsers') || '{}');
+      if (!localUsers[username]) {
+        localUsers[username] = {
+          createdAt: user.created_at,
+          lastActive: user.last_active
+        };
+        localStorage.setItem('quizUsers', JSON.stringify(localUsers));
+      }
+      
+      // Now safe to switch user in localStorage
+      userService.setCurrentUser(username);
+      
+      // Update last active time
+      localUsers[username].lastActive = new Date().toISOString();
+      localStorage.setItem('quizUsers', JSON.stringify(localUsers));
+      
     } catch (error) {
-      // Ignore error, localStorage is updated
+      // If API fails, try localStorage only
+      try {
+        userService.switchUser(username);
+      } catch (localError) {
+        throw new Error(`User "${username}" not found in API or localStorage`);
+      }
     }
   }
 

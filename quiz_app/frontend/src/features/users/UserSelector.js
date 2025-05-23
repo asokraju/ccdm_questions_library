@@ -14,7 +14,6 @@ function UserSelector({ onUserSelected }) {
   useEffect(() => {
     loadUsers();
     const current = apiUserService.getCurrentUser();
-    console.log('Current user from storage:', current);
     setCurrentUser(current);
     
     // If there's a current user, auto-select them
@@ -25,26 +24,11 @@ function UserSelector({ onUserSelected }) {
 
   const loadUsers = async () => {
     try {
-      console.log('Loading users from API...');
       const allUsers = await apiUserService.getAllUsers();
-      console.log('All users loaded from API:', allUsers);
       setUsers(allUsers);
     } catch (error) {
-      console.error('Error loading users from API:', error);
-      console.log('Falling back to localStorage...');
-      try {
-        // Try localStorage fallback manually
-        const localUsers = JSON.parse(localStorage.getItem('quizUsers') || '{}');
-        console.log('LocalStorage users:', localUsers);
-        const userArray = Object.keys(localUsers).map(username => ({
-          username,
-          ...localUsers[username]
-        }));
-        setUsers(userArray);
-      } catch (localError) {
-        console.error('Error loading from localStorage:', localError);
-        setUsers([]);
-      }
+      console.error('Error loading users:', error);
+      setUsers([]);
     }
   };
 
