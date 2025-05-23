@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { commentTemplates } from '../../utils/commentTemplates';
 
 const Question = React.memo(function Question({ question, selectedAnswer, showExplanation, onAnswerSelect, comment, onCommentChange }) {
   const [localComment, setLocalComment] = useState(comment || '');
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [lastSaved, setLastSaved] = useState(null);
+  const maxCommentLength = 500;
 
   useEffect(() => {
     setLocalComment(comment || '');
@@ -9,10 +13,36 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
 
   const handleCommentChange = (e) => {
     const newComment = e.target.value;
-    setLocalComment(newComment);
-    if (onCommentChange) {
-      onCommentChange(newComment);
+    if (newComment.length <= maxCommentLength) {
+      setLocalComment(newComment);
+      if (onCommentChange) {
+        onCommentChange(newComment);
+        setLastSaved(Date.now());
+        setTimeout(() => setLastSaved(null), 2000);
+      }
     }
+  };
+
+  const handleTemplateSelect = (template) => {
+    const newComment = localComment ? localComment + ' ' + template.text : template.text;
+    if (newComment.length <= maxCommentLength) {
+      setLocalComment(newComment);
+      if (onCommentChange) {
+        onCommentChange(newComment);
+      }
+    }
+    setShowTemplates(false);
+  };
+
+  const handleClearComment = () => {
+    setLocalComment('');
+    if (onCommentChange) {
+      onCommentChange('');
+    }
+  };
+
+  const handleCopyComment = () => {
+    navigator.clipboard.writeText(localComment);
   };
 
   const getOptionClass = (optionKey) => {
@@ -68,7 +98,49 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
       )}
       
       <div className="comment-section">
-        <label htmlFor="comment">Your Notes:</label>
+        <div className="comment-header">
+          <label htmlFor="comment">Your Notes:</label>
+          <div className="comment-actions">
+            <button 
+              className="comment-action-btn"
+              onClick={() => setShowTemplates(!showTemplates)}
+              title="Use template"
+            >
+              📝
+            </button>
+            <button 
+              className="comment-action-btn"
+              onClick={handleCopyComment}
+              disabled={!localComment}
+              title="Copy comment"
+            >
+              📋
+            </button>
+            <button 
+              className="comment-action-btn"
+              onClick={handleClearComment}
+              disabled={!localComment}
+              title="Clear comment"
+            >
+              🗑️
+            </button>
+          </div>
+        </div>
+        
+        {showTemplates && (
+          <div className="comment-templates">
+            {commentTemplates.map(template => (
+              <button
+                key={template.id}
+                className="template-btn"
+                onClick={() => handleTemplateSelect(template)}
+              >
+                {template.label}
+              </button>
+            ))}
+          </div>
+        )}
+        
         <textarea
           id="comment"
           className="comment-textarea"
@@ -77,6 +149,13 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
           placeholder="Add your notes or comments about this question..."
           rows="3"
         />
+        
+        <div className="comment-footer">
+          <span className={`char-count ${localComment.length > maxCommentLength * 0.9 ? 'warning' : ''}`}>
+            {localComment.length}/{maxCommentLength}
+          </span>
+          {lastSaved && <span className="save-indicator">✓ Saved</span>}
+        </div>
       </div>
     </div>
   );

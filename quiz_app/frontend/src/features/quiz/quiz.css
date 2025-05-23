@@ -169,12 +169,70 @@
   border-top: 1px solid var(--bg-light);
 }
 
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
 .comment-section label {
-  display: block;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-base);
+}
+
+.comment-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.comment-action-btn {
+  background: transparent;
+  border: 1px solid var(--bg-light);
+  border-radius: var(--border-radius-sm);
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.comment-action-btn:hover:not(:disabled) {
+  background-color: var(--bg-light);
+  border-color: var(--color-primary);
+}
+
+.comment-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Comment Templates */
+.comment-templates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-base);
+}
+
+.template-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--border-radius-pill);
+  padding: 4px 12px;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.template-btn:hover {
+  background-color: var(--color-primary);
+  color: var(--text-white);
+  border-color: var(--color-primary);
 }
 
 .comment-textarea {
@@ -199,6 +257,29 @@
 .comment-textarea::placeholder {
   color: var(--text-secondary);
   opacity: 0.6;
+}
+
+/* Comment Footer */
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+.char-count {
+  color: var(--text-secondary);
+}
+
+.char-count.warning {
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.save-indicator {
+  color: var(--color-success);
+  animation: fadeIn var(--transition-base);
 }
 
 /* Responsive Design */

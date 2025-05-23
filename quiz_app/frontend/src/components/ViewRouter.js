@@ -8,6 +8,7 @@ const StudyNotes = React.lazy(() => import('../features/study').then(module => (
 const Statistics = React.lazy(() => import('../features/statistics').then(module => ({ default: module.Statistics })));
 const ReviewList = React.lazy(() => import('../features/review').then(module => ({ default: module.ReviewList })));
 const DataExportImport = React.lazy(() => import('../features/dataManagement').then(module => ({ default: module.DataExportImport })));
+const CommentManager = React.lazy(() => import('../features/comments').then(module => ({ default: module.CommentManager })));
 
 function ViewRouter({ 
   currentView, 
@@ -97,6 +98,15 @@ function ViewRouter({
           <DataExportImport
             onBack={() => onNavigate('menu')}
             onUpdateProgress={onUpdateProgress}
+          />
+        </Suspense>
+      );
+
+    case 'comments':
+      return (
+        <Suspense fallback={<LoadingSpinner />}>
+          <CommentManager
+            onBack={() => onNavigate('menu')}
           />
         </Suspense>
       );

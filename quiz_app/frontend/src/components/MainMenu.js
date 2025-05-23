@@ -50,6 +50,13 @@ const MainMenu = React.memo(function MainMenu({
           
           <Button 
             variant="secondary"
+            onClick={() => onNavigate('comments')}
+          >
+            💬 Manage Comments
+          </Button>
+          
+          <Button 
+            variant="secondary"
             onClick={() => onNavigate('data')}
           >
             📥 Export/Import Data
