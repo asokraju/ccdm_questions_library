@@ -7,7 +7,9 @@ const MainMenu = React.memo(function MainMenu({
   selectedTopic, 
   onTopicChange, 
   onNavigate, 
-  onReset 
+  onReset,
+  onLogout,
+  currentUser
 }) {
   return (
     <div>
@@ -18,7 +20,10 @@ const MainMenu = React.memo(function MainMenu({
       />
       
       <Card className="menu">
-        <h2>Choose an Option</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <h2>Choose an Option</h2>
+          {currentUser && <span style={{ color: '#6c757d' }}>Logged in as: <strong>{currentUser}</strong></span>}
+        </div>
         <div className="menu-buttons">
           <Button 
             variant="primary"
@@ -80,7 +85,7 @@ const MainMenu = React.memo(function MainMenu({
             variant="secondary"
             onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {
-                window.location.reload();
+                onLogout();
               }
             }}
           >

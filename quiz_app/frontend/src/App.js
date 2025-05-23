@@ -60,6 +60,12 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    setCurrentUser(null);
+    setCurrentView('menu');
+  };
+
   // Show user selector if no user is selected
   if (!currentUser) {
     return (
@@ -73,8 +79,7 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <UserSelector onUserSelected={handleUserSelected} />
-
+      
       {currentView === 'menu' ? (
         <MainMenu
           topics={topics}
@@ -82,6 +87,8 @@ function App() {
           onTopicChange={setSelectedTopic}
           onNavigate={handleNavigate}
           onReset={handleReset}
+          onLogout={handleLogout}
+          currentUser={currentUser}
         />
       ) : (
         <ViewRouter
