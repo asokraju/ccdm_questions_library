@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProgressBar({ progress }) {
+const ProgressBar = React.memo(function ProgressBar({ progress }) {
   return (
     <div className="progress-bar">
       <div 
@@ -9,6 +9,6 @@ function ProgressBar({ progress }) {
       />
     </div>
   );
-}
+});
 
 export default ProgressBar;

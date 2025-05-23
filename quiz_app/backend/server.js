@@ -181,6 +181,76 @@ app.post('/api/reset', (req, res) => {
   res.json({ success: true });
 });
 
+// Notes API endpoints
+app.get('/api/notes/topics', async (req, res) => {
+  try {
+    const dataDir = path.join(__dirname, '../../data');
+    const topics = [];
+    
+    const topicDirs = await fs.readdir(dataDir);
+    
+    for (const topicDir of topicDirs) {
+      const topicPath = path.join(dataDir, topicDir);
+      const stat = await fs.stat(topicPath);
+      
+      if (stat.isDirectory()) {
+        const notesFile = path.join(topicPath, 'notes.md');
+        
+        try {
+          await fs.access(notesFile);
+          
+          // Read the notes file to get metadata
+          const content = await fs.readFile(notesFile, 'utf8');
+          const wordCount = content.split(/\s+/).length;
+          const readTime = Math.ceil(wordCount / 200); // Average reading speed
+          
+          // Extract description from first paragraph
+          const lines = content.split('\n');
+          let description = '';
+          for (const line of lines) {
+            if (line.trim() && !line.startsWith('#')) {
+              description = line.trim().substring(0, 150) + '...';
+              break;
+            }
+          }
+          
+          topics.push({
+            name: topicDir.replace(/_/g, ' '),
+            wordCount,
+            readTime,
+            description: description || 'Comprehensive study material and exam preparation notes.'
+          });
+        } catch (error) {
+          // notes.md doesn't exist for this topic, skip it
+          console.log(`No notes.md found for topic: ${topicDir}`);
+        }
+      }
+    }
+    
+    res.json(topics);
+  } catch (error) {
+    console.error('Error loading notes topics:', error);
+    res.status(500).json({ error: 'Failed to load topics' });
+  }
+});
+
+app.get('/api/notes/:topic', async (req, res) => {
+  try {
+    const topicName = req.params.topic.replace(/ /g, '_');
+    const notesFile = path.join(__dirname, '../../data', topicName, 'notes.md');
+    
+    const content = await fs.readFile(notesFile, 'utf8');
+    
+    res.json({
+      topic: topicName.replace(/_/g, ' '),
+      content: content
+    });
+  } catch (error) {
+    console.error(`Error loading notes for topic ${req.params.topic}:`, error);
+    res.status(404).json({ error: 'Notes not found for this topic' });
+  }
+});
+
 // Get local network IP address
 function getNetworkIP() {
   const os = require('os');

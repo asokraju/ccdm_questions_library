@@ -1,0 +1,164 @@
+/* Reusable Component Styles */
+
+/* Button Styles */
+.btn-base {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-base:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Variants */
+.primary {
+  background-color: var(--color-primary);
+  color: var(--text-white);
+  border-color: var(--color-primary);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background-color: var(--color-secondary);
+  color: var(--text-white);
+  border-color: var(--color-secondary);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+  transform: translateY(-1px);
+}
+
+.danger {
+  background-color: var(--color-danger);
+  color: var(--text-white);
+  border-color: var(--color-danger);
+}
+
+.danger:hover:not(:disabled) {
+  background-color: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+  transform: translateY(-1px);
+}
+
+.study-button {
+  background: linear-gradient(135deg, var(--color-info), var(--color-primary));
+  border-color: var(--color-info);
+}
+
+.study-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #138496, var(--color-primary-hover));
+  transform: translateY(-1px);
+}
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+}
+
+.loading-spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.loading-spinner .spinner {
+  border: 3px solid var(--bg-light);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--border-radius-pill);
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner-small .spinner {
+  width: 20px;
+  height: 20px;
+}
+
+.loading-spinner-medium .spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loading-spinner-large .spinner {
+  width: 60px;
+  height: 60px;
+}
+
+.loading-message {
+  margin-top: var(--spacing-md);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+  padding: var(--spacing-lg);
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: var(--border-radius-base);
+  color: #721c24;
+  text-align: center;
+}
+
+.error-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.error-text {
+  margin: 0 0 var(--spacing-md) 0;
+  color: #721c24;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-pill);
+  overflow: hidden;
+  margin: var(--spacing-md) 0;
+}
+
+.progress-bar {
+  height: 8px;
+  background: linear-gradient(90deg, var(--color-success), var(--color-primary));
+  border-radius: var(--border-radius-pill);
+  transition: width var(--transition-base);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .btn-base {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+}

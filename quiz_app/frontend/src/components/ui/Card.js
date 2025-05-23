@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ children, className = '', style = {}, ...props }) {
+const Card = React.memo(function Card({ children, className = '', style = {}, ...props }) {
   return (
     <div 
       className={`card ${className}`.trim()} 
@@ -10,6 +10,6 @@ function Card({ children, className = '', style = {}, ...props }) {
       {children}
     </div>
   );
-}
+});
 
 export default Card;

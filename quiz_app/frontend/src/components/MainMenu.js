@@ -2,7 +2,7 @@ import React from 'react';
 import TopicSelector from './TopicSelector';
 import { Button, Card } from './ui';
 
-function MainMenu({ 
+const MainMenu = React.memo(function MainMenu({ 
   topics, 
   selectedTopic, 
   onTopicChange, 
@@ -58,6 +58,6 @@ function MainMenu({
       </Card>
     </div>
   );
-}
+});
 
 export default MainMenu;

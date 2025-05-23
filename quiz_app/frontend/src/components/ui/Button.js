@@ -7,7 +7,7 @@ const buttonVariants = {
   study: 'secondary study-button'
 };
 
-function Button({ 
+const Button = React.memo(function Button({ 
   variant = 'secondary', 
   onClick, 
   children, 
@@ -16,7 +16,7 @@ function Button({
   className = '',
   ...props 
 }) {
-  const buttonClass = `${buttonVariants[variant] || variant} ${className}`.trim();
+  const buttonClass = `btn-base ${buttonVariants[variant] || variant} ${className}`.trim();
 
   return (
     <button
@@ -29,6 +29,6 @@ function Button({
       {children}
     </button>
   );
-}
+});
 
 export default Button;

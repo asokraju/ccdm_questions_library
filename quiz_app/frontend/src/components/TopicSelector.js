@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function TopicSelector({ topics, selectedTopic, onTopicChange }) {
+const TopicSelector = React.memo(function TopicSelector({ topics, selectedTopic, onTopicChange }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -71,6 +71,6 @@ function TopicSelector({ topics, selectedTopic, onTopicChange }) {
       </div>
     </div>
   );
-}
+});
 
 export default TopicSelector;

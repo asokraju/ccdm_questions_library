@@ -1,9 +1,12 @@
-import React from 'react';
-import { QuizContainer, QuizConfig } from '../features/quiz';
-import { StudyNotes } from '../features/study';
-import { Statistics } from '../features/statistics';
-import { ReviewList } from '../features/review';
+import React, { Suspense } from 'react';
 import { Button, Card } from './ui';
+import LoadingSpinner from './LoadingSpinner';
+
+const QuizContainer = React.lazy(() => import('../features/quiz').then(module => ({ default: module.QuizContainer })));
+const QuizConfig = React.lazy(() => import('../features/quiz').then(module => ({ default: module.QuizConfig })));
+const StudyNotes = React.lazy(() => import('../features/study').then(module => ({ default: module.StudyNotes })));
+const Statistics = React.lazy(() => import('../features/statistics').then(module => ({ default: module.Statistics })));
+const ReviewList = React.lazy(() => import('../features/review').then(module => ({ default: module.ReviewList })));
 
 function ViewRouter({ 
   currentView, 
@@ -27,16 +30,18 @@ function ViewRouter({
   switch (currentView) {
     case 'config':
       return (
-        <QuizConfig
-          selectedTopic={selectedTopic}
-          onStartQuiz={handleQuizStart}
-          onBack={handleQuizBack}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <QuizConfig
+            selectedTopic={selectedTopic}
+            onStartQuiz={handleQuizStart}
+            onBack={handleQuizBack}
+          />
+        </Suspense>
       );
 
     case 'quiz':
       return (
-        <>
+        <Suspense fallback={<LoadingSpinner />}>
           {quizConfig ? (
             <QuizContainer
               quizConfig={quizConfig}
@@ -54,29 +59,35 @@ function ViewRouter({
               </Button>
             </Card>
           )}
-        </>
+        </Suspense>
       );
 
     case 'statistics':
       return progress ? (
-        <Statistics
-          progress={progress}
-          onBack={() => onNavigate('menu')}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Statistics
+            progress={progress}
+            onBack={() => onNavigate('menu')}
+          />
+        </Suspense>
       ) : null;
 
     case 'review':
       return (
-        <ReviewList
-          onBack={() => onNavigate('menu')}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <ReviewList
+            onBack={() => onNavigate('menu')}
+          />
+        </Suspense>
       );
 
     case 'notes':
       return (
-        <StudyNotes
-          onBack={() => onNavigate('menu')}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <StudyNotes
+            onBack={() => onNavigate('menu')}
+          />
+        </Suspense>
       );
 
     default:
