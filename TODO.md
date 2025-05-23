@@ -1,6 +1,46 @@
 # TODO List
 
-## Current Sprint: Quiz Configuration Features
+## Current Sprint: User Comments & Persistence
+
+### Completed Features ✓
+- [x] Add comment functionality to quiz questions
+  - Added comment textarea to Question component
+  - Comments saved with each question
+- [x] Implement persistent storage (localStorage for MVP)
+  - Comments persisted in localStorage
+  - Comments survive page refresh
+- [x] Create comment display in review section
+  - Comments shown in review list with preview
+  - Full comments displayed when viewing questions
+- [x] Update backend to store comments with answers
+  - Comments included in answer submission
+  - Comments returned with review questions
+
+### High Priority
+- [ ] Add database persistence (PostgreSQL/SQLite)
+  - Move from localStorage to proper database
+  - Enable multi-device sync
+- [ ] Add user profiles/sessions
+  - Simple username-based profiles
+  - Track progress per user
+
+### Medium Priority
+- [ ] Add export/import functionality for user data
+  - Export comments to JSON/CSV
+  - Import previous study sessions
+- [ ] Enhance UI with comment editing capabilities
+  - Edit comments from review section
+  - Comment templates for common notes
+
+### Low Priority
+- [ ] Add search/filter for comments
+  - Search through all comments
+  - Filter questions by comment keywords
+- [ ] Add comment analytics
+  - Most commented topics
+  - Comment word cloud
+
+## Previous Sprint: Quiz Configuration Features
 
 ### High Priority
 - [x] Create new branch for quiz configuration features
