@@ -6,6 +6,7 @@
   --color-primary-hover: #0056b3;
   --color-secondary: #6c757d;
   --color-secondary-hover: #5a6268;
+  --color-secondary-dark: #495057;
   --color-success: #28a745;
   --color-success-hover: #1e7e34;
   --color-danger: #dc3545;
@@ -18,6 +19,7 @@
   --bg-secondary: #f8f9fa;
   --bg-dark: #343a40;
   --bg-light: #e9ecef;
+  --bg-border: #dee2e6;
   
   /* Text Colors */
   --text-primary: #212529;

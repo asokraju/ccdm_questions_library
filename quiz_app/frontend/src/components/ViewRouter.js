@@ -7,6 +7,7 @@ const QuizConfig = React.lazy(() => import('../features/quiz').then(module => ({
 const StudyNotes = React.lazy(() => import('../features/study').then(module => ({ default: module.StudyNotes })));
 const Statistics = React.lazy(() => import('../features/statistics').then(module => ({ default: module.Statistics })));
 const ReviewList = React.lazy(() => import('../features/review').then(module => ({ default: module.ReviewList })));
+const DataExportImport = React.lazy(() => import('../features/dataManagement').then(module => ({ default: module.DataExportImport })));
 
 function ViewRouter({ 
   currentView, 
@@ -86,6 +87,16 @@ function ViewRouter({
         <Suspense fallback={<LoadingSpinner />}>
           <StudyNotes
             onBack={() => onNavigate('menu')}
+          />
+        </Suspense>
+      );
+
+    case 'data':
+      return (
+        <Suspense fallback={<LoadingSpinner />}>
+          <DataExportImport
+            onBack={() => onNavigate('menu')}
+            onUpdateProgress={onUpdateProgress}
           />
         </Suspense>
       );

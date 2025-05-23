@@ -49,6 +49,13 @@ const MainMenu = React.memo(function MainMenu({
           </Button>
           
           <Button 
+            variant="secondary"
+            onClick={() => onNavigate('data')}
+          >
+            📥 Export/Import Data
+          </Button>
+          
+          <Button 
             variant="danger"
             onClick={onReset}
           >
