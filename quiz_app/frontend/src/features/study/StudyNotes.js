@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiService } from '../../services/apiService';
 import MarkdownRenderer from './MarkdownRenderer';
 
 function StudyNotes({ onBack }) {
@@ -16,8 +16,8 @@ function StudyNotes({ onBack }) {
   const loadTopics = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/api/notes/topics');
-      setTopics(response.data);
+      const response = await apiService.getNotesTopics();
+      setTopics(response);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading topics:', error);
@@ -29,8 +29,8 @@ function StudyNotes({ onBack }) {
   const loadNoteContent = async (topic) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`/api/notes/${encodeURIComponent(topic)}`);
-      setNoteContent(response.data.content);
+      const response = await apiService.getNoteContent(topic);
+      setNoteContent(response.content);
       setSelectedTopic(topic);
       setIsLoading(false);
     } catch (error) {

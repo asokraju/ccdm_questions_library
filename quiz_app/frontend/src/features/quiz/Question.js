@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Question({ question, selectedAnswer, showExplanation, onAnswerSelect }) {
+const Question = React.memo(function Question({ question, selectedAnswer, showExplanation, onAnswerSelect }) {
   const getOptionClass = (optionKey) => {
     let classes = ['option'];
     
@@ -54,6 +54,6 @@ function Question({ question, selectedAnswer, showExplanation, onAnswerSelect })
       )}
     </div>
   );
-}
+});
 
 export default Question;

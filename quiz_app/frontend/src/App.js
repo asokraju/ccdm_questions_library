@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import QuizContainer from './components/QuizContainer';
-import Statistics from './components/Statistics';
-import ReviewList from './components/ReviewList';
-import TopicSelector from './components/TopicSelector';
-import QuizConfig from './components/QuizConfig';
-import StudyNotes from './components/StudyNotes';
-import './App.css';
+import { apiService } from './services/apiService';
+import { performanceMonitor } from './utils/performance';
+import Header from './components/Header';
+import MainMenu from './components/MainMenu';
+import ViewRouter from './components/ViewRouter';
+import './styles/main.css';
 
 function App() {
   const [currentView, setCurrentView] = useState('menu');
@@ -16,9 +14,13 @@ function App() {
   const [quizConfig, setQuizConfig] = useState(null);
 
   useEffect(() => {
+    // Performance monitoring
+    performanceMonitor.logBundleInfo();
+    performanceMonitor.checkMemoryUsage();
+    
     // Load topics
-    axios.get('/api/topics')
-      .then(response => setTopics(response.data))
+    apiService.getTopics()
+      .then(response => setTopics(response))
       .catch(error => console.error('Error loading topics:', error));
     
     // Load progress
@@ -26,133 +28,49 @@ function App() {
   }, []);
 
   const loadProgress = () => {
-    axios.get('/api/progress')
-      .then(response => setProgress(response.data))
+    apiService.getProgress()
+      .then(response => setProgress(response))
       .catch(error => console.error('Error loading progress:', error));
   };
 
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all progress?')) {
-      axios.post('/api/reset')
+      apiService.resetProgress()
         .then(() => {
           loadProgress();
           setCurrentView('menu');
+          performanceMonitor.trackNavigation('menu (after reset)');
         })
         .catch(error => console.error('Error resetting progress:', error));
     }
   };
 
+  const handleNavigate = (view) => {
+    performanceMonitor.trackNavigation(view);
+    setCurrentView(view);
+  };
+
   return (
     <div className="container">
-      <div className="header">
-        <h1>CCDM Quiz Application</h1>
-        <p>Test your Clinical Data Management knowledge</p>
-      </div>
+      <Header />
 
-      {currentView === 'menu' && (
-        <div>
-          <TopicSelector
-            topics={topics}
-            selectedTopic={selectedTopic}
-            onTopicChange={setSelectedTopic}
-          />
-          
-          <div className="menu card">
-            <h2>Choose an Option</h2>
-            <div className="menu-buttons">
-              <button 
-                className="primary"
-                onClick={() => setCurrentView('config')}
-              >
-                Start Quiz
-              </button>
-              <button 
-                className="secondary study-button"
-                onClick={() => setCurrentView('notes')}
-              >
-                📖 Study Material
-              </button>
-              <button 
-                className="secondary"
-                onClick={() => setCurrentView('statistics')}
-              >
-                View Statistics
-              </button>
-              <button 
-                className="secondary"
-                onClick={() => setCurrentView('review')}
-              >
-                Review Incorrect Answers
-              </button>
-              <button 
-                className="danger"
-                onClick={handleReset}
-              >
-                Reset Progress
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {currentView === 'config' && (
-        <QuizConfig
+      {currentView === 'menu' ? (
+        <MainMenu
+          topics={topics}
           selectedTopic={selectedTopic}
-          onStartQuiz={(config) => {
-            setQuizConfig(config);
-            setCurrentView('quiz');
-          }}
-          onBack={() => {
-            setCurrentView('menu');
-            setQuizConfig(null);
-          }}
+          onTopicChange={setSelectedTopic}
+          onNavigate={handleNavigate}
+          onReset={handleReset}
         />
-      )}
-
-      {currentView === 'quiz' && (
-        <>
-          {quizConfig ? (
-            <QuizContainer
-              quizConfig={quizConfig}
-              onBack={() => {
-                setCurrentView('menu');
-                setQuizConfig(null);
-              }}
-              onUpdateProgress={loadProgress}
-            />
-          ) : (
-            <div className="card">
-              <p>Quiz configuration error. Please try again.</p>
-              <button 
-                className="secondary" 
-                onClick={() => {
-                  setCurrentView('menu');
-                  setQuizConfig(null);
-                }}
-              >
-                Back to Menu
-              </button>
-            </div>
-          )}
-        </>
-      )}
-
-      {currentView === 'statistics' && progress && (
-        <Statistics
+      ) : (
+        <ViewRouter
+          currentView={currentView}
+          selectedTopic={selectedTopic}
+          quizConfig={quizConfig}
           progress={progress}
-          onBack={() => setCurrentView('menu')}
-        />
-      )}
-
-      {currentView === 'review' && (
-        <ReviewList
-          onBack={() => setCurrentView('menu')}
-        />
-      )}
-
-      {currentView === 'notes' && (
-        <StudyNotes
-          onBack={() => setCurrentView('menu')}
+          onNavigate={handleNavigate}
+          onSetQuizConfig={setQuizConfig}
+          onUpdateProgress={loadProgress}
         />
       )}
     </div>

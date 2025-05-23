@@ -1,0 +1,67 @@
+/* Main CSS File - Imports all modular stylesheets */
+
+/* 1. CSS Variables and Design System */
+@import './variables.css';
+
+/* 2. Base Styles and Resets */
+@import './base.css';
+
+/* 3. Reusable Component Styles */
+@import './components.css';
+
+/* 4. Layout Component Styles */
+@import '../components/menu.css';
+
+/* 5. Feature-Specific Styles */
+@import '../features/quiz/quiz.css';
+@import '../features/study/study.css';
+
+/* 6. Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.d-flex { display: flex; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-none { display: none; }
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+/* Print Styles */
+@media print {
+  .back-button,
+  .menu-buttons,
+  .navigation {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+  
+  .note-content {
+    max-width: none !important;
+  }
+}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from 'react';
+import { apiService } from '../../services/apiService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
 
@@ -11,11 +11,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    loadQuestions();
-  }, [quizConfig]);
-
-  const loadQuestions = async () => {
+  const loadQuestions = useCallback(async () => {
     if (!quizConfig) {
       setIsLoading(false);
       return;
@@ -32,14 +28,18 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
         params.difficulty = quizConfig.difficulty;
       }
       
-      const response = await axios.get('/api/questions', { params });
-      setQuestions(response.data);
+      const response = await apiService.getQuestions(params);
+      setQuestions(response);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading questions:', error);
       setIsLoading(false);
     }
-  };
+  }, [quizConfig]);
+
+  useEffect(() => {
+    loadQuestions();
+  }, [loadQuestions]);
 
   const handleAnswerSelect = (answer) => {
     if (showExplanation) return;
@@ -64,7 +64,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
     // Submit to backend
     try {
-      await axios.post('/api/answer', {
+      await apiService.submitAnswer({
         questionId: currentQuestion.id,
         answer: selectedAnswer,
         topic: currentQuestion.topic,

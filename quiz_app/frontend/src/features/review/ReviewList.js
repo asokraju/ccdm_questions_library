@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Question from './Question';
+import { apiService } from '../../services/apiService';
+import { Question } from '../quiz';
 
 function ReviewList({ onBack }) {
   const [reviewQuestions, setReviewQuestions] = useState([]);
@@ -14,8 +14,8 @@ function ReviewList({ onBack }) {
   const loadReviewQuestions = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/api/reviews');
-      setReviewQuestions(response.data);
+      const reviews = await apiService.getReviews();
+      setReviewQuestions(reviews);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading review questions:', error);
