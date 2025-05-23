@@ -1,36 +1,60 @@
 # TODO List
 
-## Current Sprint: User Comments & Persistence
+## Current Sprint: Cross-Device Storage & Sync
 
-### Completed Features ✓
-- [x] Add comment functionality to quiz questions
-  - Added comment textarea to Question component
-  - Comments saved with each question
-- [x] Implement persistent storage (localStorage for MVP)
-  - Comments persisted in localStorage
-  - Comments survive page refresh
-- [x] Create comment display in review section
-  - Comments shown in review list with preview
-  - Full comments displayed when viewing questions
-- [x] Update backend to store comments with answers
-  - Comments included in answer submission
-  - Comments returned with review questions
-
-### High Priority
-- [ ] Add database persistence (PostgreSQL/SQLite)
-  - Move from localStorage to proper database
+### High Priority - Storage & Sync
+- [ ] Implement server-side storage for user data
+  - Move from localStorage to database (PostgreSQL/SQLite)
+  - Create API endpoints for user data CRUD operations
   - Enable multi-device sync
-- [ ] Add user profiles/sessions
-  - Simple username-based profiles
-  - Track progress per user
+- [ ] Add user authentication
+  - Simple email/password or OAuth
+  - Secure user data access
+- [ ] Handle offline/online data sync
+  - Queue changes when offline
+  - Sync when connection restored
+
+### Recently Completed Features ✓
+- [x] Add comment functionality to quiz questions
+  - Added comment textarea with templates and character count
+  - Comments saved per user per question
+- [x] Implement user profiles/sessions
+  - Username-based profiles with localStorage
+  - Isolated data per user
+- [x] Add export/import functionality
+  - Export all user data to JSON
+  - Import data from file
+  - Bulk comment management
+- [x] Enhance comment UI
+  - Comment templates
+  - Character counter
+  - Copy/paste/clear functions
+  - Save indicator
+- [x] Fix iOS Safari input bug
+  - Created IOSCompatibleInput component
+  - Uses prompt() fallback on iOS
+- [x] Redesign main menu
+  - Card-based grid layout
+  - Better mobile ergonomics
+  - User profile indicator
+
+### Known Issues
+- [ ] localStorage not shared between devices
+  - Currently browser-specific storage
+  - Need server-side solution for sync
+- [ ] Firefox iOS may have localStorage restrictions
+  - Added fallback to in-memory storage
+  - Need to test on actual device
 
 ### Medium Priority
-- [ ] Add export/import functionality for user data
-  - Export comments to JSON/CSV
-  - Import previous study sessions
-- [ ] Enhance UI with comment editing capabilities
-  - Edit comments from review section
-  - Comment templates for common notes
+- [ ] Add progress sync across devices
+  - Sync quiz statistics
+  - Sync answer history
+- [ ] Add conflict resolution for concurrent edits
+  - Handle when same user edits from multiple devices
+- [ ] Add data backup/restore
+  - Automated backups
+  - Point-in-time restore
 
 ### Low Priority
 - [ ] Add search/filter for comments
@@ -39,6 +63,9 @@
 - [ ] Add comment analytics
   - Most commented topics
   - Comment word cloud
+- [ ] Add collaborative features
+  - Share comments with other users
+  - Public/private comment options
 
 ## Previous Sprint: Quiz Configuration Features
 
