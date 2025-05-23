@@ -122,6 +122,9 @@
   border-radius: var(--border-radius-base);
   font-size: var(--font-size-base);
   transition: border-color var(--transition-base);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .username-input:focus {
@@ -188,6 +191,17 @@
   gap: var(--spacing-md);
   flex-wrap: wrap;
   margin-top: var(--spacing-xl);
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .username-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .form-actions button {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 /* Responsive Design */

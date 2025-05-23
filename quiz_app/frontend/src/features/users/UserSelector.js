@@ -41,6 +41,17 @@ function UserSelector({ onUserSelected }) {
     }
   };
 
+  const handleShowCreateForm = () => {
+    setShowCreateForm(true);
+    // Use setTimeout to avoid iOS focus issues
+    setTimeout(() => {
+      const input = document.querySelector('.username-input');
+      if (input && !(/iPhone|iPad|iPod/i.test(navigator.userAgent))) {
+        input.focus();
+      }
+    }, 100);
+  };
+
   const handleSelectUser = (username) => {
     userService.switchUser(username);
     setCurrentUser(username);
@@ -116,7 +127,7 @@ function UserSelector({ onUserSelected }) {
         {!showCreateForm ? (
           <button 
             className="primary create-user-btn"
-            onClick={() => setShowCreateForm(true)}
+            onClick={handleShowCreateForm}
           >
             Create New User
           </button>
@@ -128,7 +139,6 @@ function UserSelector({ onUserSelected }) {
               onChange={(e) => setNewUsername(e.target.value)}
               placeholder="Enter username"
               maxLength="20"
-              autoFocus
               className="username-input"
             />
             <div className="form-actions">
