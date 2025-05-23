@@ -162,6 +162,45 @@
   margin-top: var(--spacing-xl);
 }
 
+/* Comment Section */
+.comment-section {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--bg-light);
+}
+
+.comment-section label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+}
+
+.comment-textarea {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--bg-light);
+  border-radius: var(--border-radius-base);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color var(--transition-base);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.comment-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.comment-textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .quiz-container {

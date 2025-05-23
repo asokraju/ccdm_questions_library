@@ -119,7 +119,7 @@ app.get('/api/questions', (req, res) => {
 
 // Submit answer
 app.post('/api/answer', (req, res) => {
-  const { questionId, answer, topic, subtopic, isCorrect } = req.body;
+  const { questionId, answer, topic, subtopic, isCorrect, comment } = req.body;
   
   // Update overall progress
   if (isCorrect) {
@@ -140,11 +140,12 @@ app.post('/api/answer', (req, res) => {
   }
   userProgress.subtopicStats[subtopic][isCorrect ? 'correct' : 'incorrect']++;
   
-  // Add to answer history
+  // Add to answer history with comment
   userProgress.answerHistory.push({
     questionId,
     answer,
     isCorrect,
+    comment: comment || '',
     timestamp: new Date().toISOString()
   });
   
@@ -158,13 +159,21 @@ app.get('/api/progress', (req, res) => {
 
 // Get reviews (questions answered incorrectly)
 app.get('/api/reviews', (req, res) => {
-  const incorrectQuestionIds = userProgress.answerHistory
-    .filter(h => !h.isCorrect)
-    .map(h => h.questionId);
+  const incorrectAnswers = userProgress.answerHistory
+    .filter(h => !h.isCorrect);
   
-  const reviewQuestions = allQuestions.filter(q => 
-    incorrectQuestionIds.includes(q.id)
-  );
+  const reviewQuestions = incorrectAnswers.map(answer => {
+    const question = allQuestions.find(q => q.id === answer.questionId);
+    if (question) {
+      return {
+        ...question,
+        userAnswer: answer.answer,
+        userComment: answer.comment,
+        answeredAt: answer.timestamp
+      };
+    }
+    return null;
+  }).filter(q => q !== null);
   
   res.json(reviewQuestions);
 });

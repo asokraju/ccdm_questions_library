@@ -48,6 +48,74 @@ button.success {
   color: white;
 }
 
+/* Review List Styles */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.review-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.review-item:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.review-item h4 {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.review-item p {
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.review-item small {
+  color: #999;
+  font-size: 12px;
+}
+
+.comment-preview {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #007bff;
+  border-radius: 4px;
+}
+
+.comment-preview em {
+  color: #555;
+  font-size: 14px;
+}
+
+.user-answer-info {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.user-answer-info p {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.user-answer-info small {
+  color: #666;
+}
+
 button.danger {
   background-color: #dc3545;
   color: white;

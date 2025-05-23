@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Question = React.memo(function Question({ question, selectedAnswer, showExplanation, onAnswerSelect }) {
+const Question = React.memo(function Question({ question, selectedAnswer, showExplanation, onAnswerSelect, comment, onCommentChange }) {
+  const [localComment, setLocalComment] = useState(comment || '');
+
+  useEffect(() => {
+    setLocalComment(comment || '');
+  }, [comment, question.id]);
+
+  const handleCommentChange = (e) => {
+    const newComment = e.target.value;
+    setLocalComment(newComment);
+    if (onCommentChange) {
+      onCommentChange(newComment);
+    }
+  };
+
   const getOptionClass = (optionKey) => {
     let classes = ['option'];
     
@@ -52,6 +66,18 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
           <p>{question.explanation}</p>
         </div>
       )}
+      
+      <div className="comment-section">
+        <label htmlFor="comment">Your Notes:</label>
+        <textarea
+          id="comment"
+          className="comment-textarea"
+          value={localComment}
+          onChange={handleCommentChange}
+          placeholder="Add your notes or comments about this question..."
+          rows="3"
+        />
+      </div>
     </div>
   );
 });

@@ -9,6 +9,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [answers, setAnswers] = useState({});
+  const [comments, setComments] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const loadQuestions = useCallback(async () => {
@@ -39,11 +40,27 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
   useEffect(() => {
     loadQuestions();
+    // Load saved comments from localStorage
+    const savedComments = localStorage.getItem('quizComments');
+    if (savedComments) {
+      setComments(JSON.parse(savedComments));
+    }
   }, [loadQuestions]);
 
   const handleAnswerSelect = (answer) => {
     if (showExplanation) return;
     setSelectedAnswer(answer);
+  };
+
+  const handleCommentChange = (comment) => {
+    const currentQuestion = questions[currentQuestionIndex];
+    const newComments = {
+      ...comments,
+      [currentQuestion.id]: comment
+    };
+    setComments(newComments);
+    // Save to localStorage
+    localStorage.setItem('quizComments', JSON.stringify(newComments));
   };
 
   const handleSubmit = async () => {
@@ -62,14 +79,15 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     };
     setAnswers(newAnswers);
 
-    // Submit to backend
+    // Submit to backend with comment
     try {
       await apiService.submitAnswer({
         questionId: currentQuestion.id,
         answer: selectedAnswer,
         topic: currentQuestion.topic,
         subtopic: currentQuestion.subtopic,
-        isCorrect
+        isCorrect,
+        comment: comments[currentQuestion.id] || ''
       });
       onUpdateProgress();
     } catch (error) {
@@ -151,6 +169,8 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
           selectedAnswer={selectedAnswer}
           showExplanation={showExplanation}
           onAnswerSelect={handleAnswerSelect}
+          comment={comments[currentQuestion.id] || ''}
+          onCommentChange={handleCommentChange}
         />
         
         <div className="navigation">

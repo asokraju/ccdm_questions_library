@@ -657,3 +657,4 @@
   answer: "c"
   explanation: "A comprehensive cloud security framework that includes encryption, access controls, audit trails, vendor assessment, and acknowledges the shared responsibility model provides the most thorough protection. This recognizes the unique challenges of cloud environments while implementing appropriate safeguards at all levels, and clearly establishes which security aspects are the responsibility of the provider versus the company."
   subtopic: "Cloud Security"
+

@@ -6,9 +6,15 @@ function ReviewList({ onBack }) {
   const [reviewQuestions, setReviewQuestions] = useState([]);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [comments, setComments] = useState({});
 
   useEffect(() => {
     loadReviewQuestions();
+    // Load saved comments from localStorage
+    const savedComments = localStorage.getItem('quizComments');
+    if (savedComments) {
+      setComments(JSON.parse(savedComments));
+    }
   }, []);
 
   const loadReviewQuestions = async () => {
@@ -40,10 +46,27 @@ function ReviewList({ onBack }) {
         <div className="question-card card">
           <Question
             question={selectedQuestion}
-            selectedAnswer={null}
+            selectedAnswer={selectedQuestion.userAnswer}
             showExplanation={true}
             onAnswerSelect={() => {}}
+            comment={selectedQuestion.userComment || comments[selectedQuestion.id] || ''}
+            onCommentChange={(newComment) => {
+              const updatedComments = {
+                ...comments,
+                [selectedQuestion.id]: newComment
+              };
+              setComments(updatedComments);
+              localStorage.setItem('quizComments', JSON.stringify(updatedComments));
+            }}
           />
+          {selectedQuestion.userAnswer && (
+            <div className="user-answer-info">
+              <p><strong>Your answer:</strong> {selectedQuestion.userAnswer.toUpperCase()}</p>
+              {selectedQuestion.answeredAt && (
+                <p><small>Answered on: {new Date(selectedQuestion.answeredAt).toLocaleString()}</small></p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -73,6 +96,11 @@ function ReviewList({ onBack }) {
                 <small>
                   {question.topic} - {question.subtopic} - {question.difficulty}
                 </small>
+                {(question.userComment || comments[question.id]) && (
+                  <div className="comment-preview">
+                    <em>Comment: {(question.userComment || comments[question.id]).substring(0, 50)}...</em>
+                  </div>
+                )}
               </div>
             ))}
           </div>
