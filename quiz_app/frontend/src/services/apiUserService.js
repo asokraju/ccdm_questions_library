@@ -3,7 +3,24 @@
 
 import userService from './userService';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+// Auto-detect if we're on mobile and use network IP
+const getApiUrl = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  
+  // Check if we're accessing via IP (mobile) vs localhost (desktop)
+  const hostname = window.location.hostname;
+  if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+    // We're on mobile, use the same hostname/IP for API
+    return `http://${hostname}:3001/api`;
+  }
+  
+  return 'http://localhost:3001/api';
+};
+
+const API_BASE_URL = getApiUrl();
+console.log('API Base URL:', API_BASE_URL);
 
 class ApiUserService {
   constructor() {
@@ -23,6 +40,7 @@ class ApiUserService {
 
   async fetchWithFallback(url, options = {}) {
     try {
+      console.log('Making API request to:', url);
       const response = await fetch(url, {
         ...options,
         headers: {
@@ -31,11 +49,15 @@ class ApiUserService {
         }
       });
 
+      console.log('API Response status:', response.status);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      return await response.json();
+      const data = await response.json();
+      console.log('API Response data:', data);
+      return data;
     } catch (error) {
       console.warn('API request failed, falling back to localStorage:', error);
       this.isOnline = false;
