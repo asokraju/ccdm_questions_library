@@ -9,6 +9,7 @@ const Statistics = React.lazy(() => import('../features/statistics').then(module
 const ReviewList = React.lazy(() => import('../features/review').then(module => ({ default: module.ReviewList })));
 const DataExportImport = React.lazy(() => import('../features/dataManagement').then(module => ({ default: module.DataExportImport })));
 const CommentManager = React.lazy(() => import('../features/comments').then(module => ({ default: module.CommentManager })));
+const UserManagement = React.lazy(() => import('../features/users').then(module => ({ default: module.UserManagement })));
 
 function ViewRouter({ 
   currentView, 
@@ -106,6 +107,15 @@ function ViewRouter({
       return (
         <Suspense fallback={<LoadingSpinner />}>
           <CommentManager
+            onBack={() => onNavigate('menu')}
+          />
+        </Suspense>
+      );
+
+    case 'users':
+      return (
+        <Suspense fallback={<LoadingSpinner />}>
+          <UserManagement
             onBack={() => onNavigate('menu')}
           />
         </Suspense>

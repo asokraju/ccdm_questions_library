@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/apiService';
+import userService from '../../services/userService';
 import './comments.css';
 
 function CommentManager({ onBack }) {
@@ -17,10 +18,11 @@ function CommentManager({ onBack }) {
   const loadData = async () => {
     try {
       setIsLoading(true);
-      // Load comments from localStorage
-      const savedComments = localStorage.getItem('quizComments');
-      if (savedComments) {
-        setComments(JSON.parse(savedComments));
+      // Load comments for current user
+      const currentUser = userService.getCurrentUser();
+      if (currentUser) {
+        const userComments = userService.getUserComments(currentUser);
+        setComments(userComments);
       }
       
       // Load all questions
@@ -44,6 +46,9 @@ function CommentManager({ onBack }) {
   });
 
   const handleCommentUpdate = (questionId, newComment) => {
+    const currentUser = userService.getCurrentUser();
+    if (!currentUser) return;
+    
     const updatedComments = {
       ...comments,
       [questionId]: newComment
@@ -52,7 +57,7 @@ function CommentManager({ onBack }) {
       delete updatedComments[questionId];
     }
     setComments(updatedComments);
-    localStorage.setItem('quizComments', JSON.stringify(updatedComments));
+    userService.setUserComments(currentUser, updatedComments);
   };
 
   const handleSelectAll = () => {
@@ -74,13 +79,16 @@ function CommentManager({ onBack }) {
   };
 
   const handleBulkDelete = () => {
+    const currentUser = userService.getCurrentUser();
+    if (!currentUser) return;
+    
     if (window.confirm(`Delete comments for ${selectedComments.size} questions?`)) {
       const updatedComments = { ...comments };
       selectedComments.forEach(id => {
         delete updatedComments[id];
       });
       setComments(updatedComments);
-      localStorage.setItem('quizComments', JSON.stringify(updatedComments));
+      userService.setUserComments(currentUser, updatedComments);
       setSelectedComments(new Set());
     }
   };

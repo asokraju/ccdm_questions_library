@@ -1,0 +1,210 @@
+/* User Management Styles */
+
+.user-selector-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.current-user-banner {
+  background-color: var(--color-primary);
+  color: var(--text-white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.current-user-banner strong {
+  font-weight: 600;
+}
+
+.switch-user-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-white);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.switch-user-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.user-item:hover {
+  background-color: var(--bg-secondary);
+  transform: translateX(4px);
+}
+
+.user-item.selected {
+  border: 2px solid var(--color-primary);
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.active-badge {
+  display: inline-block;
+  background-color: var(--color-success);
+  color: var(--text-white);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-xs);
+  margin-left: var(--spacing-sm);
+  font-weight: normal;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-info h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-lg);
+}
+
+.user-info small {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.delete-user-btn {
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition-base);
+  padding: var(--spacing-sm);
+}
+
+.delete-user-btn:hover {
+  opacity: 1;
+}
+
+.create-user-btn {
+  width: 100%;
+  margin-top: var(--spacing-lg);
+}
+
+.create-user-form {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.username-input {
+  padding: var(--spacing-md);
+  border: 2px solid var(--bg-border);
+  border-radius: var(--border-radius-base);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-base);
+}
+
+.username-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.no-users-message {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-secondary);
+}
+
+/* User Management Page */
+.user-management-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.user-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+}
+
+.stat-card {
+  background-color: var(--bg-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  text-align: center;
+}
+
+.stat-card h3 {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: normal;
+  margin: 0 0 var(--spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card .stat-value {
+  color: var(--text-primary);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
+}
+
+.user-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xl);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-selector-container {
+    padding: var(--spacing-md);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+  }
+  
+  .user-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

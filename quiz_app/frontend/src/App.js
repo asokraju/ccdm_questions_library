@@ -4,9 +4,11 @@ import { performanceMonitor } from './utils/performance';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import ViewRouter from './components/ViewRouter';
+import { UserSelector } from './features/users';
 import './styles/main.css';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentView, setCurrentView] = useState('menu');
   const [selectedTopic, setSelectedTopic] = useState('all');
   const [topics, setTopics] = useState([]);
@@ -50,9 +52,28 @@ function App() {
     setCurrentView(view);
   };
 
+  const handleUserSelected = (username) => {
+    setCurrentUser(username);
+    if (username) {
+      // Load user-specific progress
+      loadProgress();
+    }
+  };
+
+  // Show user selector if no user is selected
+  if (!currentUser) {
+    return (
+      <div className="container">
+        <Header />
+        <UserSelector onUserSelected={handleUserSelected} />
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Header />
+      <UserSelector onUserSelected={handleUserSelected} />
 
       {currentView === 'menu' ? (
         <MainMenu
