@@ -70,6 +70,7 @@ function UserSelector({ onUserSelected }) {
         <button 
           className="switch-user-btn"
           onClick={() => {
+            userService.setCurrentUser(null);
             setCurrentUser(null);
             onUserSelected(null);
           }}

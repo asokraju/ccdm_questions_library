@@ -75,6 +75,17 @@ const MainMenu = React.memo(function MainMenu({
           >
             Reset Progress
           </Button>
+          
+          <Button 
+            variant="secondary"
+            onClick={() => {
+              if (window.confirm('Are you sure you want to logout?')) {
+                window.location.reload();
+              }
+            }}
+          >
+            🚪 Logout
+          </Button>
         </div>
       </Card>
     </div>
