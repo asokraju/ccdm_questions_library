@@ -116,7 +116,7 @@
   gap: var(--spacing-md);
 }
 
-.username-input {
+.username-input, .ios-input-display {
   padding: var(--spacing-md);
   border: 2px solid var(--bg-border);
   border-radius: var(--border-radius-base);
@@ -125,6 +125,23 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  width: 100%;
+}
+
+.ios-input-display {
+  background-color: var(--bg-primary);
+  min-height: 44px; /* iOS recommended touch target */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ios-input-display:active {
+  background-color: var(--bg-light);
 }
 
 .username-input:focus {
