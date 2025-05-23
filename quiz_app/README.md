@@ -1,15 +1,26 @@
 # CCDM Quiz Application
 
-A comprehensive quiz application for Clinical Data Management (CCDM) training and assessment.
+A comprehensive quiz application for Clinical Data Management (CCDM) training and assessment with **cross-device synchronization** and multi-user support.
 
-## Features
+## 🚀 Key Features
 
-- Multiple-choice questions from YAML files
-- Topic-based question selection
-- Progress tracking with statistics
-- Performance visualization by topic and subtopic
-- Review system for incorrect answers
-- Responsive web interface
+### **Cross-Device Synchronization (NEW!)**
+- **Multi-Device Access**: Create users on mobile, access from desktop (and vice versa)
+- **Real-Time Sync**: Progress and comments automatically sync across all devices
+- **Offline Support**: Works offline with automatic sync when connection restored
+- **SQLite Backend**: Persistent database storage with proper schema
+
+### **User Management**
+- **Individual Profiles**: Multiple users with isolated data
+- **Progress Tracking**: Detailed statistics per user and topic
+- **Comment System**: Personal notes with templates and export/import
+- **iOS/Android Compatible**: Seamless mobile experience
+
+### **Enhanced Quiz Features**
+- **Configurable Quizzes**: Customizable question count and difficulty levels
+- **Performance Analytics**: Detailed statistics and progress visualization
+- **Review System**: Review incorrect answers with personal comments
+- **Study Notes**: Comprehensive markdown-based study materials
 
 ## Setup Instructions
 
@@ -201,12 +212,29 @@ quiz_app/
 
 ## API Endpoints
 
+### Quiz Endpoints
 - `GET /api/topics` - Get all available topics
 - `GET /api/questions` - Get questions (with optional topic/difficulty filters)
 - `POST /api/answer` - Submit an answer
 - `GET /api/progress` - Get user progress and statistics
 - `GET /api/reviews` - Get questions answered incorrectly
 - `POST /api/reset` - Reset all progress
+
+### User Management Endpoints (NEW!)
+- `POST /api/users` - Create new user
+- `GET /api/users` - Get all users
+- `GET /api/users/:username` - Get specific user
+- `DELETE /api/users/:username` - Delete user
+- `GET /api/users/:username/comments` - Get user comments
+- `POST /api/users/:username/comments` - Save/update comment
+- `GET /api/users/:username/progress` - Get user progress
+- `POST /api/users/:username/progress` - Update user progress
+- `GET /api/users/:username/export` - Export all user data
+- `POST /api/users/:username/import` - Import user data
+
+### Study Notes Endpoints
+- `GET /api/notes/topics` - Get available study topics
+- `GET /api/notes/:topic` - Get study notes for specific topic
 
 ## Features Overview
 
@@ -227,10 +255,17 @@ quiz_app/
 - Full explanations for learning
 - Organized by topic and difficulty
 
-### 4. Responsive Design
-- Works on desktop and mobile devices
-- Clean, modern interface
-- Accessibility considerations
+### 4. Cross-Device Synchronization (NEW!)
+- **User Profiles**: Create users on any device, access from anywhere
+- **Real-Time Sync**: Comments and progress sync automatically
+- **Offline Mode**: Works offline with sync queue for later
+- **Sync Status**: Visual indicator shows connection and sync status
+
+### 5. Responsive Design
+- Works seamlessly on desktop and mobile devices
+- iOS/Android optimized with custom input components
+- Clean, modern interface with accessibility considerations
+- Network IP auto-detection for mobile access
 
 ## Adding New Questions
 
