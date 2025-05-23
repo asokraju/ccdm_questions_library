@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../../services/userService';
+import InputErrorBoundary from '../../components/InputErrorBoundary';
+import SafeInput from '../../components/SafeInput';
 import './users.css';
 
 function UserSelector({ onUserSelected }) {
@@ -126,19 +128,15 @@ function UserSelector({ onUserSelected }) {
           </button>
         ) : (
           <form onSubmit={handleCreateUser} className="create-user-form">
-            <input
-              type="text"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-              onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
-              placeholder="Enter username"
-              maxLength="20"
-              className="username-input"
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-            />
+            <InputErrorBoundary>
+              <SafeInput
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+                placeholder="Enter username"
+                maxLength={20}
+                className="username-input"
+              />
+            </InputErrorBoundary>
             <div className="form-actions">
               <button type="submit" className="primary" disabled={!newUsername.trim()}>
                 Create
