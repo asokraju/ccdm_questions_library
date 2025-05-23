@@ -3,12 +3,16 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const path = require('path');
 const yaml = require('js-yaml');
+const database = require('./db/database');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+
+// Initialize database on startup
+database.initialize().catch(console.error);
 
 // In-memory storage for user progress (in production, use a database)
 let userProgress = {
@@ -257,6 +261,160 @@ app.get('/api/notes/:topic', async (req, res) => {
   } catch (error) {
     console.error(`Error loading notes for topic ${req.params.topic}:`, error);
     res.status(404).json({ error: 'Notes not found for this topic' });
+  }
+});
+
+// ========== USER API ENDPOINTS ==========
+
+// Create new user
+app.post('/api/users', async (req, res) => {
+  try {
+    const { username } = req.body;
+    if (!username || username.trim().length === 0) {
+      return res.status(400).json({ error: 'Username cannot be empty' });
+    }
+    
+    const user = await database.createUser(username.trim());
+    res.json(user);
+  } catch (error) {
+    if (error.message === 'User already exists') {
+      return res.status(409).json({ error: error.message });
+    }
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Failed to create user' });
+  }
+});
+
+// Get all users
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await database.getAllUsers();
+    res.json(users);
+  } catch (error) {
+    console.error('Error getting users:', error);
+    res.status(500).json({ error: 'Failed to get users' });
+  }
+});
+
+// Get user by username
+app.get('/api/users/:username', async (req, res) => {
+  try {
+    const user = await database.getUser(req.params.username);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Error getting user:', error);
+    res.status(500).json({ error: 'Failed to get user' });
+  }
+});
+
+// Delete user
+app.delete('/api/users/:username', async (req, res) => {
+  try {
+    await database.deleteUser(req.params.username);
+    res.json({ success: true });
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Failed to delete user' });
+  }
+});
+
+// Get user comments
+app.get('/api/users/:username/comments', async (req, res) => {
+  try {
+    const comments = await database.getComments(req.params.username);
+    res.json(comments);
+  } catch (error) {
+    console.error('Error getting comments:', error);
+    res.status(500).json({ error: 'Failed to get comments' });
+  }
+});
+
+// Save/update comment
+app.post('/api/users/:username/comments', async (req, res) => {
+  try {
+    const { questionId, comment } = req.body;
+    if (!questionId) {
+      return res.status(400).json({ error: 'Question ID is required' });
+    }
+    
+    await database.saveComment(req.params.username, questionId, comment || '');
+    res.json({ success: true });
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    console.error('Error saving comment:', error);
+    res.status(500).json({ error: 'Failed to save comment' });
+  }
+});
+
+// Delete comment
+app.delete('/api/users/:username/comments/:questionId', async (req, res) => {
+  try {
+    await database.deleteComment(req.params.username, req.params.questionId);
+    res.json({ success: true });
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    console.error('Error deleting comment:', error);
+    res.status(500).json({ error: 'Failed to delete comment' });
+  }
+});
+
+// Get user progress
+app.get('/api/users/:username/progress', async (req, res) => {
+  try {
+    const progress = await database.getProgress(req.params.username);
+    res.json(progress);
+  } catch (error) {
+    console.error('Error getting progress:', error);
+    res.status(500).json({ error: 'Failed to get progress' });
+  }
+});
+
+// Update user progress
+app.post('/api/users/:username/progress', async (req, res) => {
+  try {
+    await database.saveProgress(req.params.username, req.body);
+    res.json({ success: true });
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    console.error('Error saving progress:', error);
+    res.status(500).json({ error: 'Failed to save progress' });
+  }
+});
+
+// Export user data
+app.get('/api/users/:username/export', async (req, res) => {
+  try {
+    const data = await database.exportUserData(req.params.username);
+    res.json(data);
+  } catch (error) {
+    if (error.message === 'User not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    console.error('Error exporting user data:', error);
+    res.status(500).json({ error: 'Failed to export user data' });
+  }
+});
+
+// Import user data
+app.post('/api/users/:username/import', async (req, res) => {
+  try {
+    await database.importUserData(req.params.username, req.body);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error importing user data:', error);
+    res.status(500).json({ error: 'Failed to import user data' });
   }
 });
 

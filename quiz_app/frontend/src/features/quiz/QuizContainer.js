@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { apiService } from '../../services/apiService';
-import userService from '../../services/userService';
+import apiUserService from '../../services/apiUserService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
 
@@ -42,11 +42,14 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   useEffect(() => {
     loadQuestions();
     // Load saved comments for current user
-    const currentUser = userService.getCurrentUser();
-    if (currentUser) {
-      const userComments = userService.getUserComments(currentUser);
-      setComments(userComments);
-    }
+    const loadUserComments = async () => {
+      const currentUser = apiUserService.getCurrentUser();
+      if (currentUser) {
+        const userComments = await apiUserService.getUserComments(currentUser);
+        setComments(userComments);
+      }
+    };
+    loadUserComments();
   }, [loadQuestions]);
 
   const handleAnswerSelect = (answer) => {
@@ -54,9 +57,9 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     setSelectedAnswer(answer);
   };
 
-  const handleCommentChange = (comment) => {
+  const handleCommentChange = async (comment) => {
     const currentQuestion = questions[currentQuestionIndex];
-    const currentUser = userService.getCurrentUser();
+    const currentUser = apiUserService.getCurrentUser();
     
     if (!currentUser) return;
     
@@ -66,8 +69,8 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     };
     setComments(newComments);
     
-    // Save to user-specific storage
-    userService.setUserComments(currentUser, newComments);
+    // Save to API and localStorage
+    await apiUserService.saveComment(currentUser, currentQuestion.id, comment);
   };
 
   const handleSubmit = async () => {

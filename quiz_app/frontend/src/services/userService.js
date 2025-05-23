@@ -5,17 +5,77 @@ const CURRENT_USER_KEY = 'currentUser';
 
 class UserService {
   constructor() {
+    this.storageAvailable = this.checkStorageAvailable();
+    this.fallbackStorage = {};
     this.initializeStorage();
   }
 
+  checkStorageAvailable() {
+    try {
+      const test = '__localStorage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      console.warn('localStorage not available, using in-memory fallback:', e);
+      return false;
+    }
+  }
+
+  getStorage(key, defaultValue = null) {
+    if (!this.storageAvailable) {
+      const value = this.fallbackStorage[key];
+      return value !== undefined ? value : defaultValue;
+    }
+    try {
+      const value = localStorage.getItem(key);
+      return value !== null ? value : defaultValue;
+    } catch (e) {
+      console.error('Error reading from localStorage:', e);
+      const value = this.fallbackStorage[key];
+      return value !== undefined ? value : defaultValue;
+    }
+  }
+
+  setStorage(key, value) {
+    if (!this.storageAvailable) {
+      this.fallbackStorage[key] = value;
+      return true;
+    }
+    try {
+      localStorage.setItem(key, value);
+      return true;
+    } catch (e) {
+      console.error('Error writing to localStorage:', e);
+      this.fallbackStorage[key] = value;
+      return true;
+    }
+  }
+
+  removeStorage(key) {
+    if (!this.storageAvailable) {
+      delete this.fallbackStorage[key];
+      return true;
+    }
+    try {
+      localStorage.removeItem(key);
+      return true;
+    } catch (e) {
+      console.error('Error removing from localStorage:', e);
+      delete this.fallbackStorage[key];
+      return true;
+    }
+  }
+
   initializeStorage() {
-    if (!localStorage.getItem(USER_STORAGE_KEY)) {
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify({}));
+    if (!this.getStorage(USER_STORAGE_KEY)) {
+      this.setStorage(USER_STORAGE_KEY, JSON.stringify({}));
     }
   }
 
   getAllUsers() {
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     return Object.keys(users).map(username => ({
       username,
       ...users[username]
@@ -23,14 +83,14 @@ class UserService {
   }
 
   getCurrentUser() {
-    return localStorage.getItem(CURRENT_USER_KEY);
+    return this.getStorage(CURRENT_USER_KEY, null);
   }
 
   setCurrentUser(username) {
     if (username) {
-      localStorage.setItem(CURRENT_USER_KEY, username);
+      this.setStorage(CURRENT_USER_KEY, username);
     } else {
-      localStorage.removeItem(CURRENT_USER_KEY);
+      this.removeStorage(CURRENT_USER_KEY);
     }
   }
 
@@ -39,7 +99,8 @@ class UserService {
       throw new Error('Username cannot be empty');
     }
 
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     
     if (users[username]) {
       throw new Error('User already exists');
@@ -50,7 +111,7 @@ class UserService {
       lastActive: new Date().toISOString()
     };
 
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
+    this.setStorage(USER_STORAGE_KEY, JSON.stringify(users));
     this.setCurrentUser(username);
 
     // Initialize user-specific storage
@@ -60,9 +121,10 @@ class UserService {
   }
 
   deleteUser(username) {
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     delete users[username];
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
+    this.setStorage(USER_STORAGE_KEY, JSON.stringify(users));
 
     // Clear user-specific data
     this.clearUserData(username);
@@ -74,7 +136,8 @@ class UserService {
   }
 
   switchUser(username) {
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     
     if (!users[username]) {
       throw new Error('User does not exist');
@@ -82,34 +145,36 @@ class UserService {
 
     // Update last active time
     users[username].lastActive = new Date().toISOString();
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
+    this.setStorage(USER_STORAGE_KEY, JSON.stringify(users));
 
     this.setCurrentUser(username);
   }
 
   getUserComments(username) {
-    return JSON.parse(localStorage.getItem(`quizComments_${username}`) || '{}');
+    const data = this.getStorage(`quizComments_${username}`, '{}');
+    return JSON.parse(data);
   }
 
   setUserComments(username, comments) {
-    localStorage.setItem(`quizComments_${username}`, JSON.stringify(comments));
+    this.setStorage(`quizComments_${username}`, JSON.stringify(comments));
   }
 
   getUserProgress(username) {
-    return JSON.parse(localStorage.getItem(`quizProgress_${username}`) || '{}');
+    const data = this.getStorage(`quizProgress_${username}`, '{}');
+    return JSON.parse(data);
   }
 
   setUserProgress(username, progress) {
-    localStorage.setItem(`quizProgress_${username}`, JSON.stringify(progress));
+    this.setStorage(`quizProgress_${username}`, JSON.stringify(progress));
   }
 
   initializeUserData(username) {
     // Initialize empty comments and progress for new user
-    if (!localStorage.getItem(`quizComments_${username}`)) {
-      localStorage.setItem(`quizComments_${username}`, '{}');
+    if (!this.getStorage(`quizComments_${username}`)) {
+      this.setStorage(`quizComments_${username}`, '{}');
     }
-    if (!localStorage.getItem(`quizProgress_${username}`)) {
-      localStorage.setItem(`quizProgress_${username}`, JSON.stringify({
+    if (!this.getStorage(`quizProgress_${username}`)) {
+      this.setStorage(`quizProgress_${username}`, JSON.stringify({
         correct: 0,
         incorrect: 0,
         answerHistory: [],
@@ -120,12 +185,13 @@ class UserService {
   }
 
   clearUserData(username) {
-    localStorage.removeItem(`quizComments_${username}`);
-    localStorage.removeItem(`quizProgress_${username}`);
+    this.removeStorage(`quizComments_${username}`);
+    this.removeStorage(`quizProgress_${username}`);
   }
 
   exportUserData(username) {
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     const userData = users[username];
     
     if (!userData) {
@@ -142,14 +208,15 @@ class UserService {
 
   importUserData(username, data) {
     // Create user if doesn't exist
-    const users = JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || '{}');
+    const usersData = this.getStorage(USER_STORAGE_KEY, '{}');
+    const users = JSON.parse(usersData);
     
     if (!users[username]) {
       users[username] = {
         createdAt: data.createdAt || new Date().toISOString(),
         lastActive: new Date().toISOString()
       };
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
+      this.setStorage(USER_STORAGE_KEY, JSON.stringify(users));
     }
 
     // Import comments and progress

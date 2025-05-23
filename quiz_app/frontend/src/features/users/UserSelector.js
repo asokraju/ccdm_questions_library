@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import userService from '../../services/userService';
+import apiUserService from '../../services/apiUserService';
 import IOSCompatibleInput from '../../components/IOSCompatibleInput';
 import './users.css';
 
@@ -9,10 +9,12 @@ function UserSelector({ onUserSelected }) {
   const [newUsername, setNewUsername] = useState('');
   const [error, setError] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [storageInfo, setStorageInfo] = useState('');
 
   useEffect(() => {
     loadUsers();
-    const current = userService.getCurrentUser();
+    const current = apiUserService.getCurrentUser();
+    console.log('Current user from storage:', current);
     setCurrentUser(current);
     
     // If there's a current user, auto-select them
@@ -21,20 +23,26 @@ function UserSelector({ onUserSelected }) {
     }
   }, [onUserSelected]);
 
-  const loadUsers = () => {
-    const allUsers = userService.getAllUsers();
-    setUsers(allUsers);
+  const loadUsers = async () => {
+    try {
+      const allUsers = await apiUserService.getAllUsers();
+      console.log('All users loaded:', allUsers);
+      setUsers(allUsers);
+    } catch (error) {
+      console.error('Error loading users:', error);
+      setUsers([]);
+    }
   };
 
-  const handleCreateUser = (e) => {
+  const handleCreateUser = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      const username = userService.createUser(newUsername.trim());
+      const username = await apiUserService.createUser(newUsername.trim());
       setNewUsername('');
       setShowCreateForm(false);
-      loadUsers();
+      await loadUsers();
       setCurrentUser(username);
       onUserSelected(username);
     } catch (err) {
@@ -46,16 +54,16 @@ function UserSelector({ onUserSelected }) {
     setShowCreateForm(true);
   };
 
-  const handleSelectUser = (username) => {
-    userService.switchUser(username);
+  const handleSelectUser = async (username) => {
+    await apiUserService.switchUser(username);
     setCurrentUser(username);
     onUserSelected(username);
   };
 
-  const handleDeleteUser = (username) => {
+  const handleDeleteUser = async (username) => {
     if (window.confirm(`Delete user "${username}" and all their data?`)) {
-      userService.deleteUser(username);
-      loadUsers();
+      await apiUserService.deleteUser(username);
+      await loadUsers();
       
       if (currentUser === username) {
         setCurrentUser(null);
@@ -75,7 +83,7 @@ function UserSelector({ onUserSelected }) {
         <button 
           className="switch-user-btn"
           onClick={() => {
-            userService.setCurrentUser(null);
+            apiUserService.setCurrentUser(null);
             setCurrentUser(null);
             onUserSelected(null);
           }}
@@ -91,6 +99,12 @@ function UserSelector({ onUserSelected }) {
       <div className="card">
         <h2>Select User Profile</h2>
         <p>Choose an existing profile or create a new one to track your progress</p>
+        
+        {storageInfo && (
+          <div className="storage-warning">
+            {storageInfo}
+          </div>
+        )}
 
         {users.length > 0 && (
           <div className="user-list">

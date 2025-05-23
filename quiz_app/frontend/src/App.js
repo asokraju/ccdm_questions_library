@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from './services/apiService';
+import apiUserService from './services/apiUserService';
 import { performanceMonitor } from './utils/performance';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import ViewRouter from './components/ViewRouter';
+import SyncStatus from './components/SyncStatus';
 import { UserSelector } from './features/users';
 import './styles/main.css';
 
@@ -29,10 +31,20 @@ function App() {
     loadProgress();
   }, []);
 
-  const loadProgress = () => {
-    apiService.getProgress()
-      .then(response => setProgress(response))
-      .catch(error => console.error('Error loading progress:', error));
+  const loadProgress = async () => {
+    if (currentUser) {
+      try {
+        const progress = await apiUserService.getUserProgress(currentUser);
+        setProgress(progress);
+      } catch (error) {
+        console.error('Error loading progress:', error);
+      }
+    } else {
+      // Load default progress from backend for non-authenticated users
+      apiService.getProgress()
+        .then(response => setProgress(response))
+        .catch(error => console.error('Error loading progress:', error));
+    }
   };
 
   const handleReset = () => {
@@ -101,6 +113,9 @@ function App() {
           onUpdateProgress={loadProgress}
         />
       )}
+      
+      {/* Sync status indicator */}
+      {currentUser && <SyncStatus />}
     </div>
   );
 }
