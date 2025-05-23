@@ -12,87 +12,128 @@ const MainMenu = React.memo(function MainMenu({
   currentUser
 }) {
   return (
-    <div>
+    <div className="main-menu-container">
+      <div className="user-header">
+        <div className="user-info">
+          <span className="welcome-text">Welcome back,</span>
+          <span className="username">{currentUser}</span>
+        </div>
+        <button className="logout-btn" onClick={() => {
+          if (window.confirm('Are you sure you want to logout?')) {
+            onLogout();
+          }
+        }}>
+          Logout
+        </button>
+      </div>
+
       <TopicSelector
         topics={topics}
         selectedTopic={selectedTopic}
         onTopicChange={onTopicChange}
       />
       
-      <Card className="menu">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-          <h2>Choose an Option</h2>
-          {currentUser && <span style={{ color: '#6c757d' }}>Logged in as: <strong>{currentUser}</strong></span>}
-        </div>
-        <div className="menu-buttons">
+      <div className="menu-grid">
+        {/* Primary Actions */}
+        <Card className="menu-card primary-card">
+          <div className="card-icon">📚</div>
+          <h3>Practice Quiz</h3>
+          <p>Test your knowledge with customizable quizzes</p>
           <Button 
             variant="primary"
             onClick={() => onNavigate('config')}
+            className="card-button"
           >
             Start Quiz
           </Button>
-          
+        </Card>
+
+        <Card className="menu-card study-card">
+          <div className="card-icon">📖</div>
+          <h3>Study Material</h3>
+          <p>Review comprehensive study notes and resources</p>
           <Button 
             variant="study"
             onClick={() => onNavigate('notes')}
+            className="card-button"
           >
-            📖 Study Material
+            Open Notes
           </Button>
-          
+        </Card>
+
+        {/* Progress & Review */}
+        <Card className="menu-card stats-card">
+          <div className="card-icon">📊</div>
+          <h3>Your Progress</h3>
+          <p>Track your performance and learning statistics</p>
           <Button 
             variant="secondary"
             onClick={() => onNavigate('statistics')}
+            className="card-button"
           >
-            View Statistics
+            View Stats
           </Button>
-          
+        </Card>
+
+        <Card className="menu-card review-card">
+          <div className="card-icon">🔍</div>
+          <h3>Review Mistakes</h3>
+          <p>Learn from incorrect answers and improve</p>
           <Button 
             variant="secondary"
             onClick={() => onNavigate('review')}
+            className="card-button"
           >
-            Review Incorrect Answers
+            Review Answers
           </Button>
-          
+        </Card>
+
+        {/* Data Management */}
+        <Card className="menu-card comment-card">
+          <div className="card-icon">💬</div>
+          <h3>Your Notes</h3>
+          <p>Manage and search through all your comments</p>
           <Button 
             variant="secondary"
             onClick={() => onNavigate('comments')}
+            className="card-button"
           >
-            💬 Manage Comments
+            Manage Notes
           </Button>
-          
+        </Card>
+
+        <Card className="menu-card data-card">
+          <div className="card-icon">💾</div>
+          <h3>Data Management</h3>
+          <p>Export or import your quiz data</p>
           <Button 
             variant="secondary"
             onClick={() => onNavigate('data')}
+            className="card-button"
           >
-            📥 Export/Import Data
+            Manage Data
           </Button>
-          
-          <Button 
-            variant="secondary"
-            onClick={() => onNavigate('users')}
-          >
-            👥 Manage Users
-          </Button>
-          
-          <Button 
-            variant="danger"
-            onClick={onReset}
-          >
-            Reset Progress
-          </Button>
-          
-          <Button 
-            variant="secondary"
-            onClick={() => {
-              if (window.confirm('Are you sure you want to logout?')) {
-                onLogout();
-              }
-            }}
-          >
-            🚪 Logout
-          </Button>
-        </div>
-      </Card>
+        </Card>
+      </div>
+
+      {/* Footer Actions */}
+      <div className="menu-footer">
+        <Button 
+          variant="secondary"
+          onClick={() => onNavigate('users')}
+          size="small"
+        >
+          👥 Manage Users
+        </Button>
+        
+        <Button 
+          variant="danger"
+          onClick={onReset}
+          size="small"
+        >
+          Reset Progress
+        </Button>
+      </div>
     </div>
   );
 });
