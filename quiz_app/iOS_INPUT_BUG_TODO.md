@@ -1,4 +1,16 @@
-# iOS Input Runtime Error - Investigation and Solutions
+# iOS Input Runtime Error - RESOLVED ✅
+
+## Solution: Use iOS-Compatible UI Elements
+
+The issue was resolved by completely avoiding native HTML input elements on iOS devices. Instead, we use a custom component that:
+- On iOS: Shows a native prompt() dialog
+- On non-iOS: Uses a click-to-edit div approach
+
+This bypasses all iOS Safari input focus issues.
+
+---
+
+# Original Investigation and Solutions
 
 ## Problem Description
 When clicking on the input field in the UserSelector component on iOS Safari, we get:
