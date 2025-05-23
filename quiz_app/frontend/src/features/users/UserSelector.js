@@ -43,13 +43,6 @@ function UserSelector({ onUserSelected }) {
 
   const handleShowCreateForm = () => {
     setShowCreateForm(true);
-    // Use setTimeout to avoid iOS focus issues
-    setTimeout(() => {
-      const input = document.querySelector('.username-input');
-      if (input && !(/iPhone|iPad|iPod/i.test(navigator.userAgent))) {
-        input.focus();
-      }
-    }, 100);
   };
 
   const handleSelectUser = (username) => {
@@ -137,9 +130,14 @@ function UserSelector({ onUserSelected }) {
               type="text"
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
+              onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
               placeholder="Enter username"
               maxLength="20"
               className="username-input"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
             />
             <div className="form-actions">
               <button type="submit" className="primary" disabled={!newUsername.trim()}>
