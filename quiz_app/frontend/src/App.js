@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from './services/apiService';
-import QuizContainer from './components/QuizContainer';
-import Statistics from './components/Statistics';
-import ReviewList from './components/ReviewList';
-import TopicSelector from './components/TopicSelector';
-import QuizConfig from './components/QuizConfig';
-import StudyNotes from './components/StudyNotes';
+import Header from './components/Header';
+import MainMenu from './components/MainMenu';
+import ViewRouter from './components/ViewRouter';
 import './App.css';
 
 function App() {
@@ -44,115 +41,25 @@ function App() {
 
   return (
     <div className="container">
-      <div className="header">
-        <h1>CCDM Quiz Application</h1>
-        <p>Test your Clinical Data Management knowledge</p>
-      </div>
+      <Header />
 
-      {currentView === 'menu' && (
-        <div>
-          <TopicSelector
-            topics={topics}
-            selectedTopic={selectedTopic}
-            onTopicChange={setSelectedTopic}
-          />
-          
-          <div className="menu card">
-            <h2>Choose an Option</h2>
-            <div className="menu-buttons">
-              <button 
-                className="primary"
-                onClick={() => setCurrentView('config')}
-              >
-                Start Quiz
-              </button>
-              <button 
-                className="secondary study-button"
-                onClick={() => setCurrentView('notes')}
-              >
-                📖 Study Material
-              </button>
-              <button 
-                className="secondary"
-                onClick={() => setCurrentView('statistics')}
-              >
-                View Statistics
-              </button>
-              <button 
-                className="secondary"
-                onClick={() => setCurrentView('review')}
-              >
-                Review Incorrect Answers
-              </button>
-              <button 
-                className="danger"
-                onClick={handleReset}
-              >
-                Reset Progress
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {currentView === 'config' && (
-        <QuizConfig
+      {currentView === 'menu' ? (
+        <MainMenu
+          topics={topics}
           selectedTopic={selectedTopic}
-          onStartQuiz={(config) => {
-            setQuizConfig(config);
-            setCurrentView('quiz');
-          }}
-          onBack={() => {
-            setCurrentView('menu');
-            setQuizConfig(null);
-          }}
+          onTopicChange={setSelectedTopic}
+          onNavigate={setCurrentView}
+          onReset={handleReset}
         />
-      )}
-
-      {currentView === 'quiz' && (
-        <>
-          {quizConfig ? (
-            <QuizContainer
-              quizConfig={quizConfig}
-              onBack={() => {
-                setCurrentView('menu');
-                setQuizConfig(null);
-              }}
-              onUpdateProgress={loadProgress}
-            />
-          ) : (
-            <div className="card">
-              <p>Quiz configuration error. Please try again.</p>
-              <button 
-                className="secondary" 
-                onClick={() => {
-                  setCurrentView('menu');
-                  setQuizConfig(null);
-                }}
-              >
-                Back to Menu
-              </button>
-            </div>
-          )}
-        </>
-      )}
-
-      {currentView === 'statistics' && progress && (
-        <Statistics
+      ) : (
+        <ViewRouter
+          currentView={currentView}
+          selectedTopic={selectedTopic}
+          quizConfig={quizConfig}
           progress={progress}
-          onBack={() => setCurrentView('menu')}
-        />
-      )}
-
-      {currentView === 'review' && (
-        <ReviewList
-          onBack={() => setCurrentView('menu')}
-        />
-      )}
-
-      {currentView === 'notes' && (
-        <StudyNotes
-          onBack={() => setCurrentView('menu')}
+          onNavigate={setCurrentView}
+          onSetQuizConfig={setQuizConfig}
+          onUpdateProgress={loadProgress}
         />
       )}
     </div>

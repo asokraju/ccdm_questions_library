@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { apiService } from '../services/apiService';
+import { apiService } from '../../services/apiService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
 
