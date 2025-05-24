@@ -56,7 +56,13 @@ class ApiUserService {
       return data;
     } catch (error) {
       console.warn('API request failed:', error.message, 'URL:', url);
-      this.isOnline = false;
+      
+      // Only mark as offline if it's a network error, not a 404
+      // 404 means the resource doesn't exist, not that we're offline
+      if (error.message && !error.message.includes('404')) {
+        this.isOnline = false;
+      }
+      
       throw error;
     }
   }
@@ -309,9 +315,18 @@ class ApiUserService {
       try {
         switch (item.type) {
           case 'DELETE_USER':
-            await this.fetchWithFallback(`${API_BASE_URL}/users/${item.username}`, {
-              method: 'DELETE'
-            });
+            try {
+              await this.fetchWithFallback(`${API_BASE_URL}/users/${item.username}`, {
+                method: 'DELETE'
+              });
+            } catch (deleteError) {
+              // If user doesn't exist (404), don't keep trying
+              if (deleteError.message && deleteError.message.includes('404')) {
+                console.log(`User ${item.username} already deleted, removing from sync queue`);
+                continue; // Don't add to failed queue
+              }
+              throw deleteError; // Re-throw other errors
+            }
             break;
             
           case 'SAVE_COMMENT':
