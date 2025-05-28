@@ -78,6 +78,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
     const currentQuestion = questions[currentQuestionIndex];
     const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    const currentUser = apiUserService.getCurrentUser();
     
     // Store answer
     const newAnswers = {
@@ -91,6 +92,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
     // Submit to backend with comment
     try {
+      // First submit to global progress (for backward compatibility)
       await apiService.submitAnswer({
         questionId: currentQuestion.id,
         answer: selectedAnswer,
@@ -99,6 +101,46 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
         isCorrect,
         comment: comments[currentQuestion.id] || ''
       });
+      
+      // Then update user-specific progress
+      if (currentUser) {
+        const userProgress = await apiUserService.getUserProgress(currentUser);
+        
+        // Update progress counts
+        if (isCorrect) {
+          userProgress.correct = (userProgress.correct || 0) + 1;
+        } else {
+          userProgress.incorrect = (userProgress.incorrect || 0) + 1;
+        }
+        
+        // Update topic stats
+        if (!userProgress.topicStats) userProgress.topicStats = {};
+        if (!userProgress.topicStats[currentQuestion.topic]) {
+          userProgress.topicStats[currentQuestion.topic] = { correct: 0, incorrect: 0 };
+        }
+        userProgress.topicStats[currentQuestion.topic][isCorrect ? 'correct' : 'incorrect']++;
+        
+        // Update subtopic stats
+        if (!userProgress.subtopicStats) userProgress.subtopicStats = {};
+        if (!userProgress.subtopicStats[currentQuestion.subtopic]) {
+          userProgress.subtopicStats[currentQuestion.subtopic] = { correct: 0, incorrect: 0 };
+        }
+        userProgress.subtopicStats[currentQuestion.subtopic][isCorrect ? 'correct' : 'incorrect']++;
+        
+        // Update answer history
+        if (!userProgress.answerHistory) userProgress.answerHistory = [];
+        userProgress.answerHistory.push({
+          questionId: currentQuestion.id,
+          answer: selectedAnswer,
+          isCorrect,
+          comment: comments[currentQuestion.id] || '',
+          timestamp: new Date().toISOString()
+        });
+        
+        // Save updated progress
+        await apiUserService.setUserProgress(currentUser, userProgress);
+      }
+      
       onUpdateProgress();
     } catch (error) {
       console.error('Error submitting answer:', error);

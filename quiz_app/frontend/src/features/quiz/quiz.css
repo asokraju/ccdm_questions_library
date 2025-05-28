@@ -155,6 +155,76 @@
   margin-bottom: var(--spacing-lg);
 }
 
+/* Difficulty Selector */
+.difficulty-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.difficulty-option {
+  padding: var(--spacing-lg);
+  border: 2px solid var(--bg-light);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background: var(--bg-primary);
+  text-align: center;
+}
+
+.difficulty-option:hover {
+  border-color: var(--color-primary);
+  background-color: #f8f9ff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.difficulty-option.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--text-white);
+}
+
+.difficulty-option .difficulty-label {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.difficulty-option .difficulty-description {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+.difficulty-option.selected .difficulty-description {
+  opacity: 0.9;
+}
+
+/* Question Count Selector */
+.question-count-selector {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+/* Topic Info */
+.topic-info {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-base);
+}
+
+/* Start Quiz Button */
+.start-quiz-btn {
+  min-width: 200px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
 .config-actions {
   display: flex;
   gap: var(--spacing-md);

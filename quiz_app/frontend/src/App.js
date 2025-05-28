@@ -26,10 +26,12 @@ function App() {
     apiService.getTopics()
       .then(response => setTopics(response))
       .catch(error => console.error('Error loading topics:', error));
-    
-    // Load progress
-    loadProgress();
   }, []);
+
+  // Load progress when component mounts or currentUser changes
+  useEffect(() => {
+    loadProgress();
+  }, [currentUser]);
 
   const loadProgress = async () => {
     if (currentUser) {
@@ -49,13 +51,32 @@ function App() {
 
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all progress?')) {
-      apiService.resetProgress()
-        .then(() => {
-          loadProgress();
-          setCurrentView('menu');
-          performanceMonitor.trackNavigation('menu (after reset)');
-        })
-        .catch(error => console.error('Error resetting progress:', error));
+      if (currentUser) {
+        // Reset user-specific progress
+        const emptyProgress = {
+          correct: 0,
+          incorrect: 0,
+          answerHistory: [],
+          topicStats: {},
+          subtopicStats: {}
+        };
+        apiUserService.setUserProgress(currentUser, emptyProgress)
+          .then(() => {
+            loadProgress();
+            setCurrentView('menu');
+            performanceMonitor.trackNavigation('menu (after reset)');
+          })
+          .catch(error => console.error('Error resetting progress:', error));
+      } else {
+        // Reset global progress (for backward compatibility)
+        apiService.resetProgress()
+          .then(() => {
+            loadProgress();
+            setCurrentView('menu');
+            performanceMonitor.trackNavigation('menu (after reset)');
+          })
+          .catch(error => console.error('Error resetting progress:', error));
+      }
     }
   };
 

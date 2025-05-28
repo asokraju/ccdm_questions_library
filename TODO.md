@@ -1,18 +1,28 @@
 # TODO List
 
+## Recently Fixed Issues (Jan 2025)
+- [x] Fixed quiz difficulty selection not showing
+  - QuizConfig component was already implemented
+  - MainMenu properly navigates to 'config' view
+- [x] Fixed user progress showing zeros
+  - Updated QuizContainer to save user-specific progress
+  - Fixed progress tracking for individual users (e.g., Vasudha)
+  - Added proper user progress updates after each answer
+  - Reset functionality now works with user-specific data
+
 ## Current Sprint: Cross-Device Storage & Sync
 
 ### High Priority - Storage & Sync
 - [ ] Implement server-side storage for user data
-  - Move from localStorage to database (PostgreSQL/SQLite)
-  - Create API endpoints for user data CRUD operations
-  - Enable multi-device sync
+  - Move from localStorage to database (PostgreSQL/SQLite) ✓ DONE
+  - Create API endpoints for user data CRUD operations ✓ DONE
+  - Enable multi-device sync ✓ DONE
 - [ ] Add user authentication
   - Simple email/password or OAuth
   - Secure user data access
 - [ ] Handle offline/online data sync
-  - Queue changes when offline
-  - Sync when connection restored
+  - Queue changes when offline ✓ PARTIALLY DONE
+  - Sync when connection restored ✓ PARTIALLY DONE
 
 ### Recently Completed Features ✓
 - [x] Add comment functionality to quiz questions

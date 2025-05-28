@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './quiz.css';
 
 function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   const [questionCount, setQuestionCount] = useState(10);
