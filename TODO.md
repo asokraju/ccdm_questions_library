@@ -1,5 +1,18 @@
 # TODO List
 
+## Content Generation Resources Added (Jan 2025)
+- [x] Created comprehensive question generation template
+  - 5-part methodology for high-quality questions
+  - YAML format specifications
+  - Example questions for each difficulty level
+  - Located in: `/content_generation/QUESTION_GENERATION_PROMPT.md`
+- [x] Created quick-use prompt template
+  - Copy-paste ready format
+  - Located in: `/content_generation/QUICK_PROMPT_TEMPLATE.md`
+- [x] Created step-by-step workflow guide
+  - Complete process from chapter to quiz
+  - Located in: `/content_generation/QUESTION_GENERATION_WORKFLOW.md`
+
 ## Current Sprint: Cross-Device Storage & Sync
 
 ### High Priority - Storage & Sync
