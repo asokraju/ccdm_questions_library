@@ -1,23 +1,37 @@
-# Core dependencies for automated question generation
-pydantic-ai>=0.0.7
-docling>=1.0.0
-openai>=1.0.0
-chromadb>=0.4.0
-pydantic>=2.0.0
-typer>=0.9.0
-rich>=13.0.0
-PyYAML>=6.0
-pytest>=7.0.0
-pytest-asyncio>=0.21.0
+# Core Dependencies
+pydantic-ai==0.0.14
+pydantic==2.10.3
+fastapi==0.115.6
+uvicorn==0.34.0
 
-# Additional utilities
-python-dotenv>=1.0.0  # For environment variables
-tenacity>=8.0.0       # For retry logic
-numpy>=1.24.0         # For metrics calculations
-pandas>=2.0.0         # For data analysis
-matplotlib>=3.7.0     # For visualizing metrics
+# LLM and AI
+openai==1.58.1
+httpx==0.28.1
 
-# Optional: Local LLM support
-# llama-cpp-python>=0.2.0
-# transformers>=4.35.0
-# torch>=2.0.0
+# Data Processing
+pyyaml==6.0.2
+python-multipart==0.0.19
+
+# Async and Task Processing
+redis==5.2.1
+celery==5.4.0
+
+# HTTP Clients
+requests==2.32.3
+aiohttp==3.11.10
+
+# Utilities
+python-dotenv==1.0.1
+typer==0.14.0
+rich==13.9.4
+loguru==0.7.3
+
+# Development and Testing
+pytest==8.3.4
+pytest-asyncio==0.24.0
+pytest-mock==3.14.0
+
+# Type Checking
+mypy==1.13.0
+types-requests==2.32.0.20241016
+types-PyYAML==6.0.12.20240917
