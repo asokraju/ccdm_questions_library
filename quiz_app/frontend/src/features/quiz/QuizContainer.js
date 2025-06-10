@@ -3,6 +3,7 @@ import { apiService } from '../../services/apiService';
 import apiUserService from '../../services/apiUserService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
+import { shuffleAllQuestions } from '../../utils/shuffleOptions';
 
 function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [questions, setQuestions] = useState([]);
@@ -31,7 +32,16 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
       }
       
       const response = await apiService.getQuestions(params);
-      setQuestions(response);
+      // Shuffle the options for each question
+      const shuffledQuestions = shuffleAllQuestions(response);
+      
+      // Debug: Log the shuffling results
+      console.log('Question shuffling results:');
+      shuffledQuestions.forEach((q, index) => {
+        console.log(`Q${index + 1}: Original correct: ${q._originalCorrectAnswer}, New correct: ${q.correctAnswer}`);
+      });
+      
+      setQuestions(shuffledQuestions);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading questions:', error);

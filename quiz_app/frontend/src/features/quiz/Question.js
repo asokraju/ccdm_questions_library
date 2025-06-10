@@ -68,7 +68,12 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
     <div className="question-container fade-in">
       <h3>{question.question}</h3>
       <div className="topic-info">
-        <small>Topic: {question.topic} | Subtopic: {question.subtopic}</small>
+        <small>
+          Topic: {question.topic} | Subtopic: {question.subtopic}
+          {question._originalCorrectAnswer && question._originalCorrectAnswer !== question.correctAnswer && 
+            ` | 🔀 Options shuffled`
+          }
+        </small>
       </div>
       
       <div className="options">
