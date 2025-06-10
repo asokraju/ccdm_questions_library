@@ -825,6 +825,12 @@ button:focus,
   cursor: pointer;
   transition: all 0.2s ease;
   background-color: white;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  display: block;
+  outline: none;
 }
 
 .difficulty-option:hover {
@@ -832,6 +838,11 @@ button:focus,
   background-color: #f8f9fa;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-option:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
 }
 
 .difficulty-option.selected {

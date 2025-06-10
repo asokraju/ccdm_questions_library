@@ -5,6 +5,11 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   const [difficulty, setDifficulty] = useState('balanced');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  
+  // Debug log for difficulty changes
+  useEffect(() => {
+    console.log('Current difficulty:', difficulty);
+  }, [difficulty]);
 
   const questionCountOptions = [5, 10, 15, 20, 25, 30];
   const difficultyOptions = [
@@ -94,12 +99,19 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
 
         <div className="config-section">
           <h3>Difficulty Level</h3>
-          <div className="difficulty-selector">
+          <div className="difficulty-selector" role="radiogroup" aria-label="Select difficulty level">
             {difficultyOptions.map(option => (
-              <div 
+              <button 
                 key={option.value} 
+                type="button"
                 className={`difficulty-option ${difficulty === option.value ? 'selected' : ''}`}
-                onClick={() => setDifficulty(option.value)}
+                onClick={() => {
+                  console.log('Difficulty clicked:', option.value);
+                  setDifficulty(option.value);
+                }}
+                aria-pressed={difficulty === option.value}
+                role="radio"
+                aria-checked={difficulty === option.value}
               >
                 <div className="difficulty-label">
                   <strong>{option.label}</strong>
@@ -107,7 +119,7 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
                 <div className="difficulty-description">
                   {option.description}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
