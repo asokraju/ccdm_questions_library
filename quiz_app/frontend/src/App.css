@@ -836,6 +836,10 @@ button:focus,
   outline: none;
   min-height: 100px;
   position: relative;
+  pointer-events: auto;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .difficulty-option:hover {
@@ -862,6 +866,7 @@ button:focus,
   margin-bottom: 8px;
   color: #495057;
   font-weight: 600;
+  pointer-events: none;
 }
 
 .difficulty-description {
@@ -869,6 +874,7 @@ button:focus,
   color: #6c757d;
   line-height: 1.4;
   margin-top: auto;
+  pointer-events: none;
 }
 
 .config-actions {

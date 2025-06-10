@@ -10,6 +10,11 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   useEffect(() => {
     console.log('Current difficulty:', difficulty);
   }, [difficulty]);
+  
+  // Debug component mount
+  useEffect(() => {
+    console.log('QuizConfig mounted, initial difficulty:', difficulty);
+  }, []);
 
   const questionCountOptions = [5, 10, 15, 20, 25, 30];
   const difficultyOptions = [
@@ -105,9 +110,19 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
                 key={option.value} 
                 type="button"
                 className={`difficulty-option ${difficulty === option.value ? 'selected' : ''}`}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   console.log('Difficulty clicked:', option.value);
+                  console.log('Current difficulty before change:', difficulty);
                   setDifficulty(option.value);
+                  console.log('Setting difficulty to:', option.value);
+                }}
+                onMouseDown={(e) => {
+                  console.log('Mouse down on:', option.value);
+                }}
+                onTouchStart={(e) => {
+                  console.log('Touch start on:', option.value);
                 }}
                 aria-pressed={difficulty === option.value}
                 role="radio"
