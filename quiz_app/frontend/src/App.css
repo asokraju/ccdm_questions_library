@@ -245,6 +245,7 @@ button:disabled {
   
   .difficulty-selector {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   
   .difficulty-option {
@@ -815,7 +816,8 @@ button:focus,
 .difficulty-selector {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 20px;
 }
 
 .difficulty-option {
@@ -829,8 +831,11 @@ button:focus,
   text-align: left;
   font-family: inherit;
   font-size: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
   outline: none;
+  min-height: 100px;
+  position: relative;
 }
 
 .difficulty-option:hover {
@@ -856,12 +861,14 @@ button:focus,
   font-size: 1.1rem;
   margin-bottom: 8px;
   color: #495057;
+  font-weight: 600;
 }
 
 .difficulty-description {
   font-size: 0.95rem;
   color: #6c757d;
   line-height: 1.4;
+  margin-top: auto;
 }
 
 .config-actions {
