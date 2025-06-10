@@ -4,7 +4,9 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   const [questionCount, setQuestionCount] = useState(10);
   const [difficulty, setDifficulty] = useState('balanced');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDifficultyDropdownOpen, setIsDifficultyDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const difficultyDropdownRef = useRef(null);
   
   // Debug log for difficulty changes
   useEffect(() => {
@@ -30,9 +32,12 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
+      if (difficultyDropdownRef.current && !difficultyDropdownRef.current.contains(event.target)) {
+        setIsDifficultyDropdownOpen(false);
+      }
     };
 
-    if (isDropdownOpen) {
+    if (isDropdownOpen || isDifficultyDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
     }
@@ -41,7 +46,7 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen, isDifficultyDropdownOpen]);
 
   const handleStartQuiz = () => {
     const config = {
@@ -105,22 +110,38 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
         <div className="config-section">
           <h3>Difficulty Level</h3>
           <div className="difficulty-selector">
-            <select 
-              className="config-select difficulty-select"
-              value={difficulty}
-              onChange={(e) => {
-                console.log('Difficulty changed to:', e.target.value);
-                setDifficulty(e.target.value);
-              }}
-            >
-              {difficultyOptions.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <div className="difficulty-info">
-              {difficultyOptions.find(opt => opt.value === difficulty)?.description}
+            <div className="custom-dropdown" ref={difficultyDropdownRef}>
+              <button
+                type="button"
+                className={`dropdown-button ${isDifficultyDropdownOpen ? 'open' : ''}`}
+                onClick={() => setIsDifficultyDropdownOpen(!isDifficultyDropdownOpen)}
+                aria-haspopup="listbox"
+                aria-expanded={isDifficultyDropdownOpen}
+              >
+                <span>{difficultyOptions.find(opt => opt.value === difficulty)?.label}</span>
+                <span className="dropdown-arrow">▼</span>
+              </button>
+              
+              {isDifficultyDropdownOpen && (
+                <div className="dropdown-menu" role="listbox">
+                  {difficultyOptions.map(option => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      className={`dropdown-option ${option.value === difficulty ? 'selected' : ''}`}
+                      onClick={() => {
+                        setDifficulty(option.value);
+                        setIsDifficultyDropdownOpen(false);
+                      }}
+                      role="option"
+                      aria-selected={option.value === difficulty}
+                    >
+                      <div className="dropdown-option-label">{option.label}</div>
+                      <div className="dropdown-option-description">{option.description}</div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
