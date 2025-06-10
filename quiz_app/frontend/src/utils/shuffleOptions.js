@@ -35,7 +35,8 @@ export function shuffleQuestionOptions(question) {
     ...question,
     options: shuffledOptions,
     correctAnswer: newCorrectAnswer,
-    _originalCorrectAnswer: question.correctAnswer // Keep original for debugging
+    _originalCorrectAnswer: question.correctAnswer, // Keep original for debugging
+    _isShuffled: true // Always mark as shuffled
   };
 }
 

@@ -70,9 +70,7 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
       <div className="topic-info">
         <small>
           Topic: {question.topic} | Subtopic: {question.subtopic}
-          {question._originalCorrectAnswer && question._originalCorrectAnswer !== question.correctAnswer && 
-            ` | 🔀 Options shuffled`
-          }
+          {question._isShuffled && ` | 🔀 Randomized`}
         </small>
       </div>
       
