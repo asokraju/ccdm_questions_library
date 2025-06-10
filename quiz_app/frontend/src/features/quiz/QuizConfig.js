@@ -104,38 +104,24 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
 
         <div className="config-section">
           <h3>Difficulty Level</h3>
-          <div className="difficulty-selector" role="radiogroup" aria-label="Select difficulty level">
-            {difficultyOptions.map(option => (
-              <button 
-                key={option.value} 
-                type="button"
-                className={`difficulty-option ${difficulty === option.value ? 'selected' : ''}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log('Difficulty clicked:', option.value);
-                  console.log('Current difficulty before change:', difficulty);
-                  setDifficulty(option.value);
-                  console.log('Setting difficulty to:', option.value);
-                }}
-                onMouseDown={(e) => {
-                  console.log('Mouse down on:', option.value);
-                }}
-                onTouchStart={(e) => {
-                  console.log('Touch start on:', option.value);
-                }}
-                aria-pressed={difficulty === option.value}
-                role="radio"
-                aria-checked={difficulty === option.value}
-              >
-                <div className="difficulty-label">
-                  <strong>{option.label}</strong>
-                </div>
-                <div className="difficulty-description">
-                  {option.description}
-                </div>
-              </button>
-            ))}
+          <div className="difficulty-selector">
+            <select 
+              className="config-select difficulty-select"
+              value={difficulty}
+              onChange={(e) => {
+                console.log('Difficulty changed to:', e.target.value);
+                setDifficulty(e.target.value);
+              }}
+            >
+              {difficultyOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <div className="difficulty-info">
+              {difficultyOptions.find(opt => opt.value === difficulty)?.description}
+            </div>
           </div>
         </div>
 
