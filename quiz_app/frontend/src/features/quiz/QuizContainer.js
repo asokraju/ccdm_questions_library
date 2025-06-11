@@ -3,6 +3,8 @@ import { apiService } from '../../services/apiService';
 import apiUserService from '../../services/apiUserService';
 import Question from './Question';
 import ProgressBar from './ProgressBar';
+import ElapsedTimer from './ElapsedTimer';
+import CountdownTimer from './CountdownTimer';
 import { shuffleAllQuestions } from '../../utils/shuffleOptions';
 
 function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
@@ -13,6 +15,15 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   const [answers, setAnswers] = useState({});
   const [comments, setComments] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Timing state
+  const [timingData, setTimingData] = useState({
+    quizStartTime: null,
+    questionStartTime: null,
+    questionTimings: [],
+    isTimedMode: false,
+    timePerQuestion: null
+  });
 
   const loadQuestions = useCallback(async () => {
     if (!quizConfig) {
@@ -42,6 +53,17 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
       });
       
       setQuestions(shuffledQuestions);
+      
+      // Initialize timing data
+      const now = Date.now();
+      setTimingData({
+        quizStartTime: now,
+        questionStartTime: now,
+        questionTimings: [],
+        isTimedMode: quizConfig.timerMode === 'timed',
+        timePerQuestion: quizConfig.timePerQuestion
+      });
+      
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading questions:', error);
@@ -83,31 +105,58 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
     await apiUserService.saveComment(currentUser, currentQuestion.id, comment);
   };
 
-  const handleSubmit = async () => {
-    if (!selectedAnswer) return;
+  const handleSubmit = async (wasAutoSubmitted = false) => {
+    if (!selectedAnswer && !wasAutoSubmitted) return;
 
     const currentQuestion = questions[currentQuestionIndex];
-    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    const answerToSubmit = selectedAnswer || null; // null if auto-submitted without selection
+    const isCorrect = answerToSubmit === currentQuestion.correctAnswer;
     
-    // Store answer
+    // Calculate time spent on this question
+    const questionEndTime = Date.now();
+    const timeSpent = questionEndTime - timingData.questionStartTime;
+    
+    // Store answer with timing data
     const newAnswers = {
       ...answers,
       [currentQuestion.id]: {
-        answer: selectedAnswer,
-        isCorrect
+        answer: answerToSubmit,
+        isCorrect,
+        timeSpent,
+        wasAutoSubmitted
       }
     };
     setAnswers(newAnswers);
+    
+    // Store timing data
+    const newTimingData = {
+      ...timingData,
+      questionTimings: [
+        ...timingData.questionTimings,
+        {
+          questionId: currentQuestion.id,
+          timeSpent,
+          wasAutoSubmitted,
+          difficulty: currentQuestion.difficulty,
+          isCorrect
+        }
+      ]
+    };
+    setTimingData(newTimingData);
 
     // Submit to backend with comment
     try {
       await apiService.submitAnswer({
         questionId: currentQuestion.id,
-        answer: selectedAnswer,
+        answer: answerToSubmit,
         topic: currentQuestion.topic,
         subtopic: currentQuestion.subtopic,
         isCorrect,
-        comment: comments[currentQuestion.id] || ''
+        comment: comments[currentQuestion.id] || '',
+        // New timing fields
+        timeSpent,
+        wasAutoSubmitted,
+        quizMode: timingData.isTimedMode ? 'timed' : 'untimed'
       });
       onUpdateProgress();
     } catch (error) {
@@ -122,9 +171,22 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
+      
+      // Reset question timer for next question
+      setTimingData(prev => ({
+        ...prev,
+        questionStartTime: Date.now()
+      }));
     } else {
       // Quiz completed
       handleQuizComplete();
+    }
+  };
+  
+  // Handle auto-submit when timer expires
+  const handleTimeUp = () => {
+    if (!showExplanation) {
+      handleSubmit(true); // true = wasAutoSubmitted
     }
   };
 
@@ -176,10 +238,28 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
       
       <div className="question-card card">
         <div className="question-header">
-          <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-          <span className={`difficulty ${currentQuestion.difficulty}`}>
-            {currentQuestion.difficulty}
-          </span>
+          <div className="question-header-left">
+            <div className="question-info">
+              <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
+              <span className={`difficulty ${currentQuestion.difficulty}`}>
+                {currentQuestion.difficulty}
+              </span>
+            </div>
+          </div>
+          <div className="question-header-right">
+            <ElapsedTimer 
+              startTime={timingData.quizStartTime} 
+              isActive={!showExplanation}
+            />
+            {timingData.isTimedMode && (
+              <CountdownTimer
+                timeLimit={timingData.timePerQuestion}
+                isActive={!showExplanation}
+                onTimeUp={handleTimeUp}
+                resetKey={currentQuestionIndex} // Reset timer when question changes
+              />
+            )}
+          </div>
         </div>
         
         <ProgressBar progress={progress} />

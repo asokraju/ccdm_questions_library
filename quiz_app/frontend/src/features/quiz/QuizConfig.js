@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
   const [questionCount, setQuestionCount] = useState(10);
   const [difficulty, setDifficulty] = useState('balanced');
+  const [timerMode, setTimerMode] = useState('none');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDifficultyDropdownOpen, setIsDifficultyDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -52,7 +53,9 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
     const config = {
       topic: selectedTopic,
       questionCount,
-      difficulty: difficulty === 'balanced' ? null : difficulty // null means all difficulties
+      difficulty: difficulty === 'balanced' ? null : difficulty, // null means all difficulties
+      timerMode: timerMode,
+      timePerQuestion: timerMode === 'timed' ? 60000 : null // 1 minute in ms
     };
     onStartQuiz(config);
   };
@@ -142,6 +145,49 @@ function QuizConfig({ selectedTopic, onStartQuiz, onBack }) {
                   ))}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+
+        <div className="config-section">
+          <h3>Timer Mode</h3>
+          <div className="timer-mode-selector">
+            <div 
+              className={`timer-option ${timerMode === 'none' ? 'selected' : ''}`}
+              onClick={() => setTimerMode('none')}
+            >
+              <div className="timer-option-header">
+                <input 
+                  type="radio" 
+                  name="timerMode" 
+                  value="none" 
+                  checked={timerMode === 'none'}
+                  onChange={() => setTimerMode('none')}
+                />
+                <strong>No Timer</strong>
+              </div>
+              <div className="timer-option-description">
+                Take your time, shows elapsed time only
+              </div>
+            </div>
+            
+            <div 
+              className={`timer-option ${timerMode === 'timed' ? 'selected' : ''}`}
+              onClick={() => setTimerMode('timed')}
+            >
+              <div className="timer-option-header">
+                <input 
+                  type="radio" 
+                  name="timerMode" 
+                  value="timed" 
+                  checked={timerMode === 'timed'}
+                  onChange={() => setTimerMode('timed')}
+                />
+                <strong>Timed Test</strong>
+              </div>
+              <div className="timer-option-description">
+                1 minute per question with countdown timer
+              </div>
             </div>
           </div>
         </div>

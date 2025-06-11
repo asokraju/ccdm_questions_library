@@ -821,11 +821,198 @@ button:focus,
   margin-bottom: 20px;
 }
 
+/* Timer Mode Selector */
+.timer-mode-selector {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 20px;
+}
+
+.timer-option {
+  padding: 20px;
+  border: 2px solid #dee2e6;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+  position: relative;
+}
+
+.timer-option:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.timer-option.selected {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.timer-option-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.timer-option-header input[type="radio"] {
+  margin: 0;
+  transform: scale(1.2);
+}
+
+.timer-option-header strong {
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.timer-option-description {
+  font-size: 0.95rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin-left: 30px;
+}
+
 .config-actions {
   text-align: center;
   margin-top: 40px;
   padding-top: 30px;
   border-top: 2px solid #dee2e6;
+}
+
+/* Timer Components */
+.elapsed-timer, .countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.elapsed-timer {
+  color: #495057;
+}
+
+.countdown-timer.normal {
+  color: #28a745;
+}
+
+.countdown-timer.warning {
+  color: #ffc107;
+}
+
+.countdown-timer.critical {
+  color: #dc3545;
+  animation: pulse 1s infinite;
+}
+
+.timer-icon {
+  font-size: 1.2rem;
+}
+
+.timer-text {
+  min-width: 60px;
+  text-align: center;
+}
+
+.countdown-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-progress-container {
+  width: 100%;
+  height: 6px;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.countdown-progress {
+  height: 100%;
+  transition: width 1s linear;
+  border-radius: 3px;
+}
+
+.countdown-progress.normal {
+  background-color: #28a745;
+}
+
+.countdown-progress.warning {
+  background-color: #ffc107;
+}
+
+.countdown-progress.critical {
+  background-color: #dc3545;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Timer in Question Header */
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--bg-light);
+  gap: 20px;
+}
+
+.question-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.question-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.question-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Mobile responsive timer */
+@media (max-width: 768px) {
+  .timer-mode-selector {
+    grid-template-columns: 1fr;
+  }
+  
+  .timer-option-description {
+    margin-left: 25px;
+  }
+  
+  .question-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .question-header-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .elapsed-timer, .countdown-timer {
+    font-size: 1rem;
+  }
 }
 
 .start-quiz-btn {
