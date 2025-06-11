@@ -186,13 +186,40 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   // Handle auto-submit when timer expires
   const handleTimeUp = () => {
     if (!showExplanation) {
-      handleSubmit(true); // true = wasAutoSubmitted
+      // Show brief notification
+      if (window.confirm("Time's up! Moving to explanation...")) {
+        handleSubmit(true); // true = wasAutoSubmitted
+      } else {
+        handleSubmit(true); // Auto-submit regardless of user choice
+      }
     }
   };
 
   const handleQuizComplete = () => {
     const correctCount = Object.values(answers).filter(a => a.isCorrect).length;
-    alert(`Quiz completed! You got ${correctCount} out of ${questions.length} correct.`);
+    const totalQuizTime = Date.now() - timingData.quizStartTime;
+    const averageTimePerQuestion = timingData.questionTimings.reduce((sum, q) => sum + q.timeSpent, 0) / timingData.questionTimings.length;
+    const autoSubmittedCount = timingData.questionTimings.filter(q => q.wasAutoSubmitted).length;
+    
+    // Format times for display
+    const formatTime = (ms) => {
+      const totalSeconds = Math.floor(ms / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+    
+    let message = `Quiz completed!\n\n`;
+    message += `📊 Results:\n`;
+    message += `✅ Correct: ${correctCount}/${questions.length} (${Math.round((correctCount/questions.length)*100)}%)\n`;
+    message += `⏱ Total time: ${formatTime(totalQuizTime)}\n`;
+    message += `📈 Avg per question: ${formatTime(averageTimePerQuestion)}\n`;
+    
+    if (timingData.isTimedMode && autoSubmittedCount > 0) {
+      message += `⏰ Auto-submitted: ${autoSubmittedCount} questions\n`;
+    }
+    
+    alert(message);
     onBack();
   };
 
