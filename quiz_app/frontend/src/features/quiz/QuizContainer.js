@@ -186,12 +186,17 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
   // Handle auto-submit when timer expires
   const handleTimeUp = () => {
     if (!showExplanation) {
+      // Different message based on whether user selected an answer
+      const hasAnswer = selectedAnswer !== null;
+      const message = hasAnswer 
+        ? "Time's up! Submitting your selected answer..."
+        : "Time's up! No answer selected - marking as incorrect...";
+      
       // Show brief notification
-      if (window.confirm("Time's up! Moving to explanation...")) {
+      setTimeout(() => {
+        alert(message);
         handleSubmit(true); // true = wasAutoSubmitted
-      } else {
-        handleSubmit(true); // Auto-submit regardless of user choice
-      }
+      }, 100);
     }
   };
 

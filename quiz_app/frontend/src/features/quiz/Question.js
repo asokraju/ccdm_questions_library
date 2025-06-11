@@ -65,7 +65,7 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
   };
 
   return (
-    <div className="question-container fade-in">
+    <div className={`question-container fade-in ${showExplanation && selectedAnswer === null ? 'auto-submitted' : ''}`}>
       <h3>{question.question}</h3>
       <div className="topic-info">
         <small>
@@ -73,6 +73,13 @@ const Question = React.memo(function Question({ question, selectedAnswer, showEx
           {question._isShuffled && ` | 🔀 Randomized`}
         </small>
       </div>
+      
+      {showExplanation && selectedAnswer === null && (
+        <div className="auto-submitted-notice">
+          <span className="icon">⏰</span>
+          <span>Time expired - No answer was selected</span>
+        </div>
+      )}
       
       <div className="options">
         {Object.entries(question.options).map(([key, value]) => (
