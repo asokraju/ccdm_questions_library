@@ -146,6 +146,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
 
     // Submit to backend with comment
     try {
+      const currentUser = apiUserService.getCurrentUser();
       await apiService.submitAnswer({
         questionId: currentQuestion.id,
         answer: answerToSubmit,
@@ -153,6 +154,7 @@ function QuizContainer({ quizConfig, onBack, onUpdateProgress }) {
         subtopic: currentQuestion.subtopic,
         isCorrect,
         comment: comments[currentQuestion.id] || '',
+        username: currentUser, // Include username for database update
         // New timing fields
         timeSpent,
         wasAutoSubmitted,

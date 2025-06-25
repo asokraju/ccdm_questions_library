@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/apiService';
+import apiUserService from '../../services/apiUserService';
 import { Question } from '../quiz';
 
 function ReviewList({ onBack }) {
@@ -20,7 +21,8 @@ function ReviewList({ onBack }) {
   const loadReviewQuestions = async () => {
     try {
       setIsLoading(true);
-      const reviews = await apiService.getReviews();
+      const currentUser = apiUserService.getCurrentUser();
+      const reviews = await apiService.getReviews(currentUser);
       setReviewQuestions(reviews);
       setIsLoading(false);
     } catch (error) {

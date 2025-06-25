@@ -122,76 +122,180 @@ app.get('/api/questions', (req, res) => {
 });
 
 // Submit answer
-app.post('/api/answer', (req, res) => {
-  const { questionId, answer, topic, subtopic, isCorrect, comment } = req.body;
+app.post('/api/answer', async (req, res) => {
+  const { questionId, answer, topic, subtopic, isCorrect, comment, username, timeSpent, wasAutoSubmitted, quizMode } = req.body;
   
-  // Update overall progress
-  if (isCorrect) {
-    userProgress.correct++;
-  } else {
-    userProgress.incorrect++;
+  try {
+    // If username is provided, update user-specific progress in database
+    if (username) {
+      // Get current user progress from database
+      const currentProgress = await database.getProgress(username);
+      
+      // Update progress
+      currentProgress.correct += isCorrect ? 1 : 0;
+      currentProgress.incorrect += isCorrect ? 0 : 1;
+      
+      // Update topic stats
+      if (!currentProgress.topicStats[topic]) {
+        currentProgress.topicStats[topic] = { correct: 0, incorrect: 0 };
+      }
+      currentProgress.topicStats[topic][isCorrect ? 'correct' : 'incorrect']++;
+      
+      // Update subtopic stats
+      if (!currentProgress.subtopicStats[subtopic]) {
+        currentProgress.subtopicStats[subtopic] = { correct: 0, incorrect: 0 };
+      }
+      currentProgress.subtopicStats[subtopic][isCorrect ? 'correct' : 'incorrect']++;
+      
+      // Add to answer history with enhanced data
+      currentProgress.answerHistory.push({
+        questionId,
+        answer,
+        isCorrect,
+        comment: comment || '',
+        timestamp: new Date().toISOString(),
+        timeSpent,
+        wasAutoSubmitted,
+        quizMode
+      });
+      
+      // Save updated progress to database
+      await database.saveProgress(username, currentProgress);
+      
+      // Update user activity
+      const user = await database.getUser(username);
+      if (user) {
+        await database.updateUserActivity(user.id);
+      }
+    } else {
+      // Fallback to in-memory progress for non-authenticated users
+      // Update overall progress
+      if (isCorrect) {
+        userProgress.correct++;
+      } else {
+        userProgress.incorrect++;
+      }
+      
+      // Update topic stats
+      if (!userProgress.topicStats[topic]) {
+        userProgress.topicStats[topic] = { correct: 0, incorrect: 0 };
+      }
+      userProgress.topicStats[topic][isCorrect ? 'correct' : 'incorrect']++;
+      
+      // Update subtopic stats
+      if (!userProgress.subtopicStats[subtopic]) {
+        userProgress.subtopicStats[subtopic] = { correct: 0, incorrect: 0 };
+      }
+      userProgress.subtopicStats[subtopic][isCorrect ? 'correct' : 'incorrect']++;
+      
+      // Add to answer history with comment
+      userProgress.answerHistory.push({
+        questionId,
+        answer,
+        isCorrect,
+        comment: comment || '',
+        timestamp: new Date().toISOString(),
+        timeSpent,
+        wasAutoSubmitted,
+        quizMode
+      });
+    }
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error submitting answer:', error);
+    res.status(500).json({ error: 'Failed to submit answer' });
   }
-  
-  // Update topic stats
-  if (!userProgress.topicStats[topic]) {
-    userProgress.topicStats[topic] = { correct: 0, incorrect: 0 };
-  }
-  userProgress.topicStats[topic][isCorrect ? 'correct' : 'incorrect']++;
-  
-  // Update subtopic stats
-  if (!userProgress.subtopicStats[subtopic]) {
-    userProgress.subtopicStats[subtopic] = { correct: 0, incorrect: 0 };
-  }
-  userProgress.subtopicStats[subtopic][isCorrect ? 'correct' : 'incorrect']++;
-  
-  // Add to answer history with comment
-  userProgress.answerHistory.push({
-    questionId,
-    answer,
-    isCorrect,
-    comment: comment || '',
-    timestamp: new Date().toISOString()
-  });
-  
-  res.json({ success: true });
 });
 
 // Get user progress
-app.get('/api/progress', (req, res) => {
-  res.json(userProgress);
+app.get('/api/progress', async (req, res) => {
+  const { username } = req.query;
+  
+  try {
+    if (username) {
+      // Get user-specific progress from database
+      const progress = await database.getProgress(username);
+      res.json(progress);
+    } else {
+      // Return in-memory progress for non-authenticated users
+      res.json(userProgress);
+    }
+  } catch (error) {
+    console.error('Error getting progress:', error);
+    res.status(500).json({ error: 'Failed to get progress' });
+  }
 });
 
 // Get reviews (questions answered incorrectly)
-app.get('/api/reviews', (req, res) => {
-  const incorrectAnswers = userProgress.answerHistory
-    .filter(h => !h.isCorrect);
+app.get('/api/reviews', async (req, res) => {
+  const { username } = req.query;
   
-  const reviewQuestions = incorrectAnswers.map(answer => {
-    const question = allQuestions.find(q => q.id === answer.questionId);
-    if (question) {
-      return {
-        ...question,
-        userAnswer: answer.answer,
-        userComment: answer.comment,
-        answeredAt: answer.timestamp
-      };
+  try {
+    let answerHistory = [];
+    
+    if (username) {
+      // Get user-specific progress from database
+      const progress = await database.getProgress(username);
+      answerHistory = progress.answerHistory || [];
+    } else {
+      // Use in-memory progress for non-authenticated users
+      answerHistory = userProgress.answerHistory || [];
     }
-    return null;
-  }).filter(q => q !== null);
-  
-  res.json(reviewQuestions);
+    
+    const incorrectAnswers = answerHistory.filter(h => !h.isCorrect);
+    
+    const reviewQuestions = incorrectAnswers.map(answer => {
+      const question = allQuestions.find(q => q.id === answer.questionId);
+      if (question) {
+        return {
+          ...question,
+          userAnswer: answer.answer,
+          userComment: answer.comment,
+          answeredAt: answer.timestamp
+        };
+      }
+      return null;
+    }).filter(q => q !== null);
+    
+    res.json(reviewQuestions);
+  } catch (error) {
+    console.error('Error getting reviews:', error);
+    res.status(500).json({ error: 'Failed to get reviews' });
+  }
 });
 
 // Reset progress
-app.post('/api/reset', (req, res) => {
-  userProgress = {
-    correct: 0,
-    incorrect: 0,
-    answerHistory: [],
-    topicStats: {},
-    subtopicStats: {}
-  };
-  res.json({ success: true });
+app.post('/api/reset', async (req, res) => {
+  const { username } = req.body;
+  
+  try {
+    if (username) {
+      // Reset user-specific progress in database
+      const emptyProgress = {
+        correct: 0,
+        incorrect: 0,
+        answerHistory: [],
+        topicStats: {},
+        subtopicStats: {}
+      };
+      await database.saveProgress(username, emptyProgress);
+    } else {
+      // Reset in-memory progress for non-authenticated users
+      userProgress = {
+        correct: 0,
+        incorrect: 0,
+        answerHistory: [],
+        topicStats: {},
+        subtopicStats: {}
+      };
+    }
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error resetting progress:', error);
+    res.status(500).json({ error: 'Failed to reset progress' });
+  }
 });
 
 // Notes API endpoints

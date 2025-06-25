@@ -65,13 +65,14 @@ export const apiService = {
     return api.get('/progress');
   },
 
-  async resetProgress() {
-    return api.post('/reset');
+  async resetProgress(username = null) {
+    return api.post('/reset', { username });
   },
 
   // Review
-  async getReviews() {
-    return api.get('/reviews');
+  async getReviews(username = null) {
+    const params = username ? { username } : {};
+    return api.get('/reviews', { params });
   },
 
   // Notes

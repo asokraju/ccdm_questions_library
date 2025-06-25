@@ -1,5 +1,15 @@
 # CCDM Questions Library - TODO
 
+## Recent Updates
+
+### Progress Tracking Fix (fix/progress-tracking branch)
+- [x] Fixed progress tracking not persisting across sessions
+- [x] Updated backend to save user-specific progress to SQLite database
+- [x] Modified frontend to send username with answer submissions
+- [x] Updated reset functionality to handle user-specific resets
+- [x] Fixed review questions to be user-specific
+- [x] All progress endpoints now support database persistence
+
 ## Comprehensive Agentic Framework Implementation
 
 ### Current Status: Phase 1 Core Infrastructure Complete ✅

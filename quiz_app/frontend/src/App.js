@@ -49,7 +49,18 @@ function App() {
 
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all progress?')) {
-      apiService.resetProgress()
+      if (currentUser) {
+        // Reset user-specific progress
+        apiUserService.setUserProgress(currentUser, {
+          correct: 0,
+          incorrect: 0,
+          answerHistory: [],
+          topicStats: {},
+          subtopicStats: {}
+        });
+      }
+      
+      apiService.resetProgress(currentUser)
         .then(() => {
           loadProgress();
           setCurrentView('menu');
